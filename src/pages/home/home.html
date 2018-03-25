@@ -8,12 +8,16 @@
 
 <ion-content padding>
 
-  <button ion-button full large icon-left>
+  <button
+    ion-button full large icon-left
+    (click)="routeGuest()">
     <ion-icon name="people"></ion-icon>
     Guest
   </button>
 
-  <button ion-button full large icon-left>
+  <button
+    ion-button full large icon-left
+    (click)="routeAdmin()">
     <ion-icon name="construct"></ion-icon>
     Admin
   </button>
