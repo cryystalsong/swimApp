@@ -14,6 +14,165 @@
 
 
 <ion-content padding>
+  <div padding>
+    <ion-segment [(ngModel)]="from">
+      <ion-segment-button value="club">
+        Club
+      </ion-segment-button>
+      <ion-segment-button value="athlete">
+        Athlete
+      </ion-segment-button>
+      <ion-segment-button value="coach">
+        Coach
+      </ion-segment-button>
+      <ion-segment-button value="competition">
+        Competition
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="from">
+    <ion-list *ngSwitchCase="'club'">
+        <ion-item>
+          <ion-label>Select Club(s)</ion-label>
+          <ion-select [(ngModel)]="clubSelect">
+            <ion-option value="allclubs">All Clubs</ion-option>
+            <ion-option value="richmondrapids">Richmond Rapids</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Awards</ion-label>
+          <ion-select [(ngModel)]="awardsSelect">
+            <ion-option value="awardswon">Awards won by selected club(s)</ion-option>
+            <ion-option value="noawards">None</ion-option>
+          </ion-select>
+        </ion-item>
+      <ion-item>
+        <ion-label>Coach</ion-label>
+        <ion-select [(ngModel)]="coachSelect">
+          <ion-option value="awardswon">Coaches at selected club(s)</ion-option>
+          <ion-option value="noawards">None</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Location</ion-label>
+        <ion-select [(ngModel)]="locnSelect">
+          <ion-option value="awardswon">Locations of selected club(s)</ion-option>
+          <ion-option value="noawards">None</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+
+
+
+
+
+    <ion-list *ngSwitchCase="'athlete'">
+      <ion-item>
+        <ion-label>Select Athlete(s)</ion-label>
+        <ion-select [(ngModel)]="athleteSelect">
+          <ion-option value="allclubs">All Athletes</ion-option>
+          <ion-option value="jenchen">Jen the Tank Chen</ion-option>
+          <ion-option value="davidxu">Shoe the David Xu</ion-option>
+          <ion-option value="cryssong">Crystal Cant sing for shit Song</ion-option>
+          <ion-option value="andypark">MitochAndrea is the powerhouse of the cell</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Height</ion-label>
+        <ion-select [(ngModel)]="heightSelect">
+          <ion-option value="heightMax">Find athletes with greatest height</ion-option>
+          <ion-option value="heightMin">Find athletes with shortest height</ion-option>
+          <ion-option value="heightEqual">Find athlete with height equal to: </ion-option>
+          <ion-option value="heightAvg">Find athlete with average height</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Weight</ion-label>
+        <ion-select [(ngModel)]="weightSelect">
+          <ion-option value="heightMax">Find athletes with greatest weight</ion-option>
+          <ion-option value="heightMin">Find athletes with shortest weight</ion-option>
+          <ion-option value="heightEqual">Find athlete with weight equal to: </ion-option>
+          <ion-option value="heightAvg">Find athlete with average weight</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Race Results</ion-label>
+        <ion-select [(ngModel)]="raceSelect">
+          <ion-option value="athleteAllStrokes">Find race results of athlete(s) for all strokes</ion-option>
+          <ion-option value="athleteSpecStroke">Find race results of athlete(s) for stroke: </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Awards</ion-label>
+        <ion-select [(ngModel)]="awardSelect">
+          <ion-option value="awardsSpecAthlete">Find awards won by selected athlete(s)</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'coach'">
+      <ion-item>
+        <ion-label>Select Coach(es)</ion-label>
+        <ion-select [(ngModel)]="clubSelect">
+          <ion-option value="allclubs">All Coaches</ion-option>
+          <ion-option value="coach1">Coach Coach</ion-option>
+          <ion-option value="coach2">Coach Couch</ion-option>
+          <ion-option value="coach3">Coach Roach</ion-option>
+          <ion-option value="coach4">Coach Carter</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Years Coaching</ion-label>
+        <ion-select [(ngModel)]="coachYrsSelect">
+          <ion-option value="yrsMax">Find coaches with most coaching experience coaching</ion-option>
+          <ion-option value="yrsMin">Find coaches with least coaching experience coaching</ion-option>
+          <ion-option value="yrsEqual">Find coaches with coaching experience equal to: </ion-option>
+          <ion-option value="yrsAvg">Find coaches with average experience coaching</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Athletes Coached</ion-label>
+        <ion-select [(ngModel)]="athletesCoachedSelect">
+          <ion-option value="findAthleteCoach">Find athletes that selected coach(es) trained</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Awards</ion-label>
+        <ion-select [(ngModel)]="awardCoachSelect">
+          <ion-option value="awardsSpecCoach">Find awards won by selected coach(es)</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'competition'">
+      <ion-item>
+        <ion-label>Select Competition(s)</ion-label>
+        <ion-select [(ngModel)]="compSelect">
+          <ion-option value="allclubs">All Competitions</ion-option>
+          <ion-option value="comp1">Olympics</ion-option>
+          <ion-option value="comp2">Fraser Valley Tournament</ion-option>
+          <ion-option value="comp3">District Tournament</ion-option>
+          <ion-option value="comp4">NCAA Tournament</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Race Results</ion-label>
+        <ion-select [(ngModel)]="raceCompSelect">
+          <ion-option value="athleteAllStrokes">Find race results of all strokes</ion-option>
+          <ion-option value="athleteSpecStroke">Find race results of stroke: </ion-option>
+
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
 
   <!--<ion-list>-->
   <!--<ion-item>-->
@@ -30,30 +189,31 @@
   <!--</ion-item>-->
   <!--</ion-list>-->
 
-  <p>Display the max or min of the averages of each event (stroke + length combo):</p>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>See</ion-label>
-      <ion-select [(ngModel)]="maxmin" cancelText="Cancel" okText="Done!">
-        <ion-option value="max">Max</ion-option>
-        <ion-option value="min">Min</ion-option>
-      </ion-select>
-    </ion-item>
+  <!--<p>Display the max or min of the averages of each event (stroke + length combo):</p>-->
 
-    <ion-item>
-      <ion-label floating>Stroke</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+  <!--<ion-list>-->
+    <!--<ion-item>-->
+      <!--<ion-label>See</ion-label>-->
+      <!--<ion-select [(ngModel)]="maxmin" cancelText="Cancel" okText="Done!">-->
+        <!--<ion-option value="max">Max</ion-option>-->
+        <!--<ion-option value="min">Min</ion-option>-->
+      <!--</ion-select>-->
+    <!--</ion-item>-->
 
-    <ion-item>
-      <ion-label floating>Length (metres)</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+    <!--<ion-item>-->
+      <!--<ion-label floating>Stroke</ion-label>-->
+      <!--<ion-input type="text"></ion-input>-->
+    <!--</ion-item>-->
 
-  </ion-list>
+    <!--<ion-item>-->
+      <!--<ion-label floating>Length (metres)</ion-label>-->
+      <!--<ion-input type="text"></ion-input>-->
+    <!--</ion-item>-->
 
-  <button ion-button round (click)="maxmin()">Go!</button>
+  <!--</ion-list>-->
+
+  <!--<button ion-button round (click)="maxmin()">Go!</button>-->
 
 
 </ion-content>

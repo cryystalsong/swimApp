@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {GuestPage} from "../guest/guest";
 /**
  * Generated class for the AdminPage page.
  *
@@ -18,6 +18,9 @@ export class AdminPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  routeAdminSignIn() : void {
+    this.navCtrl.push('GuestPage');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPage');
   }
