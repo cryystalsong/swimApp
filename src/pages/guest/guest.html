@@ -81,47 +81,89 @@
 
 
     <ion-list *ngSwitchCase="'athlete'">
+
+
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type in Athlete name</ion-label>
+          <ion-input [(ngModel)]="athlete.athlName" name="athlName" type="text" #athlName="ngModel" required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <p ion-text [hidden]="athlName.valid || submitted == false" color="danger" padding-left>
+        Athlete name is required
+      </p>
+
+// !!!
       <ion-item>
-        <ion-label>Select Athlete(s)</ion-label>
-        <ion-select [(ngModel)]="athleteSelect">
-          <ion-option value="allclubs">All Athletes</ion-option>
-          <ion-option value="jenchen">Jen the Tank Chen</ion-option>
-          <ion-option value="davidxu">Shoe the David Xu</ion-option>
-          <ion-option value="cryssong">Crystal Cant sing for shit Song</ion-option>
-          <ion-option value="andypark">MitochAndrea is the powerhouse of the cell</ion-option>
-        </ion-select>
+        <ion-label >All Athletes</ion-label>
+        <div *ngIf = "!athlete.athlName; else elsetag">
+          <ion-checkbox [(ngModel)]="athlete.allAthletes" #allAthletes = "ngModel" color="dark"></ion-checkbox>
+        </div>
+        <ng-template #elsetag>
+          <div>
+            <ion-checkbox disabled = "true"   color="dark"></ion-checkbox>
+          </div>
+        </ng-template>
       </ion-item>
+
+
       <ion-item>
         <ion-label>Height</ion-label>
-        <ion-select [(ngModel)]="heightSelect">
+        <ion-select [(ngModel)]="athlete.height">
+          <div *ngIf = "!athlete.athlName; else elsetag">
           <ion-option value="heightMax">Find athletes with greatest height</ion-option>
           <ion-option value="heightMin">Find athletes with shortest height</ion-option>
           <ion-option value="heightEqual">Find athlete with height equal to: </ion-option>
           <ion-option value="heightAvg">Find athlete with average height</ion-option>
+          </div>
+          <ng-template #elsetag>
+          <div>
+            <ion-option value="heightMax">Find height of selected athlete</ion-option>
+          </div>
+          </ng-template>
         </ion-select>
       </ion-item>
+
       <ion-item>
-        <ion-label>Weight</ion-label>
-        <ion-select [(ngModel)]="weightSelect">
-          <ion-option value="heightMax">Find athletes with greatest weight</ion-option>
-          <ion-option value="heightMin">Find athletes with shortest weight</ion-option>
-          <ion-option value="heightEqual">Find athlete with weight equal to: </ion-option>
-          <ion-option value="heightAvg">Find athlete with average weight</ion-option>
-        </ion-select>
+        <ion-label>Awards won by selected athlete</ion-label>
+        <ion-checkbox [(ngModel)]="athlete.athlAward" #athlAward = "ngModel"  color="dark">
+        </ion-checkbox>
       </ion-item>
-      <ion-item>
-        <ion-label>Race Results</ion-label>
-        <ion-select [(ngModel)]="raceSelect">
-          <ion-option value="athleteAllStrokes">Find race results of athlete(s) for all strokes</ion-option>
-          <ion-option value="athleteSpecStroke">Find race results of athlete(s) for stroke: </ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Awards</ion-label>
-        <ion-select [(ngModel)]="awardSelect">
-          <ion-option value="awardsSpecAthlete">Find awards won by selected athlete(s)</ion-option>
-        </ion-select>
-      </ion-item>
+
+
+
+      <div padding>
+        <button ion-button (click)="onAthleteSubmit()" type="submit" block>SUBMIT</button>
+      </div>
+
+
+      <!--<ion-item>-->
+        <!--<ion-label>Height</ion-label>-->
+        <!--<ion-select [(ngModel)]="heightSelect">-->
+          <!--<ion-option value="heightMax">Find athletes with greatest height</ion-option>-->
+          <!--<ion-option value="heightMin">Find athletes with shortest height</ion-option>-->
+          <!--<ion-option value="heightEqual">Find athlete with height equal to: </ion-option>-->
+          <!--<ion-option value="heightAvg">Find athlete with average height</ion-option>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
+      <!--<ion-item>-->
+        <!--<ion-label>Weight</ion-label>-->
+        <!--<ion-select [(ngModel)]="weightSelect">-->
+          <!--<ion-option value="heightMax">Find athletes with greatest weight</ion-option>-->
+          <!--<ion-option value="heightMin">Find athletes with shortest weight</ion-option>-->
+          <!--<ion-option value="heightEqual">Find athlete with weight equal to: </ion-option>-->
+          <!--<ion-option value="heightAvg">Find athlete with average weight</ion-option>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
+      <!--<ion-item>-->
+        <!--<ion-label>Race Results</ion-label>-->
+        <!--<ion-select [(ngModel)]="raceSelect">-->
+          <!--<ion-option value="athleteAllStrokes">Find race results of athlete(s) for all strokes</ion-option>-->
+          <!--<ion-option value="athleteSpecStroke">Find race results of athlete(s) for stroke: </ion-option>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
 
     </ion-list>
 

@@ -41,6 +41,8 @@ export class GuestPage {
 
   }
 
+  athlete = {allAthletes: false, athlName: '', athlAward: false, height: ''};
+
   navUpdate() {
     this.navCtrl.push("UpdatePage")
   }
