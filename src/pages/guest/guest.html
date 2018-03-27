@@ -33,6 +33,28 @@
 
   <div [ngSwitch]="from">
     <ion-list *ngSwitchCase="'club'">
+
+
+
+      <form #strokeForm="ngForm" novalidate>
+        <ion-list no-lines>
+          <ion-item>
+            <ion-label floating>Stroke</ion-label>
+            <ion-input [(ngModel)]="stroke.strStroke" name="strStroke" type="text" #strStroke="ngModel" required>
+            </ion-input>
+          </ion-item>
+        </ion-list>
+
+        <p ion-text [hidden]="strStroke.valid || submitted == false" color="danger" padding-left>
+          Stroke is required
+        </p>
+
+        <div padding>
+          <button ion-button (click)="onStrokeSubmit(strokeForm)" type="submit" block>SUBMIT</button>
+        </div>
+      </form>
+
+
         <ion-item>
           <ion-label>Select Club(s)</ion-label>
           <ion-select [(ngModel)]="clubSelect">
@@ -205,6 +227,10 @@
       <!--<ion-label floating>Stroke</ion-label>-->
       <!--<ion-input type="text"></ion-input>-->
     <!--</ion-item>-->
+
+
+
+
 
     <!--<ion-item>-->
       <!--<ion-label floating>Length (metres)</ion-label>-->

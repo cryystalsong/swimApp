@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {ResultsPage} from "../results/results";
+import {NgForm} from "@angular/forms"; //delete this!!!
 /**
  * Generated class for the GuestPage page.
  *
@@ -26,4 +27,22 @@ export class GuestPage {
 
   }
 
+  conferenceDate = '';
+  clubSelect = '';
+  awardsSelect = '';
+  submitted = false;
+  stroke = {strStroke:''}
+  onStrokeSubmit(form: NgForm) {
+    this.submitted = true;
+
+    if (form.valid) {
+      console.log('Stroke submitted is: ' + this.clubName);
+      console.log('Date is: ' + this.clubSelect);
+      console.log('Date is: ' + this.awardsSelect);
+
+      // this.navCtrl.push(ResultsPage);
+    }
+  }
 }
+
+
