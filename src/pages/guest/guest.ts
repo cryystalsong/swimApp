@@ -36,12 +36,16 @@ export class GuestPage {
     this.submitted = true;
 
     if (form.valid) {
-      console.log('Stroke submitted is: ' + this.clubName);
+      console.log('Stroke submitted is: ' + this.stroke.strStroke);
       console.log('Date is: ' + this.clubSelect);
       console.log('Date is: ' + this.awardsSelect);
 
       // this.navCtrl.push(ResultsPage);
     }
+  }
+
+  navUpdate() {
+    this.navCtrl.push("UpdatePage")
   }
 }
 
