@@ -27,21 +27,18 @@ export class GuestPage {
 
   }
 
-  conferenceDate = '';
-  clubSelect = '';
-  awardsSelect = '';
+  club = {clubName: '', clubAward: false, clubCoaches: '', clubLocation: ''} // clubCoaches should be an array !!!
   submitted = false;
-  stroke = {strStroke:''}
-  onStrokeSubmit(form: NgForm) {
+  onClubSubmit() {
     this.submitted = true;
 
-    if (form.valid) {
-      console.log('Stroke submitted is: ' + this.stroke.strStroke);
-      console.log('Date is: ' + this.clubSelect);
-      console.log('Date is: ' + this.awardsSelect);
+    console.log('clubName submitted is: ' + this.club.clubName);
+    console.log('clubAwards submitted is: ' + this.club.clubAward);
+    console.log('clubCoaches submitted is: ' + this.club.clubCoaches); //!!! clubCoaches should be an array
+    console.log('clubCoaches submitted is: ' + this.club.clubLocation);
 
-      // this.navCtrl.push(ResultsPage);
-    }
+    // this.navCtrl.push(ResultsPage);
+
   }
 
   navUpdate() {

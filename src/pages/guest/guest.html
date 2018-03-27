@@ -31,61 +31,50 @@
     </ion-segment>
   </div>
 
-  <div [ngSwitch]="from">
-    <ion-list *ngSwitchCase="'club'">
 
+      <div [ngSwitch]="from">
+        <ion-list *ngSwitchCase="'club'">
 
+          <ion-list no-lines>
+            <ion-item>
+              <ion-label floating>Type in Club name</ion-label>
+              <ion-input [(ngModel)]="club.clubName" name="clubName" type="text" #clubName="ngModel" required>
+              </ion-input>
+            </ion-item>
+          </ion-list>
 
-      <form #strokeForm="ngForm" novalidate>
-        <ion-list no-lines>
+          <p ion-text [hidden]="clubName.valid || submitted == false" color="danger" padding-left>
+            Club name is required
+          </p>
+
           <ion-item>
-            <ion-label floating>Stroke</ion-label>
-            <ion-input [(ngModel)]="stroke.strStroke" name="strStroke" type="text" #strStroke="ngModel" required>
-            </ion-input>
+            <ion-label>Awards won by selected club</ion-label>
+            <ion-checkbox [(ngModel)]="club.clubAward" #clubAward = "ngModel"  color="dark">
+            </ion-checkbox>
           </ion-item>
+
+
+          <ion-item>
+            <ion-label>Coach</ion-label>
+            <ion-select [(ngModel)]="club.clubCoaches">
+              <ion-option value="allCoaches">All coaches at selected club</ion-option>
+              <ion-option value="noCoaches">None</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Location</ion-label>
+            <ion-select [(ngModel)]="club.clubLocation">
+              <ion-option value="location">Location of selected club</ion-option>
+              <ion-option value="noLocation">None</ion-option>
+            </ion-select>
+          </ion-item>
+
+
+          <div padding>
+            <button ion-button (click)="onClubSubmit()" type="submit" block>SUBMIT</button>
+          </div>
         </ion-list>
-
-        <p ion-text [hidden]="strStroke.valid || submitted == false" color="danger" padding-left>
-          Stroke is required
-        </p>
-
-        <div padding>
-          <button ion-button (click)="onStrokeSubmit(strokeForm)" type="submit" block>SUBMIT</button>
-        </div>
-      </form>
-
-
-        <ion-item>
-          <ion-label>Select Club(s)</ion-label>
-          <ion-select [(ngModel)]="clubSelect">
-            <ion-option value="allclubs">All Clubs</ion-option>
-            <ion-option value="richmondrapids">Richmond Rapids</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>Awards</ion-label>
-          <ion-select [(ngModel)]="awardsSelect">
-            <ion-option value="awardswon">Awards won by selected club(s)</ion-option>
-            <ion-option value="noawards">None</ion-option>
-          </ion-select>
-        </ion-item>
-      <ion-item>
-        <ion-label>Coach</ion-label>
-        <ion-select [(ngModel)]="coachSelect">
-          <ion-option value="awardswon">Coaches at selected club(s)</ion-option>
-          <ion-option value="noawards">None</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Location</ion-label>
-        <ion-select [(ngModel)]="locnSelect">
-          <ion-option value="awardswon">Locations of selected club(s)</ion-option>
-          <ion-option value="noawards">None</ion-option>
-        </ion-select>
-      </ion-item>
-
-    </ion-list>
 
 
 
