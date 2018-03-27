@@ -47,7 +47,7 @@ export class GuestPage {
 
   }
   updateAllAthletes() {
-    this.athlete.athlName = 'You have selected all athletes';
+    this.athlete.athlName = '';
     this.athlete.allAthletes = true;
   }
 
