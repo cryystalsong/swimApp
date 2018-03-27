@@ -42,7 +42,18 @@ export class GuestPage {
   }
 
   athlete = {allAthletes: false, athlName: '', athlAward: false, height: ''};
+  onAthleteSubmit() {
+    this.submitted = true;
 
+  }
+  updateAllAthletes() {
+    this.athlete.athlName = 'You have selected all athletes';
+    this.athlete.allAthletes = true;
+  }
+
+  updateAthleteName() {
+    this.athlete.allAthletes = false;
+  }
   navUpdate() {
     this.navCtrl.push("UpdatePage")
   }

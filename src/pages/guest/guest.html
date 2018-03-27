@@ -86,26 +86,24 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type in Athlete name</ion-label>
-          <ion-input [(ngModel)]="athlete.athlName" name="athlName" type="text" #athlName="ngModel" required>
+          <ion-input [(ngModel)]="athlete.athlName" name="athlName" (ionChange)="updateAthleteName()" type="text" #athlName="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
 
+      <div *ngIf = "!athlete.allAthletes">
       <p ion-text [hidden]="athlName.valid || submitted == false" color="danger" padding-left>
         Athlete name is required
       </p>
-
-// !!!
+      </div>
+      <!--<ng-template #elsetag>-->
+        <!--<div>-->
+          <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
+        <!--</div>-->
+      <!--</ng-template>-->
       <ion-item>
         <ion-label >All Athletes</ion-label>
-        <div *ngIf = "!athlete.athlName; else elsetag">
-          <ion-checkbox [(ngModel)]="athlete.allAthletes" #allAthletes = "ngModel" color="dark"></ion-checkbox>
-        </div>
-        <ng-template #elsetag>
-          <div>
-            <ion-checkbox disabled = "true"   color="dark"></ion-checkbox>
-          </div>
-        </ng-template>
+        <ion-checkbox [(ngModel)]="athlete.allAthletes" (ionChange)="updateAllAthletes()" #allAthletes = "ngModel" color="dark"></ion-checkbox>
       </ion-item>
 
 
