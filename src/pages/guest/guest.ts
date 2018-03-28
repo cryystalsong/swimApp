@@ -55,7 +55,7 @@ export class GuestPage {
     } else if (this.club.clubOptionSelected === "clubCoaches") {
       q = "select * from person p, coach c where p.id=c.id and c.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')";
     } else {
-      "select c.address from club c where c.name = '" + this.club.clubName + "'"
+      q= "select c.name, c.address from club c where c.name = '" + this.club.clubName + "'";
     }
 
 
