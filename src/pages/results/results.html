@@ -14,6 +14,17 @@
 
 
 <ion-content padding>
-  <p>testing</p>
+
+  <ion-list no-lines>
+    <ion-item>
+      <ion-label floating>Find name of athlete ID</ion-label>
+      <ion-input [(ngModel)]="person.id" type="text">
+      </ion-input>
+    </ion-item>
+
+    <button ion-button round (click)="test()">test!</button>
+  </ion-list>
+
+  <div id="crystal"></div>
 
 </ion-content>

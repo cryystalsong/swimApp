@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HTTP } from '@ionic-native/http';
+import {MyApp} from "../../app/app.component";
 
 /**
  * Generated class for the UpdatePage page.
@@ -16,7 +16,7 @@ import { HTTP } from '@ionic-native/http';
 })
 export class UpdatePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public myApp: MyApp) {
   }
 
   ionViewDidLoad() {
@@ -43,53 +43,66 @@ export class UpdatePage {
 
   Update(){
 
-    // check the initial projection of all athletes
-    var query = "select_star_from_athlete";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
+    // // check the initial projection of all athletes
+    // var query = "select * from athlete";
+    // var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
+    //
+    // this.http.get(phpURL, {},{}).then(data => {
+    //   console.log(data.data);
+    // })
 
     //make the update to a specified athlete
-    var query = "update_athlete_set_weight_equal_" + this.athlete.athleteWeight +
-      "where_id_equal_" + this.athlete.athleteID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
+    var query = "update athlete set weight = " + this.athlete.athleteWeight +
+      " where id = " + this.athlete.athleteID;
+    // var phpURL = "http://www.ugrad.cs.ubc.ca/~u2o0b/clubsAwardsWon.php?q=";
+    //
+    // this.http.get(phpURL+query, {},{}).then(data => {
+    //   console.log(query);
+    //
+    //   var query1 = "select * from athlete";
+    //
+    //   this.http.get(phpURL+query1, {},{}).then(data => {
+    //     console.log(data.data);
+    //   });
 
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
+    // });
+
+    console.log(this.myApp.retrieveQueryData(query));
+
+
+
+
+
 
     //check the projection of athlete to look for update
-    var query = "select_star_from_athlete";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
-
-    //select the updated athlete weight
-    var query = "select_weight_from_athlete_where_id_equal_" + this.athlete.athleteID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
 
 
+    // //select the updated athlete weight
+    // var query2 = "select_weight_from_athlete_where_id_equal_" + this.athlete.athleteID;
+    //
+    // this.http.get(phpURL+query2, {},{}).then(data => {
+    //   console.log(data.data);
+    // })
 
-    this.submitted = true;
+    //
+    //
+    //
+    // this.submitted = true;
   }
 
 
   test() {
 
-    var query = "select_star_from_person";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
+    var query = "select * from person";
+    // var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
+    //
+    // this.http.get(phpURL, {},{}).then(data => {
+    //   console.log(data.data);
+    // })
 
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
+    console.log(query);
+
+    console.log(this.myApp.retrieveQueryData(query));
 
   }
 

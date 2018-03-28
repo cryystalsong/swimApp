@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {HTTP} from '@ionic-native/http';
 
 /**
  * Generated class for the ResultsPage page.
@@ -15,11 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ResultsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP) {
   }
+
+  person = {id: ''}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResultsPage');
   }
+
+
 
 }
