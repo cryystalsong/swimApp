@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {ResultsPage} from "../results/results";
-import {NgForm} from "@angular/forms"; //delete this!!!
-/**
- * Generated class for the GuestPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ModalController, IonicPage, NavController, NavParams } from 'ionic-angular';
+// import {AthletePage} from "../athlete/athlete";
+// import {AdminPage} from "../admin/admin";
 
 @IonicPage()
 @Component({
@@ -15,8 +9,12 @@ import {NgForm} from "@angular/forms"; //delete this!!!
   templateUrl: 'guest.html',
 })
 export class GuestPage {
+  // adm;
+  constructor(public navCtrl: NavController,
+              public modalCtrl: ModalController,
+              public navParams: NavParams) {
+    // this.adm = this.adminPage.admin;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -27,7 +25,7 @@ export class GuestPage {
 
   }
 
-  club = {clubName: '', clubAward: false, clubCoaches: '', clubLocation: ''} // clubCoaches should be an array !!!
+  club = {clubName: '', clubAward: false, clubCoaches: '', clubLocation: ''}; // clubCoaches should be an array !!!
   submitted = false;
   onClubSubmit() {
     this.submitted = true;
@@ -41,8 +39,21 @@ export class GuestPage {
 
   }
 
-  athlete = {allAthletes: false, athlName: '', athlAward: false, height: ''};
+    athlete = {
+      allAthletes: false, athlName: '', athlAward: false, height: '', show: {
+        name: false,
+        id: false,
+        sex: false,
+        height: false,
+        weight: false,
+        birthday: false,
+        city: false,
+        country: false
+      }
+    };
   onAthleteSubmit() {
+    console.log("athlete.show.name " + this.athlete.show.name);
+    console.log("athlete.show.height " + this.athlete.show.height);
     this.submitted = true;
 
   }
@@ -50,6 +61,17 @@ export class GuestPage {
     this.athlete.athlName = '';
     this.athlete.allAthletes = true;
   }
+
+  // updateAthleteSelection() {
+  //   let modal = this.modalCtrl.create(AthletePage, this.athlete.show);
+  //   modal.present();
+  //
+  //   modal.onWillDismiss((data: any) => {
+  //     if (data) {
+  //       this.athlete.show = data;
+  //     }
+  //   });
+  // }
 
   updateAthleteName() {
     this.athlete.allAthletes = false;
