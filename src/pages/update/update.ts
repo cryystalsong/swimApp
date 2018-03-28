@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {MyApp} from "../../app/app.component";
+import { HTTP } from '@ionic-native/http';
+
 
 /**
  * Generated class for the UpdatePage page.
@@ -16,7 +18,7 @@ import {MyApp} from "../../app/app.component";
 })
 export class UpdatePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public myApp: MyApp) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public myApp: MyApp, private http: HTTP) {
   }
 
   ionViewDidLoad() {
@@ -25,109 +27,116 @@ export class UpdatePage {
 
   athlete = {athleteID: 0, athleteAward: '', athleteWeight: 0}
   coach = {coachID: 0, coachAward: ''}
-  award = {recipientName: '', awardType: ''}
-  participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID: ''}
+  award = {recipientPersonID: 0, recipientClubName: ''}
+  participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''}
 
 
   submitted = false;
 
   DeleteAthlete() {
 
-    this.submitted = true;
+    console.log(typeof this.athlete.athleteID);
+    var query = "delete from athlete where id = " + this.athlete.athleteID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      var result= JSON.parse(data.data);
+      console.log(Object.keys(result));
+
+
+      // console.log(data.data);
+      var query = "select * from athlete";
+      this.myApp.retrieveQueryData(query).then((result) => {
+        this.myApp.displayQueryData(result, "deleteAthleteResult");
+      });
+    })
+
+  }
+
+
+  DeleteCoach(){
+
+    var query = "delete from coach where id = " + this.coach.coachID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+      var query = "select * from coach";
+      this.myApp.retrieveQueryData(query).then((result) => {
+        this.myApp.displayQueryData(result, "deleteCoachResult");
+      });
+    })
+
+  }
+
+  DeleteRecipientPerson(){
+
+    var query = "delete from AwardPerson where id = " + this.award.recipientPersonID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+      var query = "select * from AwardPerson";
+      this.myApp.retrieveQueryData(query).then((result) => {
+        this.myApp.displayQueryData(result, "deleteRecipientPerson");
+      });
+    })
+  }
+
+  DeleteRecipientClub(){
+
+    var query = "delete from AwardClub where cName = " + "'" + this.award.recipientClubName + "'";
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+      var query = "select * from AwardClub";
+      this.myApp.retrieveQueryData(query).then((result) => {
+        this.myApp.displayQueryData(result, "deleteRecipientClub");
+      });
+    })
+
   }
 
 
   Insert() {
 
-    this.submitted = true;
+    var query = "insert into Participate values (" + this.participate.seconds + ", "
+      + this.participate.length + ", " + "'" + this.participate.stroke + "'" + ", "
+      + "'" + this.participate.name + "'" + ", " + "'" + this.participate.pdate + "'" + ", "
+      + this.participate.ID + ")";
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+
+      var query = "select * from Participate";
+      this.myApp.retrieveQueryData(query).then((result) => {
+        this.myApp.displayQueryData(result, "insertedParticipate");
+      });
+
+    })
+
   }
 
-  Update() {
-
-    // // check the initial projection of all athletes
-    // var query = "select * from athlete";
-    // var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-    //
-    // this.http.get(phpURL, {},{}).then(data => {
-    //   console.log(data.data);
-    // })
+  Updated(){
 
     //make the update to a specified athlete
-    var query = "update athlete set weight = " + this.athlete.athleteWeight +
-      " where id = " + this.athlete.athleteID;
-    // var phpURL = "http://www.ugrad.cs.ubc.ca/~u2o0b/clubsAwardsWon.php?q=";
-    //
-    // this.http.get(phpURL+query, {},{}).then(data => {
-    //   console.log(query);
-    //
-    //   var query1 = "select * from athlete";
-    //
-    //   this.http.get(phpURL+query1, {},{}).then(data => {
-    //     console.log(data.data);
-    //   });
+    var query = "update athlete set weight = " + this.athlete.athleteWeight + " where id = "
+      + this.athlete.athleteID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
-    // });
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+      var query = "select * from Athlete";
+      this.myApp.retrieveQueryData(query).then((result) => {
+        this.myApp.displayQueryData(result, "updateAthleteWeight");
+      });
 
-    console.log(this.myApp.retrieveQueryData(query));
+    })
 
-
-    //check the projection of athlete to look for update
-
-
-    // //select the updated athlete weight
-    // var query2 = "select_weight_from_athlete_where_id_equal_" + this.athlete.athleteID;
-    //
-    // this.http.get(phpURL+query2, {},{}).then(data => {
-    //   console.log(data.data);
-    // })
-
-    //
-    //
-    //
-    // this.submitted = true;
-  }
-
-  // tableCreate() {
-  //   var body = document.getElementById('crystal2');
-  //   var tbl = document.createElement('table');
-  //   tbl.style.width = '100%';
-  //   tbl.setAttribute('border', '1');
-  //   var tbdy = document.createElement('tbody');
-  //   for (var i = 0; i < 3; i++) {
-  //     var tr = document.createElement('tr');
-  //     for (var j = 0; j < 2; j++) {
-  //       if (i == 2 && j == 1) {
-  //         break
-  //       } else {
-  //         var td = document.createElement('td');
-  //         td.appendChild(document.createTextNode('\u0020'))
-  //         i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
-  //         tr.appendChild(td)
-  //       }
-  //     }
-  //     tbdy.appendChild(tr);
-  //   }
-  //   tbl.appendChild(tbdy);
-  //   body.appendChild(tbl)
-  // }
-
-
-  test() {
-
-    var query = "select * from events";
-    // var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-    //
-    // this.http.get(phpURL, {},{}).then(data => {
-    //   console.log(data.data);
-    // })
-
-    this.myApp.retrieveQueryData(query).then((result) => {
-      console.log(result);
-
-      this.myApp.displayQueryData(result,"crystal2");
-
-    });
   }
 
 
 }
+

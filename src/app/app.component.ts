@@ -37,7 +37,7 @@ export class MyApp {
 
       // var query = "select name from person where id=" + this.person.id;
 
-      var phpURL = "http://www.ugrad.cs.ubc.ca/~u2o0b/clubsAwardsWon.php?q=" + query;
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
 
       this.http.get(phpURL, {}, {}).then((data) => {
