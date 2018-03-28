@@ -32,9 +32,15 @@ export class GuestPage {
   onClubSubmit() {
     this.submitted = true;
 
-    console.log('clubName submitted is: ' + this.club.clubName);
-    console.log('clubOptionSelected is: ' + this.club.clubOptionSelected);
-
+    if (this.club.clubOptionSelected === "clubAwards") {
+      console.log(this.myApp.retrieveQueryData("select ac.cname, ac.awardname from awardclub ac where ac.cname = '" + this.club.clubName + "'"));
+    } else if (this.club.clubOptionSelected === "clubAthletes") {
+      console.log(this.myApp.retrieveQueryData("select * from person p, athlete a where p.id=a.id and a.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')"));
+    } else if (this.club.clubOptionSelected === "clubCoaches") {
+      console.log(this.myApp.retrieveQueryData("select * from person p, coach c where p.id=c.id and c.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')"));
+    } else {
+      console.log(this.myApp.retrieveQueryData("select c.address from club c where c.name = '" + this.club.clubName + "'"));
+    }
 
     // this.navCtrl.push(ResultsPage);
 
@@ -84,17 +90,19 @@ export class GuestPage {
   comp = {compName: '', compOptionSelected: ''}; // clubCoaches should be an array !!!
   onCompSubmit() {
     this.submitted = true;
-
-    console.log('compName submitted is: ' + this.comp.compName);
-    console.log('compOptionSelected is: ' + this.comp.compOptionSelected);
-
+    
+    if (this.comp.compOptionSelected === "compTitleHolders") {
+      console.log(this.myApp.retrieveQueryData("select e.titleholder, e.length, e.stroke from events e where e.cname = '" + this.comp.compName + "'"));
+    } else {
+      console.log(this.myApp.retrieveQueryData("select p.name, pa.length, pa.stroke, pa.length from person p, participate pa where p.id = pa.id and pa.name = '" + this.comp.compName + "'"));
+    }
 
     // this.navCtrl.push(ResultsPage);
 
   }
 
   divisionQuery() {
-    console.log(this.myApp.retrieveQueryData("select * from person"));
+    console.log(this.myApp.retrieveQueryData("select p.name from person p, athlete a where p.id=a.id and NOT EXISTS ((select c.name from competition c) MINUS (select p.name from participate p where p.id=a.id))"));
   }
 
   minNestedAggQuery() {
