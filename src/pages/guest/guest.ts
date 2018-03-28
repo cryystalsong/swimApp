@@ -67,7 +67,7 @@ export class GuestPage {
     }
   };
   onAthleteSubmit() {
-    var query = "";
+    var query = '';
     console.log("athlete.athlAward " + this.athlete.athlAward);
     console.log("athlete.show " + JSON.stringify(this.athlete.show));
     console.log("athlete.show.name " + this.athlete.show.name);
@@ -190,7 +190,7 @@ export class GuestPage {
     }
   };
   onCoachSubmit() {
-    var query = "";
+    var query = '';
     console.log(this.coach.show.name);
     this.submitted = true;
     let select = "select ";
