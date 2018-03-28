@@ -23,22 +23,24 @@ export class MyApp {
   //returns JSON object from input query
   public retrieveQueryData(query : string) : any {
 
-    // var query = "select name from person where id=" + this.person.id;
+    return new Promise((resolve, reject) => {
 
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+      // var query = "select name from person where id=" + this.person.id;
 
-    var results;
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~u2o0b/clubsAwardsWon.php?q=" + query;
 
-    this.http.get(phpURL, {}, {}).then(data => {
-      results = JSON.parse(data.data);
-      console.log(results);
-      // console.log(typeof results);
 
-      // document.getElementById("crystal").innerHTML = results;
+      this.http.get(phpURL, {}, {}).then(data => {
+        var results = JSON.parse(data.data);
+        // console.log(results);
+        // console.log(typeof results);
+        // document.getElementById("crystal").innerHTML = results;
 
-      return results;
-
-    });
+        resolve(results);
+      }, (error) => {
+        reject(error);
+      });
+    })
   }
 }
 
