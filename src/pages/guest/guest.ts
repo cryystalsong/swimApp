@@ -25,15 +25,14 @@ export class GuestPage {
 
   }
 
-  club = {clubName: '', clubAward: false, clubCoaches: '', clubLocation: ''}; // clubCoaches should be an array !!!
+  club = {clubName: '', clubOptionSelected: ''}; // clubCoaches should be an array !!!
   submitted = false;
   onClubSubmit() {
     this.submitted = true;
 
     console.log('clubName submitted is: ' + this.club.clubName);
-    console.log('clubAwards submitted is: ' + this.club.clubAward);
-    console.log('clubCoaches submitted is: ' + this.club.clubCoaches); //!!! clubCoaches should be an array
-    console.log('clubCoaches submitted is: ' + this.club.clubLocation);
+    console.log('clubOptionSelected is: ' + this.club.clubOptionSelected);
+
 
     // this.navCtrl.push(ResultsPage);
 

@@ -42,33 +42,20 @@
       </p>
 
       <ion-item>
-        <ion-label>Awards won by selected club</ion-label>
-        <ion-checkbox [(ngModel)]="club.clubAward" #clubAward = "ngModel"  color="dark">
-        </ion-checkbox>
-      </ion-item>
-
-
-      <ion-item>
-        <ion-label>Coach</ion-label>
-        <ion-select [(ngModel)]="club.clubCoaches">
-          <ion-option value="allCoaches">All coaches at selected club</ion-option>
-          <ion-option value="noCoaches">None</ion-option>
+        <ion-label>Show</ion-label>
+        <ion-select [(ngModel)]="club.clubOptionSelected">
+          <ion-option value="clubAwards">awards won by the club</ion-option>
+          <ion-option value="clubAthletes">athletes at the club</ion-option>
+          <ion-option value="clubCoaches">coaches at the club </ion-option>
+          <ion-option value="clubLocation">location of the club</ion-option>
         </ion-select>
       </ion-item>
-
-      <ion-item>
-        <ion-label>Location</ion-label>
-        <ion-select [(ngModel)]="club.clubLocation">
-          <ion-option value="location">Location of selected club</ion-option>
-          <ion-option value="noLocation">None</ion-option>
-        </ion-select>
-      </ion-item>
-
 
       <div padding>
         <button ion-button (click)="onClubSubmit()" type="submit" block>SUBMIT</button>
       </div>
     </ion-list>
+
 
 
 
