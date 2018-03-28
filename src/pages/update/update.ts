@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HTTP } from '@ionic-native/http';
 
 /**
  * Generated class for the UpdatePage page.
@@ -15,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UpdatePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP) {
   }
 
   ionViewDidLoad() {
@@ -37,6 +38,18 @@ export class UpdatePage {
   Insert() {
     this.submitted = true;
   }
+
+  test() {
+
+    var query = "select_star_from_person";
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+    })
+
+  }
+
 
 
 }
