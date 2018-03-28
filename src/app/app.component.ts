@@ -87,7 +87,7 @@ export class MyApp {
 
 // Loop through the JSON and output each row in to a string.
     for (var i = 0; i < count; i++) {
-      tableContent = tableContent + "<tr>";
+      tableContent = tableContent + "<tr align='center'>";
 
       for (var j=0; j<keyArray.length;j++) {
         tableContent += "<td>" + result[i][keyArray[j]] + "</td>";
