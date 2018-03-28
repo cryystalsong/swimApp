@@ -73,13 +73,15 @@
           <button ion-button (click)="Insert()" type="submit" block>INSERT</button>
         </div>
 
+        <div id="insertedParticipate"></div>
+
       </ion-list>
     </ion-list>
 
 
 
     <ion-list *ngSwitchCase="'Delete'">
-  <!--CASCADING DELETES-->
+      <!--CASCADING DELETES-->
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type Athlete ID that was caught doping</ion-label>
@@ -88,17 +90,19 @@
         </ion-item>
       </ion-list>
 
-        <!--<div #ngIf = "!athlete.athleteName">-->
-        <p ion-text [hidden]="athleteID.valid ||submitted == false" color="danger" padding-left>
-          Athlete ID is required
-        </p>
-        <!--</div>-->
+      <!--<div #ngIf = "!athlete.athleteName">-->
+      <p ion-text [hidden]="athleteID.valid ||submitted == false" color="danger" padding-left>
+        Athlete ID is required
+      </p>
+      <!--</div>-->
 
-        <div padding>
-          <button ion-button (click)="DeleteAthlete" type="submit" icon-right>
-            DELETE
-          </button>
-        </div>
+      <div padding>
+        <button ion-button (click)="DeleteAthlete()" type="submit" icon-right>
+          DELETE ATHLETE
+        </button>
+      </div>
+
+      <div id="deleteAthleteResult"></div>
 
 
       <ion-list no-lines>
@@ -110,36 +114,56 @@
       </ion-list>
 
       <p ion-text [hidden]="coachID.valid ||submitted == false" color="danger" padding-left>
-        Coach name is required
+        Coach ID is required
       </p>
 
       <div padding>
-        <button ion-button (click)="Delete" type="submit" icon-right>
+        <button ion-button (click)="DeleteCoach()" type="submit" icon-right>
           DELETE
         </button>
       </div>
+
+      <div id="deleteCoachResult"></div>
 
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Recipient to remove their awards</ion-label>
-          <ion-input [(ngModel)]="award.recipientName" name="recipientName" type="text" #recipientName="ngModel" required>
+          <ion-label floating>Type Person ID to remove their awards</ion-label>
+          <ion-input [(ngModel)]="award.recipientPersonID" name="recipientPersonID" type="text" #recipientPersonID="ngModel" required>
           </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>AwardType</ion-label>
-          <ion-select [(ngModel)]="award.awardType">
-            <ion-option value = "Person"> Person</ion-option>
-            <ion-option value = "Club"> Club</ion-option>
-          </ion-select>
         </ion-item>
       </ion-list>
 
+      <p ion-text [hidden]="recipientPersonID.valid ||submitted == false" color="danger" padding-left>
+        Person ID is required
+      </p>
+
       <div padding>
-        <button ion-button="delete" (click)="DeleteAthlete()" type="submit" icon-right>
-          DELETE
+        <button ion-button (click)="DeleteRecipientPerson()" type="submit" icon-right>
+          DELETE PERSON AWARD
         </button>
       </div>
 
+      <div id="deleteRecipientPerson"></div>
+
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type Club Name to remove their awards</ion-label>
+          <ion-input [(ngModel)]="award.recipientClubName" name="recipientClubName" type="text" #recipientClubName="ngModel" required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <p ion-text [hidden]="recipientClubName.valid ||submitted == false" color="danger" padding-left>
+        Club Name is required
+      </p>
+
+      <div padding>
+        <button ion-button (click)="DeleteRecipientClub()" type="submit" icon-right>
+          DELETE CLUB AWARD
+        </button>
+      </div>
+
+      <div id="deleteRecipientClub"></div>
 
 
     </ion-list>
@@ -156,6 +180,18 @@
           <ion-input [(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="text" #athleteWeight="ngModel" required>
           </ion-input>
         </ion-item>
+<<<<<<< HEAD
+=======
+
+        <div padding>
+          <button ion-button (click)="Updated()" type="submit">
+            UPDATE
+          </button>
+        </div>
+
+        <div id="updateAthleteWeight"></div>
+
+>>>>>>> 9cc5e2e58dae0981addf9fddd3bb4362290f9801
       </ion-list>
     </ion-list>
 
@@ -167,14 +203,5 @@
 
 
   </div>
-
-
-  <div padding>
-    <button ion-button="ath" (click)="test()" type="submit">TEST QUERY </button>
-  </div>
-
-  <div id="crystal2"></div>
-
-
 
 </ion-content>
