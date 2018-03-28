@@ -57,6 +57,8 @@
       <div padding>
         <button ion-button (click)="onClubSubmit()" type="submit" block>SUBMIT</button>
       </div>
+
+      <div id="clubResult"></div>
     </ion-list>
 
 
@@ -222,6 +224,8 @@
         <button ion-button (click)="onCompSubmit()" type="submit" block>SUBMIT</button>
       </div>
 
+      <div id="compResult"></div>
+
     </ion-list>
 
     <ion-list *ngSwitchCase="'other'">
@@ -236,6 +240,8 @@
       <div padding>
         <button ion-button (click)="minNestedAggQuery()" type="submit" block>Show event that takes minimum average time to swim</button>
       </div>
+
+      <div id="otherResult"></div>
 
     </ion-list>
   </div>

@@ -34,25 +34,22 @@ export class GuestPage {
   onClubSubmit() {
     this.submitted = true;
 
-    // if (this.club.clubOptionSelected === "clubAwards") {
-
-    var q = "select ac.cname, ac.awardname from awardclub ac where ac.cname = '" + this.club.clubName + "'";
-    // var q2 = "select * from person";
+    var q = '';
+    if (this.club.clubOptionSelected === "clubAwards") {
+      q = "select ac.cname, ac.awardname from awardclub ac where ac.cname = '" + this.club.clubName + "'";
+    } else if (this.club.clubOptionSelected === "clubAthletes") {
+      q = "select * from person p, athlete a where p.id=a.id and a.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')";
+    } else if (this.club.clubOptionSelected === "clubCoaches") {
+      q = "select * from person p, coach c where p.id=c.id and c.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')";
+    } else {
+      "select c.address from club c where c.name = '" + this.club.clubName + "'"
+    }
 
 
     this.myApp.retrieveQueryData(q).then((data)=> {
-        console.log(q);
+      this.myApp.displayQueryData(data, "clubResult");
         console.log(data);
       });
-
-     // console.log(this.myApp.retrieveQueryData("select ac.cname, ac.awardname from awardclub ac where ac.cname = '" + this.club.clubName + "'"));
-    // } else if (this.club.clubOptionSelected === "clubAthletes") {
-    //   console.log(this.myApp.retrieveQueryData("select * from person p, athlete a where p.id=a.id and a.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')"));
-    // } else if (this.club.clubOptionSelected === "clubCoaches") {
-    //   console.log(this.myApp.retrieveQueryData("select * from person p, coach c where p.id=c.id and c.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')"));
-    // } else {
-    //   console.log(this.myApp.retrieveQueryData("select c.address from club c where c.name = '" + this.club.clubName + "'"));
-    // }
 
     // this.navCtrl.push(ResultsPage);
 
@@ -193,26 +190,48 @@ export class GuestPage {
   onCompSubmit() {
     this.submitted = true;
 
+    var q = '';
+
     if (this.comp.compOptionSelected === "compTitleHolders") {
-      console.log(this.myApp.retrieveQueryData("select e.titleholder, e.length, e.stroke from events e where e.cname = '" + this.comp.compName + "'"));
+      q="select e.titleholder, e.length, e.stroke from events e where e.cname = '" + this.comp.compName + "'"
     } else {
-      console.log(this.myApp.retrieveQueryData("select p.name, pa.length, pa.stroke, pa.length from person p, participate pa where p.id = pa.id and pa.name = '" + this.comp.compName + "'"));
+      q="select p.name, pa.length, pa.stroke, pa.length from person p, participate pa where p.id = pa.id and pa.name = '" + this.comp.compName + "'"
     }
+
+    this.myApp.retrieveQueryData(q).then((data)=> {
+      this.myApp.displayQueryData(data, "compResult");
+      console.log(data);
+    });
 
     // this.navCtrl.push(ResultsPage);
 
   }
 
   divisionQuery() {
-    console.log(this.myApp.retrieveQueryData("select p.name from person p, athlete a where p.id=a.id and NOT EXISTS ((select c.name from competition c) MINUS (select p.name from participate p where p.id=a.id))"));
+    var q = "select p.name from person p, athlete a where p.id=a.id and NOT EXISTS ((select c.name from competition c) MINUS (select p.name from participate p where p.id=a.id))"
+
+    this.myApp.retrieveQueryData(q).then((data)=> {
+      this.myApp.displayQueryData(data, "otherResult");
+      console.log(data);
+    });
   }
 
   minNestedAggQuery() {
-    console.log(this.myApp.retrieveQueryData("select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select min(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))"))
+    var q ="select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select min(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))";
+
+    this.myApp.retrieveQueryData(q).then((data)=> {
+      this.myApp.displayQueryData(data, "otherResult");
+      console.log(data);
+    });
   }
 
   maxNestedAggQuery() {
-    console.log(this.myApp.retrieveQueryData("select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select max(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))"))
+    var q = "select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select max(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))";
+
+    this.myApp.retrieveQueryData(q).then((data)=> {
+      this.myApp.displayQueryData(data, "otherResult");
+      console.log(data);
+    });
   }
 
 }
