@@ -78,6 +78,7 @@ export class GuestPage {
     let where = "";
     let flag = 0;
     let flag2 = 0;
+    let flag3 = 0;
     if (this.athlete.show.name) {
       flag = 1;
       select += "p.name";
@@ -101,7 +102,7 @@ export class GuestPage {
       flag2 = 1;
 
     }
-    if (this.athlete.show.height) {
+    if (this.athlete.height || this.athlete.show.height) {
       if (flag) {
         select += ", a.height";
       } else {
@@ -147,18 +148,20 @@ export class GuestPage {
       flag2 = 1;
     }
 
-    if (this.athlete.athlName) {
-      where += "where p.name = \'" + this.athlete.athlName + "\'" ; //  and a.id = p.id
+   if (this.athlete.athlName) {
+      where += "where p.name = \'" + this.athlete.athlName + "\' and a.id = p.id";
+      flag2 = 1;
+    } else if (this.athlete.height) {
+      where += "where a.id = p.id and " + "a.height in (select " + this.athlete.height + "from athlete a1)"
       flag2 = 1;
     }
+
     if (flag2) {
-      where += " and a.id = p.id";
       from += ", person p";
     }
-    query = select + " " + from;
-    if (where) {
-      query += " " + where;
-    }
+
+    query = select + " " + from + " " + where;
+
 
     console.log("query " + query);
 
