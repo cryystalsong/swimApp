@@ -14,5 +14,135 @@
 
 
 <ion-content padding>
+  <div padding>
+    <ion-segment [(ngModel)]="from">
+      <ion-segment-button value="Insert">
+        Insert
+      </ion-segment-button>
+      <ion-segment-button value="Delete">
+        Delete
+      </ion-segment-button>
+      <ion-segment-button value="Update">
+        Update
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
+  <div [ngSwitch]="from">
+
+    <ion-list *ngSwitchCase="'Insert'">
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type in seconds</ion-label>
+          <ion-input [(ngModel)]="participate.seconds" name="seconds" type="text" #seconds="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Type in length</ion-label>
+          <ion-input [(ngModel)]="participate.length" name="length" type="text" #length="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Type in stroke</ion-label>
+          <ion-input [(ngModel)]="participate.stroke" name="stroke" type="text" #stroke="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Type in name</ion-label>
+          <ion-input [(ngModel)]="participate.name" name="name" type="text" #name="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Type in date</ion-label>
+          <ion-input [(ngModel)]="participate.pdate" name="date" type="text" #pdate="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Type in ID</ion-label>
+          <ion-input [(ngModel)]="participate.ID" name="ID" type="text" #ID="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <div padding>
+          <button ion-button (click)="Insert()" type="submit" block>INSERT</button>
+        </div>
+
+      </ion-list>
+    </ion-list>
+
+
+
+    <ion-list *ngSwitchCase="'Delete'">
+  <!--CASCADING DELETES-->
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type Athlete name that was caught doping</ion-label>
+          <ion-input [(ngModel)]="athlete.athleteName" name="athleteName" type="text" #athleteName="ngModel" required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+        <!--<div #ngIf = "!athlete.athleteName">-->
+        <p ion-text [hidden]="athleteName.valid ||submitted == false" color="danger" padding-left>
+          Athlete name is required
+        </p>
+        <!--</div>-->
+
+        <div padding>
+          <button ion-button (click)="Delete" type="submit" icon-right>
+            DELETE
+          </button>
+        </div>
+
+
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type Coach name that was caught administering doping</ion-label>
+          <ion-input [(ngModel)]="coach.coachName" name="coachName" type="text" #coachName="ngModel" required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <p ion-text [hidden]="coachName.valid ||submitted == false" color="danger" padding-left>
+        Coach name is required
+      </p>
+
+      <div padding>
+        <button ion-button (click)="Delete" type="submit" icon-right>
+          DELETE
+        </button>
+      </div>
+
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type Recipient to remove their awards</ion-label>
+          <ion-input [(ngModel)]="award.recipientName" name="recipientName" type="text" #recipientName="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>AwardType</ion-label>
+          <ion-select [(ngModel)]="award.awardType">
+            <ion-option value = "Person"> Person</ion-option>
+            <ion-option value = "Club"> Club</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <div padding>
+        <button ion-button (click)="Delete" type="submit" icon-right>
+          DELETE
+        </button>
+      </div>
+
+
+
+    </ion-list>
+  </div>
 
 </ion-content>

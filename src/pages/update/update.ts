@@ -22,4 +22,21 @@ export class UpdatePage {
     console.log('ionViewDidLoad UpdatePage');
   }
 
+  athlete = {athleteName: '', athleteAward: ''}
+  coach = {coachName: '', coachAward: ''}
+  award = {recipientName:'', awardType:''}
+  participate = {seconds: '', length: '', stroke: '', name: '',pdate: '', ID:''}
+
+
+  submitted = false;
+  Delete() {
+    this.submitted = true;
+  }
+
+
+  Insert() {
+    this.submitted = true;
+  }
+
+
 }
