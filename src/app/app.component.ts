@@ -42,5 +42,52 @@ export class MyApp {
       });
     })
   }
+
+  //display the given
+  //PARAM:
+  // result is the resulting JSON Object
+  // tagID is the tagID of the div you want the info to be displayed in
+  public displayQueryData(result, tagID) : void {
+    // Parse the JSON so we can access what we need.
+
+// Get the amount of objects inside 'watson_tone' so we can loop through each one.
+    var count = Object.keys(result).length;
+
+// Make some strings to include in our output.
+    var tableHeader = "<table>";
+
+    var keyArray = Object.keys(result[0]);
+
+    for (var a=0; a< keyArray.length ;a++) {
+      tableHeader += "<col width='150'>" ;
+    }
+
+    tableHeader += "<tr>";
+
+    for (var b=0; b < keyArray.length ;b++) {
+      tableHeader += "<th>" + keyArray[b] + "</th>";
+    }
+
+    tableHeader += "</tr>";
+
+    var tableContent = "";
+
+// Loop through the JSON and output each row in to a string.
+    for (var i = 0; i < count; i++) {
+      tableContent = tableContent + "<tr>";
+
+      for (var j=0; j<keyArray.length;j++) {
+        tableContent += "<td>" + result[i][keyArray[j]] + "</td>";
+      }
+
+      tableContent += "<tr>";
+    }
+
+
+    var tableFooter = "</table>";
+
+// Get div and output the HTML. You can include these HTML strings straight in to your emailText variable.
+    document.getElementById(tagID).innerHTML = tableHeader + tableContent + tableFooter;
+  }
 }
 
