@@ -114,7 +114,7 @@ export class UpdatePage {
 
   test() {
 
-    var query = "select * from athlete";
+    var query = "select * from events";
     // var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
     //
     // this.http.get(phpURL, {},{}).then(data => {
@@ -124,32 +124,9 @@ export class UpdatePage {
     this.myApp.retrieveQueryData(query).then((result) => {
       console.log(result);
 
-// Parse the JSON so we can access what we need.
-
-// Get the amount of objects inside 'watson_tone' so we can loop through each one.
-      var count = Object.keys(result).length;
-
-// Make some strings to include in our output.
-      var tableHeader =
-        "<table>" +
-        "<col width='40'><col width='40'><col width='40'>" +
-        "<tr><th>HEIGHT</th><th>ID</th><th>WEIGHT</th></tr>";
-
-      var tableContent = "";
-
-// Loop through the JSON and output each row in to a string.
-      for (var i = 0; i < count; i++) {
-        tableContent = tableContent + "<tr><td>" + result[i].HEIGHT + "</td><td>" + result[i].ID + "</td><td>" + result[i].WEIGHT + "</td></tr>";
-      }
-
-      var tableFooter = "</table>";
-
-// Get div and output the HTML. You can include these HTML strings straight in to your emailText variable.
-      document.getElementById("crystal2").innerHTML = tableHeader + tableContent + tableFooter;
+      this.myApp.displayQueryData(result,"crystal2");
 
     });
-
-
   }
 
 
