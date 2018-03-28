@@ -19,7 +19,7 @@ export class AdminPage {
   }
 
   routeAdminSignIn() : void {
-    this.navCtrl.push('GuestPage');
+    this.navCtrl.push('UpdatePage');
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPage');
