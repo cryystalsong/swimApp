@@ -194,24 +194,30 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'competition'">
-      <ion-item>
-        <ion-label>Select Competition(s)</ion-label>
-        <ion-select [(ngModel)]="compSelect">
-          <ion-option value="allclubs">All Competitions</ion-option>
-          <ion-option value="comp1">Olympics</ion-option>
-          <ion-option value="comp2">Fraser Valley Tournament</ion-option>
-          <ion-option value="comp3">District Tournament</ion-option>
-          <ion-option value="comp4">NCAA Tournament</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Race Results</ion-label>
-        <ion-select [(ngModel)]="raceCompSelect">
-          <ion-option value="athleteAllStrokes">Find race results of all strokes</ion-option>
-          <ion-option value="athleteSpecStroke">Find race results of stroke: </ion-option>
 
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type in Competition name</ion-label>
+          <ion-input [(ngModel)]="comp.compName" name="compName" type="text" #compName="ngModel" required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <p ion-text [hidden]="compName.valid || submitted == false" color="danger" padding-left>
+        Competition name is required
+      </p>
+
+      <ion-item>
+        <ion-label>Show</ion-label>
+        <ion-select [(ngModel)]="comp.compOptionSelected">
+          <ion-option value="compTitleHolders">titleholders of each race</ion-option>
+          <ion-option value="compAllRaces">all race results</ion-option>
         </ion-select>
       </ion-item>
+
+      <div padding>
+        <button ion-button (click)="onCompSubmit()" type="submit" block>SUBMIT</button>
+      </div>
     </ion-list>
   </div>
 
