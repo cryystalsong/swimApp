@@ -93,6 +93,7 @@ export class GuestPage {
     let from = "from athlete a, person p" ;
     let where = "where a.id = p.id ";
     let flag = 0;
+
     if (this.athlete.show.name) {
       flag = 1;
       select += "p.name";
@@ -141,9 +142,9 @@ export class GuestPage {
     }
     if (this.athlete.show.city) {
       if (flag) {
-        select += ", p.city";
+        select += ", p.citydetails";
       } else {
-        select += "p.city";
+        select += "p.citydetails";
         flag = 1;
       }
 
@@ -172,6 +173,7 @@ export class GuestPage {
       this.myApp.displayQueryData(data, "athleteResult");
       console.log(data);
     }).catch((err)=>{
+      console.log(err);
     this.presentAlert();
     });
 

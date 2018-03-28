@@ -21,9 +21,4 @@ export class HomePage {
     this.navCtrl.push('AdminPage');
   }
 
-  displayData() : void {
-    this.navCtrl.push('ResultsPage');
-  }
-
-
 }
