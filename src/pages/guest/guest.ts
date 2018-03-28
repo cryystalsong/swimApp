@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, IonicPage, NavController, NavParams } from 'ionic-angular';
 // import {AthletePage} from "../athlete/athlete";
 // import {AdminPage} from "../admin/admin";
+import {MyApp} from '../../app/app.component'
 
 @IonicPage()
 @Component({
@@ -12,7 +13,8 @@ export class GuestPage {
   // adm;
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              public myApp: MyApp) {
     // this.adm = this.adminPage.admin;
 
   }
@@ -95,7 +97,10 @@ export class GuestPage {
 
   }
 
-  minNestedAggQuery() {}
+  minNestedAggQuery(
+  ) {
+    console.log(this.myApp.retrieveQueryData("select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select max(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))"))
+  }
 
   maxNestedAggQuery() {}
 
