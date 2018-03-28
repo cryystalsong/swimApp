@@ -94,7 +94,7 @@ export class GuestPage {
   }
 
   divisionQuery() {
-
+    console.log(this.myApp.retrieveQueryData("select * from person"));
   }
 
   minNestedAggQuery() {
