@@ -18,8 +18,18 @@ export class AdminPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  login = {username: '', password: ''};
+  submitted = true;
+
   routeAdminSignIn() : void {
-    this.navCtrl.push('GuestPage');
+    console.log(this.login.username);
+    console.log(this.login.password);
+
+    if(this.login.username === "username" && this.login.password === "password") {
+      this.navCtrl.push('GuestPage', {id: "login"});
+    } else {
+      this.submitted = false;
+    }
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPage');
