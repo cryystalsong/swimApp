@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform} from 'ionic-angular';
+import {AlertController, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {HTTP} from '@ionic-native/http';
@@ -11,7 +11,7 @@ import { HomePage } from '../pages/home/home';
 export class MyApp {
   rootPage:any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private http: HTTP) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private http: HTTP, private alertCtrl: AlertController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -21,6 +21,14 @@ export class MyApp {
   }
 
 
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'ERROR!',
+      subTitle: 'Incorrect information',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 
   //returns JSON object from input query
   public retrieveQueryData(query : string) : any {
@@ -41,10 +49,10 @@ export class MyApp {
         resolve(results);
       }, (error) => {
         reject(error);
+      })
+        .catch((err)=>{
+        this.presentAlert();
       });
-      //   .catch((err)=>{
-      //   this.presentAlert();
-      // });
     });
   }
 
