@@ -82,20 +82,20 @@
   <!--CASCADING DELETES-->
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Athlete name that was caught doping</ion-label>
-          <ion-input [(ngModel)]="athlete.athleteName" name="athleteName" type="text" #athleteName="ngModel" required>
+          <ion-label floating>Type Athlete ID that was caught doping</ion-label>
+          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="text" #athleteID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
 
         <!--<div #ngIf = "!athlete.athleteName">-->
-        <p ion-text [hidden]="athleteName.valid ||submitted == false" color="danger" padding-left>
-          Athlete name is required
+        <p ion-text [hidden]="athleteID.valid ||submitted == false" color="danger" padding-left>
+          Athlete ID is required
         </p>
         <!--</div>-->
 
         <div padding>
-          <button ion-button (click)="Delete" type="submit" icon-right>
+          <button ion-button (click)="DeleteAthlete" type="submit" icon-right>
             DELETE
           </button>
         </div>
@@ -103,13 +103,13 @@
 
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Coach name that was caught administering doping</ion-label>
-          <ion-input [(ngModel)]="coach.coachName" name="coachName" type="text" #coachName="ngModel" required>
+          <ion-label floating>Type Coach ID that was caught administering doping</ion-label>
+          <ion-input [(ngModel)]="coach.coachID" name="coachID" type="text" #coachID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
 
-      <p ion-text [hidden]="coachName.valid ||submitted == false" color="danger" padding-left>
+      <p ion-text [hidden]="coachID.valid ||submitted == false" color="danger" padding-left>
         Coach name is required
       </p>
 
@@ -135,7 +135,7 @@
       </ion-list>
 
       <div padding>
-        <button ion-button (click)="Delete" type="submit" icon-right>
+        <button ion-button="delete" (click)="DeleteAthlete()" type="submit" icon-right>
           DELETE
         </button>
       </div>
@@ -143,11 +143,36 @@
 
 
     </ion-list>
+
+    <ion-list *ngSwitchCase="'Update'">
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Type Athlete ID to update</ion-label>
+          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="text" #athleteID="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Type Athlete weight to update</ion-label>
+          <ion-input [(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="text" #athleteWeight="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <div padding>
+          <button ion-button="update" (click)="Update()" type="submit">
+            UPDATE
+          </button>
+        </div>
+
+      </ion-list>
+    </ion-list>
+
+
   </div>
 
 
   <div padding>
     <button ion-button="ath" (click)="test()" type="submit">TEST QUERY </button>
   </div>
+
+
 
 </ion-content>
