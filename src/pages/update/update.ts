@@ -25,74 +25,131 @@ export class UpdatePage {
 
   athlete = {athleteID: 0, athleteAward: '', athleteWeight: 0}
   coach = {coachID: 0, coachAward: ''}
-  award = {recipientName:'', awardType:''}
-  participate = {seconds: '', length: '', stroke: '', name: '',pdate: '', ID:''}
+  award = {recipientPersonID: 0, recipientClubName: ''}
+  participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''}
 
 
   submitted = false;
   DeleteAthlete() {
 
+    var query = "delete from athlete where id = " + this.athlete.athleteID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+
+      var query = "select * from athlete";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+      })
+    })
+
     this.submitted = true;
   }
+
+  DeleteCoach(){
+
+    var query = "delete from coach where id = " + this.coach.coachID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+
+      var query = "select * from coach";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+      })
+
+    })
+
+    this.submitted = true;
+  }
+
+  DeleteRecipientPerson(){
+
+    var query = "delete from AwardPerson where id = " + this.award.recipientPersonID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+
+      var query = "select * from AwardPerson";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+      })
+
+    })
+  }
+
+  DeleteRecipientClub(){
+
+    var query = "delete from AwardClub where cName = " + "'" + this.award.recipientClubName + "'";
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+    this.http.get(phpURL, {},{}).then(data => {
+      console.log(data.data);
+
+      var query = "select * from AwardClub";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+      })
+
+    })
+
+  }
+
 
 
   Insert() {
 
-    this.submitted = true;
-  }
-
-  Update(){
-
-    // check the initial projection of all athletes
-    var query = "select_star_from_athlete";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
+    var query = "insert into Participate values (" + this.participate.seconds + ", "
+    + this.participate.length + ", " + "'" + this.participate.stroke + "'" + ", "
+    + "'" + this.participate.name + "'" + ", " + "'" + this.participate.pdate + "'" + ", "
+    + this.participate.ID + ")";
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
     this.http.get(phpURL, {},{}).then(data => {
       console.log(data.data);
+
+      var query = "select * from Participate";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+      })
+
     })
 
+
+  }
+
+  Updated(){
     //make the update to a specified athlete
-    var query = "update_athlete_set_weight_equal_" + this.athlete.athleteWeight +
-      "where_id_equal_" + this.athlete.athleteID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
+    var query = "update athlete set weight = " + this.athlete.athleteWeight + " where id = "
+    + this.athlete.athleteID;
+    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
     this.http.get(phpURL, {},{}).then(data => {
       console.log(data.data);
+
+      var query = "select * from athlete";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+      })
+
+
     })
-
-    //check the projection of athlete to look for update
-    var query = "select_star_from_athlete";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
-
-    //select the updated athlete weight
-    var query = "select_weight_from_athlete_where_id_equal_" + this.athlete.athleteID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
-
-
-
     this.submitted = true;
   }
-
-
-  test() {
-
-    var query = "select_star_from_person";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~j5m0b/clubsAwardsWon.php/" + query;
-
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-    })
-
-  }
-
-
 
 }
