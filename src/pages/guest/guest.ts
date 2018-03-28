@@ -11,15 +11,22 @@ import {MyApp} from "../../app/app.component";
 })
 export class GuestPage {
 
+  hideUpdate = false;
+
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
               public navParams: NavParams,
               public myApp: MyApp) {
-
+    var fromPage = navParams.get('id');
+    if(fromPage !== "login") {
+      this.hideUpdate = true;
+    }
   }
+
   // var query = "";
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuestPage');
+    console.log(this.hideUpdate);
   }
 
   maxmin() {

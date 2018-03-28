@@ -280,9 +280,8 @@
     </ion-list>
   </div>
 
-  <!--<div *ngIf = "!adm">-->
-  <button ion-button round (click)="navUpdate()">Update Queries</button>
-<!--</div>-->
+
+  <button [hidden]="hideUpdate" ion-button round (click)="navUpdate()">Update Queries</button>
 
 
 </ion-content>

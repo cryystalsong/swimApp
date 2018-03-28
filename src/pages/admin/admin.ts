@@ -26,7 +26,7 @@ export class AdminPage {
     console.log(this.login.password);
 
     if(this.login.username === "username" && this.login.password === "password") {
-      this.navCtrl.push('GuestPage', {id: "login"});
+      this.navCtrl.push('GuestPage', {id: 'login'});
     } else {
       this.submitted = false;
     }
