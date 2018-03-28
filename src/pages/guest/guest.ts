@@ -234,9 +234,9 @@ export class GuestPage {
     }
     if (this.coach.show.yrs) {
       if (flag) {
-        select += ", c.yrs";
+        select += ", c.yearsofexp";
       } else {
-        select += "c.yrs";
+        select += "c.yearsofexp";
         flag = 1;
       }
     }
@@ -251,9 +251,9 @@ export class GuestPage {
     }
     if (this.coach.show.city) {
       if (flag) {
-        select += ", p.city";
+        select += ", p.citydetails";
       } else {
-        select += "p.city";
+        select += "p.citydetails";
         flag = 1;
       }
       flag2 = 1;
