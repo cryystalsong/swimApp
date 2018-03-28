@@ -97,12 +97,13 @@ export class GuestPage {
 
   }
 
-  minNestedAggQuery(
-  ) {
-    console.log(this.myApp.retrieveQueryData("select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select max(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))"))
+  minNestedAggQuery() {
+    console.log(this.myApp.retrieveQueryData("select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select min(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))"))
   }
 
-  maxNestedAggQuery() {}
+  maxNestedAggQuery() {
+    console.log(this.myApp.retrieveQueryData("select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select max(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))"))
+  }
 
 }
 
