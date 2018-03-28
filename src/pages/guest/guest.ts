@@ -78,6 +78,18 @@ export class GuestPage {
   navUpdate() {
     this.navCtrl.push("UpdatePage")
   }
+
+  comp = {compName: '', compOptionSelected: ''}; // clubCoaches should be an array !!!
+  onCompSubmit() {
+    this.submitted = true;
+
+    console.log('compName submitted is: ' + this.comp.compName);
+    console.log('compOptionSelected is: ' + this.comp.compOptionSelected);
+
+
+    // this.navCtrl.push(ResultsPage);
+
+  }
 }
 
 
