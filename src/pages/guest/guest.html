@@ -168,7 +168,7 @@
           </ion-input>
         </ion-item>
 
-        <div *ngIf = "!coach.allCoach">
+        <div *ngIf = "!coach.allCoaches">
           <p ion-text [hidden]="coachName.valid || submitted == false" color="danger" padding-left>
             Coach name is required
           </p>
@@ -178,17 +178,14 @@
           <ion-checkbox [(ngModel)]="coach.allCoaches" (ionChange)="updateAllCoaches()" #allCoaches = "ngModel" color="dark"></ion-checkbox>
         </ion-item>
 
-
         <ion-item [class.hide]="!coach.allCoaches">
           <ion-label>Years of Experience</ion-label>
           <ion-select [(ngModel)]="coach.yrs">
-            <ion-option value="yearsMax">Find athletes with greatest height</ion-option>
-            <ion-option value="yearsMin">Find athletes with shortest height</ion-option>
-            <ion-option value="yearsEqual">Find athlete with height equal to: </ion-option>
-            <ion-option value="yearsAvg">Find the average number of years of experience</ion-option>
+            <ion-option value="max(c1.yearsOfExp)">Find athletes with greatest height</ion-option>
+            <ion-option value="min(c1.yearsOfExp)">Find athletes with shortest height</ion-option>
+            <ion-option value="!!!max(c1.yearsOfExp)">Find athlete with height equal to: </ion-option>
           </ion-select>
         </ion-item>
-
 
         <ion-item>
           <ion-label>Name</ion-label>

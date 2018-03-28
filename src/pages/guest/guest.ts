@@ -90,15 +90,12 @@ export class GuestPage {
     console.log("athlete.show.height " + this.athlete.show.height);
     this.submitted = true;
     let select = "select ";
-    let from = "from athlete a" ;
-    let where = "";
+    let from = "from athlete a, person p" ;
+    let where = "where a.id = p.id ";
     let flag = 0;
-    let flag2 = 0;
-    let flag3 = 0;
     if (this.athlete.show.name) {
       flag = 1;
       select += "p.name";
-      flag2 = 1;
     }
     if (this.athlete.show.id) {
       if (flag) {
@@ -115,7 +112,6 @@ export class GuestPage {
         select += "p.sex";
         flag = 1;
       }
-      flag2 = 1;
 
     }
     if (this.athlete.height || this.athlete.show.height) {
@@ -141,7 +137,6 @@ export class GuestPage {
         select += "p.birthday";
         flag = 1;
       }
-      flag2 = 1;
 
     }
     if (this.athlete.show.city) {
@@ -151,7 +146,6 @@ export class GuestPage {
         select += "p.city";
         flag = 1;
       }
-      flag2 = 1;
 
     }
     if (this.athlete.show.country) {
@@ -159,22 +153,15 @@ export class GuestPage {
         select += ", p.country";
       } else {
         select += "p.country";
-        flag = 1;
       }
-      flag2 = 1;
     }
 
    if (this.athlete.athlName) {
-      where += "where p.name = \'" + this.athlete.athlName + "\' and a.id = p.id";
-      flag2 = 1;
+      where += " and p.name = \'" + this.athlete.athlName + "\'";
     } else if (this.athlete.height) {
-      where += "where a.id = p.id and " + "a.height in (select " + this.athlete.height + "from athlete a1)"
-      flag2 = 1;
+      where += " and " + "a.height in (select " + this.athlete.height + "from athlete a1)";
     }
 
-    if (flag2) {
-      from += ", person p";
-    }
 
     query = select + " " + from + " " + where;
 
@@ -207,7 +194,9 @@ export class GuestPage {
       yrs: false,
       birthday: false,
       city: false,
-      country: false
+      country: false,
+      athletes: false,
+      awards: false
     }
   };
   onCoachSubmit() {
@@ -215,14 +204,12 @@ export class GuestPage {
     console.log(this.coach.show.name);
     this.submitted = true;
     let select = "select ";
-    let from = "from coach c" ;
-    let where = "";
+    let from = "from coach c, person p" ;
+    let where = "where c.id = p.id";
     let flag = 0;
-    let flag2 = 0;
     if (this.coach.show.name) {
       flag = 1;
       select += "p.name";
-      flag2 = 1;
     }
     if (this.coach.show.id) {
       if (flag) {
@@ -247,7 +234,6 @@ export class GuestPage {
         select += "p.birthday";
         flag = 1;
       }
-      flag2 = 1;
     }
     if (this.coach.show.city) {
       if (flag) {
@@ -256,7 +242,6 @@ export class GuestPage {
         select += "p.citydetails";
         flag = 1;
       }
-      flag2 = 1;
     }
     if (this.coach.show.country) {
       if (flag) {
@@ -265,21 +250,29 @@ export class GuestPage {
         select += "p.country";
         flag = 1;
       }
-      flag2 = 1;
     }
 
-    if (this.coach.coachName) {
-      where += "where p.name = \'" + this.coach.coachName + "\'" ; //  and a.id = p.id
-      flag2 = 1;
+    if (this.coach.show.athletes) {
+      from += ", person ap, coaches co";
+      if (flag) {
+        select += ", ap.name";
+      } else {
+        select += "ap.name";
+        flag = 1;
+      }
     }
-    if (flag2) {
-      where += " and c.id = p.id";
-      from += ", person p";
+
+    if (this.coach.coachName && this.coach.athletes) {
+      where = "where co.aid = ap.id and co.cid not in ((select co2.cid from coaches co2) " +
+        "minus (select c.id from coach c, person cp where cp.name = \'" + this.coach.coachName + "\' and cp.id = c.id))";
+    } else if (this.coach.coachName) {
+      where += " and p.name = \'" + this.coach.coachName + "\'";
+    } else if (this.coach.yrs){
+      where += " and c.yearsOfExp = (select " + this.coach.yrs + " from Coach c1)";
     }
-    query = select + " " + from;
-    if (where) {
-      query += " " + where;
-    }
+
+    query = select + " " + from + " " + where;
+
 
     console.log("query " + query);
     this.myApp.retrieveQueryData(query).then((data)=> {
