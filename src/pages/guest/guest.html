@@ -89,7 +89,7 @@
         <!--</div>-->
         <!--</ng-template>-->
 
-      <p>OR Find height information about all Athletes</p>
+      <p>OR Find information about all Athletes</p>
 
 
       <ion-item>
@@ -99,7 +99,7 @@
 
 
       <ion-item>
-        <ion-label>Height</ion-label>
+        <ion-label>Find height info for all athletes</ion-label>
         <ion-select [(ngModel)]="athlete.height">
           <div *ngIf = "!athlete.athlName; else elsetag">
             <ion-option value="max(a1.height)">Find the athlete with greatest height</ion-option>
@@ -187,9 +187,9 @@
         <ion-item [class.hide]="!coach.allCoaches">
           <ion-label>Years of Experience</ion-label>
           <ion-select [(ngModel)]="coach.yrs">
-            <ion-option value="max(c1.yearsOfExp)">Find athletes with greatest height</ion-option>
-            <ion-option value="min(c1.yearsOfExp)">Find athletes with shortest height</ion-option>
-            <ion-option value="!!!max(c1.yearsOfExp)">Find athlete with height equal to: </ion-option>
+            <ion-option value="max(c1.yearsOfExp)">Find coach with longest coaching experience</ion-option>
+            <ion-option value="min(c1.yearsOfExp)">Find coach with shortest coaching experience</ion-option>
+            <ion-option value="!!!max(c1.yearsOfExp)">Find coach with given coaching experience (in years)</ion-option> //TODO add user input box
           </ion-select>
         </ion-item>
 
@@ -219,11 +219,11 @@
         </ion-item>
         <ion-item [class.hide]="coach.allCoaches" >
           <ion-label>Athletes Coached</ion-label>
-          <ion-checkbox [(ngModel)]="coach.show.athletes" #country = "ngModel"  color="dark"></ion-checkbox>
+          <ion-checkbox [(ngModel)]="coach.show.athletes" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK
         </ion-item>
         <ion-item [class.hide]="coach.allCoaches" >
           <ion-label>Awards Won</ion-label>
-          <ion-checkbox [(ngModel)]="coach.show.awards" #country = "ngModel"  color="dark"></ion-checkbox>
+          <ion-checkbox [(ngModel)]="coach.show.awards" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK
         </ion-item>
 
         <div padding>
@@ -269,6 +269,8 @@
       <div padding>
         <button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all competitions</button>
       </div>
+
+      <h5>Nested Aggregation w/ Group By Query: Find the max/min average time of each unique event(event defined by Stroke + Length)</h5>
 
       <div padding>
         <button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time to swim</button>
