@@ -10,15 +10,14 @@ import {MyApp} from "../../app/app.component";
   templateUrl: 'guest.html',
 })
 export class GuestPage {
-  query = "";
+
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
               public navParams: NavParams,
               public myApp: MyApp) {
-    // this.adm = this.adminPage.admin;
 
   }
-
+  // var query = "";
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuestPage');
   }
@@ -55,19 +54,20 @@ export class GuestPage {
 
   }
 
-    athlete = {
-      allAthletes: false, athlName: '', athlAward: false, height: '', show: {
-        name: false,
-        id: false,
-        sex: false,
-        height: false,
-        weight: false,
-        birthday: false,
-        city: false,
-        country: false
-      }
-    };
+  athlete = {
+    allAthletes: false, athlName: '', athlAward: false, height: '', show: {
+      name: false,
+      id: false,
+      sex: false,
+      height: false,
+      weight: false,
+      birthday: false,
+      city: false,
+      country: false
+    }
+  };
   onAthleteSubmit() {
+    var query = "";
     console.log("athlete.athlAward " + this.athlete.athlAward);
     console.log("athlete.show " + JSON.stringify(this.athlete.show));
     console.log("athlete.show.name " + this.athlete.show.name);
@@ -148,19 +148,25 @@ export class GuestPage {
     }
 
     if (this.athlete.athlName) {
-      where += "where p.name = \'" + this.athlete.athlName + "\'" ;
+      where += "where p.name = \'" + this.athlete.athlName + "\'" ; //  and a.id = p.id
       flag2 = 1;
     }
     if (flag2) {
-      from += ", person p"
+      where += " and a.id = p.id";
+      from += ", person p";
     }
-    this.query = select + " " + from;
+    query = select + " " + from;
     if (where) {
-      this.query += " " + where;
+      query += " " + where;
     }
 
-    console.log("query " + this.query);
-    console.log(this.myApp.retrieveQueryData(this.query));
+    console.log("query " + query);
+
+    this.myApp.retrieveQueryData(query).then((data)=> {
+      this.myApp.displayQueryData(data, "athleteResult");
+      console.log(data);
+    });
+
   }
 
   updateAllAthletes() {
@@ -168,20 +174,108 @@ export class GuestPage {
     this.athlete.allAthletes = true;
   }
 
-  // updateAthleteSelection() {
-  //   let modal = this.modalCtrl.create(AthletePage, this.athlete.show);
-  //   modal.present();
-  //
-  //   modal.onWillDismiss((data: any) => {
-  //     if (data) {
-  //       this.athlete.show = data;
-  //     }
-  //   });
-  // }
-
   updateAthleteName() {
     this.athlete.allAthletes = false;
   }
+
+
+  coach = {
+    allCoaches: false, coachName: '', yrs: '', show: {
+      name: false,
+      id: false,
+      yrs: false,
+      birthday: false,
+      city: false,
+      country: false
+    }
+  };
+  onCoachSubmit() {
+    var query = "";
+    console.log(this.coach.show.name);
+    this.submitted = true;
+    let select = "select ";
+    let from = "from coach c" ;
+    let where = "";
+    let flag = 0;
+    let flag2 = 0;
+    if (this.coach.show.name) {
+      flag = 1;
+      select += "p.name";
+      flag2 = 1;
+    }
+    if (this.coach.show.id) {
+      if (flag) {
+        select += ", c.id";
+      } else {
+        select += "c.id";
+        flag = 1;
+      }
+    }
+    if (this.coach.show.yrs) {
+      if (flag) {
+        select += ", c.yrs";
+      } else {
+        select += "c.yrs";
+        flag = 1;
+      }
+    }
+    if (this.coach.show.birthday) {
+      if (flag) {
+        select += ", p.birthday";
+      } else {
+        select += "p.birthday";
+        flag = 1;
+      }
+      flag2 = 1;
+    }
+    if (this.coach.show.city) {
+      if (flag) {
+        select += ", p.city";
+      } else {
+        select += "p.city";
+        flag = 1;
+      }
+      flag2 = 1;
+    }
+    if (this.coach.show.country) {
+      if (flag) {
+        select += ", p.country";
+      } else {
+        select += "p.country";
+        flag = 1;
+      }
+      flag2 = 1;
+    }
+
+    if (this.coach.coachName) {
+      where += "where p.name = \'" + this.coach.coachName + "\'" ; //  and a.id = p.id
+      flag2 = 1;
+    }
+    if (flag2) {
+      where += " and c.id = p.id";
+      from += ", person p";
+    }
+    query = select + " " + from;
+    if (where) {
+      query += " " + where;
+    }
+
+    console.log("query " + query);
+    this.myApp.retrieveQueryData(query).then((data)=> {
+      this.myApp.displayQueryData(data, "coachResult");
+      console.log(data);
+    });
+  }
+
+  updateAllCoaches() {
+    this.coach.coachName = '';
+    this.coach.allCoaches = true;
+  }
+
+  updateCoachName() {
+    this.coach.allCoaches = false;
+  }
+
   navUpdate() {
     this.navCtrl.push("UpdatePage")
   }
