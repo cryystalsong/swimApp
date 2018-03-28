@@ -95,8 +95,8 @@
         <!--</div>-->
 
         <div padding>
-          <button ion-button (click)="DeleteAthlete()" type="submit" icon-right>
-            DELETE ATHLETE
+          <button ion-button (click)="DeleteAthlete" type="submit" icon-right>
+            DELETE
           </button>
         </div>
 
@@ -110,48 +110,33 @@
       </ion-list>
 
       <p ion-text [hidden]="coachID.valid ||submitted == false" color="danger" padding-left>
-        Coach ID is required
+        Coach name is required
       </p>
 
       <div padding>
-        <button ion-button (click)="DeleteCoach()" type="submit" icon-right>
+        <button ion-button (click)="Delete" type="submit" icon-right>
           DELETE
         </button>
       </div>
 
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Person ID to remove their awards</ion-label>
-          <ion-input [(ngModel)]="award.recipientPersonID" name="recipientPersonID" type="text" #recipientPersonID="ngModel" required>
+          <ion-label floating>Type Recipient to remove their awards</ion-label>
+          <ion-input [(ngModel)]="award.recipientName" name="recipientName" type="text" #recipientName="ngModel" required>
           </ion-input>
         </ion-item>
-      </ion-list>
-
-      <p ion-text [hidden]="recipientPersonID.valid ||submitted == false" color="danger" padding-left>
-        Person ID is required
-      </p>
-
-      <div padding>
-        <button ion-button (click)="DeleteRecipientPerson()" type="submit" icon-right>
-          DELETE PERSON AWARD
-        </button>
-      </div>
-
-      <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Club Name to remove their awards</ion-label>
-          <ion-input [(ngModel)]="award.recipientClubName" name="recipientClubName" type="text" #recipientClubName="ngModel" required>
-          </ion-input>
+          <ion-label>AwardType</ion-label>
+          <ion-select [(ngModel)]="award.awardType">
+            <ion-option value = "Person"> Person</ion-option>
+            <ion-option value = "Club"> Club</ion-option>
+          </ion-select>
         </ion-item>
       </ion-list>
 
-      <p ion-text [hidden]="recipientClubName.valid ||submitted == false" color="danger" padding-left>
-        Club Name is required
-      </p>
-
       <div padding>
-        <button ion-button (click)="DeleteRecipientClub()" type="submit" icon-right>
-          DELETE CLUB AWARD
+        <button ion-button="delete" (click)="DeleteAthlete()" type="submit" icon-right>
+          DELETE
         </button>
       </div>
 
@@ -171,9 +156,8 @@
           <ion-input [(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="text" #athleteWeight="ngModel" required>
           </ion-input>
         </ion-item>
-
         <div padding>
-          <button ion-button (click)="Updated()" type="submit">
+          <button ion-button="update" (click)="Update()" type="submit">
             UPDATE
           </button>
         </div>
@@ -183,15 +167,14 @@
 
 
   </div>
-<<<<<<< HEAD
-=======
 
 
   <div padding>
     <button ion-button="ath" (click)="test()" type="submit">TEST QUERY </button>
   </div>
 
+  <div id="crystal2"></div>
 
 
->>>>>>> parent of 6c918cc... might create merge conflicts with this
+
 </ion-content>
