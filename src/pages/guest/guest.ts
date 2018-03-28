@@ -188,7 +188,10 @@ export class GuestPage {
 
 
   coach = {
-    allCoaches: false, coachName: '', yrs: '', show: {
+    allCoaches: false,
+    coachName: '',
+    yrs: '',
+    show: {
       name: false,
       id: false,
       yrs: false,
@@ -262,7 +265,7 @@ export class GuestPage {
       }
     }
 
-    if (this.coach.coachName && this.coach.athletes) {
+    if (this.coach.coachName && this.coach.show.athletes) {
       where = "where co.aid = ap.id and co.cid not in ((select co2.cid from coaches co2) " +
         "minus (select c.id from coach c, person cp where cp.name = \'" + this.coach.coachName + "\' and cp.id = c.id))";
     } else if (this.coach.coachName) {
