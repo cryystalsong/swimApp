@@ -96,11 +96,6 @@
         Athlete name is required
       </p>
       </div>
-      <!--<ng-template #elsetag>-->
-        <!--<div>-->
-          <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
-        <!--</div>-->
-      <!--</ng-template>-->
       <ion-item>
         <ion-label >All Athletes</ion-label>
         <ion-checkbox [(ngModel)]="athlete.allAthletes" (ionChange)="updateAllAthletes()" #allAthletes = "ngModel" color="dark"></ion-checkbox>
@@ -124,10 +119,23 @@
         </ion-select>
       </ion-item>
 
+          <button ion-button (click)="updateAthleteSelection()" type="submit" block>Show</button>
+
+        <!--<ion-select [(ngModel)]="athlete.show" (click)="updateAthleteSelection()">-->
+          <!--<ion-option [(ngModel)]="athlete.show.name" #name = "ngModel"  color="dark"></ion-option>-->
+          <!--<ion-checkbox [(ngModel)]="athlete.show.id" #id = "ngModel"  color="dark"></ion-checkbox>-->
+          <!--<ion-checkbox [(ngModel)]="athlete.show.gender" #gender = "ngModel"  color="dark"></ion-checkbox>-->
+          <!--<ion-checkbox [(ngModel)]="athlete.show.height" #height = "ngModel"  color="dark"></ion-checkbox>-->
+          <!--<ion-checkbox [(ngModel)]="athlete.show.weight" #weight = "ngModel"  color="dark"></ion-checkbox>-->
+          <!--<ion-checkbox [(ngModel)]="athlete.show.birthday" #birthday = "ngModel"  color="dark"></ion-checkbox>-->
+          <!--<ion-checkbox [(ngModel)]="athlete.show.city" #city = "ngModel"  color="dark"></ion-checkbox>-->
+          <!--<ion-checkbox [(ngModel)]="athlete.show.country" #country = "ngModel"  color="dark"></ion-checkbox>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
+
       <ion-item>
         <ion-label>Awards won by selected athlete</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.athlAward" #athlAward = "ngModel"  color="dark">
-        </ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.athlAward" #athlAward = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
 
 
