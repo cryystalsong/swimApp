@@ -12,24 +12,31 @@
 
 </ion-header>
 
-
 <ion-content padding>
 
   <ion-list>
 
     <ion-item>
       <ion-label stacked>Username</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" required>
+      </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input [(ngModel)] = "login.password" name="password" type="password" #password="ngModel"></ion-input>
     </ion-item>
 
   </ion-list>
+
+  <p ion-text [hidden]="submitted == true" color="danger" padding-left>
+    Incorrect username or password
+  </p>
+
   <button
     ion-button full large icon-left
     (click)="routeAdminSignIn()">Sign In</button>
+
+
 
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {HTTP} from '@ionic-native/http';
@@ -20,6 +20,8 @@ export class MyApp {
     });
   }
 
+
+
   //returns JSON object from input query
   public retrieveQueryData(query : string) : any {
 
@@ -30,7 +32,7 @@ export class MyApp {
       var phpURL = "http://www.ugrad.cs.ubc.ca/~u2o0b/clubsAwardsWon.php?q=" + query;
 
 
-      this.http.get(phpURL, {}, {}).then(data => {
+      this.http.get(phpURL, {}, {}).then((data) => {
         var results = JSON.parse(data.data);
         // console.log(results);
         // console.log(typeof results);
@@ -40,7 +42,10 @@ export class MyApp {
       }, (error) => {
         reject(error);
       });
-    })
+      //   .catch((err)=>{
+      //   this.presentAlert();
+      // });
+    });
   }
 
   //display the given

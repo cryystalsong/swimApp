@@ -14,7 +14,7 @@ export class HomePage {
   }
 
   routeGuest() : void {
-    this.navCtrl.push('GuestPage');
+    this.navCtrl.push('GuestPage', {id: "guest"});
   }
 
   routeAdmin() : void {
