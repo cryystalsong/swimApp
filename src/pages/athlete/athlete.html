@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button (click)="cancel()">Cancel</button>
+    </ion-buttons>
+
+    <ion-title>
+      Show
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="applySelections()" strong>Okay</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="outer-content">
+
+  <ion-list>
+    <ion-list-header>Show</ion-list-header>
+    <!--[attr.att]="att | lowercase"-->
+    <ion-item *ngFor="let a of attributes" >
+      <span item-start class="dot"></span>
+      <ion-label>{{a}}</ion-label>
+      <ion-toggle [(ngModel)]="att.isChecked" color="secondary"></ion-toggle>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <button ion-item (click)="resetOptions()" detail-none class="reset-filters">
+      Reset All Filters
+    </button>
+  </ion-list>
+
+</ion-content>
+
+
+
