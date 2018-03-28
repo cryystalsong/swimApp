@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import {ModalController, IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 // import {AthletePage} from "../athlete/athlete";
 // import {AdminPage} from "../admin/admin";
 import {MyApp} from "../../app/app.component";
@@ -16,7 +16,8 @@ export class GuestPage {
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
               public navParams: NavParams,
-              public myApp: MyApp) {
+              public myApp: MyApp,
+              private alertCtrl: AlertController) {
     var fromPage = navParams.get('id');
     if(fromPage !== "login") {
       this.hideUpdate = true;
@@ -29,9 +30,15 @@ export class GuestPage {
     console.log(this.hideUpdate);
   }
 
-  maxmin() {
-
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'ERROR!',
+      subTitle: 'Incorrect information',
+      buttons: ['Dismiss']
+    });
+    alert.present();
   }
+
 
   club = {clubName: '', clubOptionSelected: ''}; // clubCoaches should be an array !!!
   submitted = false;
@@ -55,7 +62,9 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "clubResult");
         console.log(data);
-      });
+      }).catch((err)=>{
+    this.presentAlert();
+    });
 
     // this.navCtrl.push(ResultsPage);
 
@@ -175,6 +184,8 @@ export class GuestPage {
     this.myApp.retrieveQueryData(query).then((data)=> {
       this.myApp.displayQueryData(data, "athleteResult");
       console.log(data);
+    }).catch((err)=>{
+    this.presentAlert();
     });
 
   }
@@ -274,6 +285,8 @@ export class GuestPage {
     this.myApp.retrieveQueryData(query).then((data)=> {
       this.myApp.displayQueryData(data, "coachResult");
       console.log(data);
+    }).catch((err)=>{
+    this.presentAlert();
     });
   }
 
@@ -305,6 +318,8 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "compResult");
       console.log(data);
+    }).catch((err)=>{
+    this.presentAlert();
     });
 
     // this.navCtrl.push(ResultsPage);
@@ -317,6 +332,8 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
       console.log(data);
+    }).catch((err)=>{
+    this.presentAlert();
     });
   }
 
@@ -326,6 +343,8 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
       console.log(data);
+    }).catch((err)=>{
+    this.presentAlert();
     });
   }
 
@@ -335,6 +354,8 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
       console.log(data);
+    }).catch((err)=>{
+    this.presentAlert();
     });
   }
 
