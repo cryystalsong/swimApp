@@ -22,6 +22,9 @@
       <ion-segment-button value="competition">
         Competition
       </ion-segment-button>
+      <ion-segment-button value="other">
+        Other
+      </ion-segment-button>
     </ion-segment>
   </div>
 
@@ -218,6 +221,22 @@
       <div padding>
         <button ion-button (click)="onCompSubmit()" type="submit" block>SUBMIT</button>
       </div>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'other'">
+      <div padding>
+        <button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all competitions</button>
+      </div>
+
+      <div padding>
+        <button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time to swim</button>
+      </div>
+
+      <div padding>
+        <button ion-button (click)="minNestedAggQuery()" type="submit" block>Show event that takes minimum average time to swim</button>
+      </div>
+
     </ion-list>
   </div>
 

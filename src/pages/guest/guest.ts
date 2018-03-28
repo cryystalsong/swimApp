@@ -90,6 +90,15 @@ export class GuestPage {
     // this.navCtrl.push(ResultsPage);
 
   }
+
+  divisionQuery() {
+
+  }
+
+  minNestedAggQuery() {}
+
+  maxNestedAggQuery() {}
+
 }
 
 
