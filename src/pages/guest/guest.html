@@ -182,12 +182,6 @@
         </p>
       </div>
 
-      <div *ngIf="!coach.allCoaches">
-        <p ion-text [hidden]="coachName.valid || submitted == false" color="danger" padding-left>
-          Coach name is required
-        </p>
-      </div>
-
       <ion-item>
         <ion-label>All Coaches</ion-label>
         <ion-checkbox [(ngModel)]="coach.allCoaches" #allCoaches="ngModel"
