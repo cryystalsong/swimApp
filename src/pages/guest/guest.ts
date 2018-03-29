@@ -79,15 +79,16 @@ export class GuestPage {
     athlName: '',
     height: '',
     sHeight: '',
+    selected: [],
     show: {
-      name: true,
-      id: false,
-      sex: false,
-      height: false,
-      weight: false,
-      birthday: false,
-      city: false,
-      country: false
+       name: true,
+       id: false,
+       sex: false,
+       height: false,
+       weight: false,
+       birthday: false,
+       city: false,
+       country: false
     }
   };
 
@@ -95,7 +96,12 @@ export class GuestPage {
 
   resetAthlete() {
     this.athlete = {
-      allAthletes: false, athlName: '', height: '', sHeight: '', show: {
+      allAthletes: false,
+      athlName: '',
+      height: '',
+      sHeight: '',
+      selected: [],
+      show: {
         name: true,
         id: false,
         sex: false,
@@ -106,12 +112,14 @@ export class GuestPage {
         country: false
       }
     }
-  }
+    }
+
 
   onAthleteSubmit() {
     var query = '';
     // console.log("athlete.athlAward " + this.athlete.athlAward);
-    console.log("athlete.show " + JSON.stringify(this.athlete.show));
+    console.log(this.athlete.selected);
+    console.log(this.athlete.selected.indexOf("ID")!== -1);
     // console.log("athlete.show.name " + this.athlete.show.name.value.checked);
     console.log("athlete.show.height " + this.athlete.show.height);
     this.submitted = true;
@@ -120,68 +128,69 @@ export class GuestPage {
     let where = "where a.id = p.id ";
     let flag = 0;
 
-    if (this.athlete.show.name) {
-      flag = 1;
-      select += "p.name";
-    }
-    if (this.athlete.show.id) {
-      if (flag) {
-        select += ", a.id";
-      } else {
-        select += "a.id";
-        flag = 1;
-      }
-    }
-    if (this.athlete.show.sex) {
-      if (flag) {
-        select += ", p.sex";
-      } else {
-        select += "p.sex";
-        flag = 1;
-      }
+     if (this.athlete.selected.indexOf("Name")!== -1) {
+       flag = 1;
+       select += "p.name";
+     }
+     if (this.athlete.selected.indexOf("ID")!== -1) {
+       if (flag) {
+         select += ", a.id";
+       } else {
+         select += "a.id";
+         flag = 1;
+       }
+     }
+     if (this.athlete.selected.indexOf("Gender")!== -1) {
+       if (flag) {
+         select += ", p.sex";
+       } else {
+         select += "p.sex";
+         flag = 1;
+       }
+     }
+     if (this.athlete.height || this.athlete.selected.indexOf("Height")!== -1) {
+       if (flag) {
+         select += ", a.height";
+       } else {
+         select += "a.height";
+         flag = 1;
+       }
+     }
+     if (this.athlete.selected.indexOf("Weight")!== -1) {
+       if (flag) {
+         select += ", a.weight";
+       } else {
+         select += "a.weight";
+         flag = 1;
+       }
+     }
+     if (this.athlete.selected.indexOf("Birth Date")!== -1) {
+       if (flag) {
+         select += ", p.birthday";
+       } else {
+         select += "p.birthday";
+         flag = 1;
+       }
 
-    }
-    if (this.athlete.height || this.athlete.show.height) {
-      if (flag) {
-        select += ", a.height";
-      } else {
-        select += "a.height";
-        flag = 1;
-      }
-    }
-    if (this.athlete.show.weight) {
-      if (flag) {
-        select += ", a.weight";
-      } else {
-        select += "a.weight";
-        flag = 1;
-      }
-    }
-    if (this.athlete.show.birthday) {
-      if (flag) {
-        select += ", p.birthday";
-      } else {
-        select += "p.birthday";
-        flag = 1;
-      }
+     }
+     if (this.athlete.selected.indexOf("City")!== -1) {
+       if (flag) {
+         select += ", p.citydetails";
+       } else {
+         select += "p.citydetails";
+         flag = 1;
+       }
 
-    }
-    if (this.athlete.show.city) {
-      if (flag) {
-        select += ", p.citydetails";
-      } else {
-        select += "p.citydetails";
-        flag = 1;
-      }
+     }
+     if (this.athlete.selected.indexOf("Country")!== -1) {
+       if (flag) {
+         select += ", p.country";
+       } else {
+         select += "p.country";
+       }
+     }
 
-    }
-    if (this.athlete.show.country) {
-      if (flag) {
-        select += ", p.country";
-      } else {
-        select += "p.country";
-      }
-    }
+    console.log("athlete.show " + JSON.stringify(this.athlete.show));
 
     if (this.athlete.athlName) {
       where += " and p.name = \'" + this.athlete.athlName + "\'";

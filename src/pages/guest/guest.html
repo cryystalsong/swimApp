@@ -136,53 +136,21 @@
         </ion-item>
       </ion-list>
 
-
       <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.name" checked="true" #name="ngModel" color="dark"></ion-checkbox>
+        <ion-label>Show</ion-label>
+        <ion-select [(ngModel)]="athlete.selected" multiple="true">
+          <div>
+            <ion-option>Name</ion-option>
+            <ion-option>ID</ion-option>
+            <ion-option>Gender</ion-option>
+            <ion-option>Height</ion-option>
+            <ion-option>Weight</ion-option>
+            <ion-option>Birth Date</ion-option>
+            <ion-option>City</ion-option>
+            <ion-option>Country</ion-option>
+          </div>
+        </ion-select>
       </ion-item>
-      <ion-item>
-        <ion-label>Athlete ID</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.id" #id="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Gender</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.sex" #sex="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Height</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.height" #height="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Weight</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.weight" #weight="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Birthday</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.birthday" #birthday="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>City</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.city" #city="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Country</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.country" #country="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-
-      <!--<ion-item>-->
-      <!--<ion-label>Show</ion-label>-->
-      <!--<ion-select multiple="true">-->
-      <!--<ion-option [(ngModel)]="athlete.show.name" checked="true" ngDefaultControl>Name</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.id" ngDefaultControl>Athlete ID</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.sex" ngDefaultControl>Gender</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.height" ngDefaultControl>Height</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.weight" ngDefaultControl>Weight</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.birthday" ngDefaultControl>Birthday</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.city" ngDefaultControl>City</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.country" ngDefaultControl>Country</ion-option>-->
-      <!--</ion-select>-->
-      <!--</ion-item>-->
 
       <div padding>
         <button ion-button (click)="onAthleteSubmit()" type="submit" block>SUBMIT</button>
@@ -232,6 +200,7 @@
         </ion-item>
       </ion-list>
 
+      <h6>Show Coach's: </h6>
       <ion-item>
         <ion-label>Name</ion-label>
         <ion-checkbox [(ngModel)]="coach.show.name" checked="true" #name="ngModel" color="dark"></ion-checkbox>
