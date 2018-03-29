@@ -86,10 +86,10 @@ export class GuestPage {
   };
   onAthleteSubmit() {
     var query = '';
-    // console.log("athlete.athlAward " + this.athlete.athlAward);
-    // console.log("athlete.show " + JSON.stringify(this.athlete.show));
-    // console.log("athlete.show.name " + this.athlete.show.name);
-    // console.log("athlete.show.height " + this.athlete.show.height);
+    console.log("athlete.athlAward " + this.athlete.athlAward);
+    console.log("athlete.show " + JSON.stringify(this.athlete.show));
+    console.log("athlete.show.name " + this.athlete.show.name.value.checked);
+    console.log("athlete.show.height " + this.athlete.show.height);
     this.submitted = true;
     let select = "select ";
     let from = "from athlete a, person p" ;

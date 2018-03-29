@@ -109,14 +109,6 @@
         </ion-select>
       </ion-item>
 
-      <!--<p>Select the information you would like to get:</p>-->
-
-      <!--<ion-item [class.hide]="!athlete.athlName" > //TODO this doesn't work!-->
-        <!--<ion-label>Awards won by selected athlete</ion-label>-->
-        <!--<ion-checkbox [(ngModel)]="athlete.athlAward" #athlAward = "ngModel"  color="dark">-->
-        <!--</ion-checkbox>-->
-      <!--</ion-item>-->
-
       <ion-item>
         <ion-label>Name</ion-label>
         <ion-checkbox [(ngModel)]="athlete.show.name" checked="true" #name = "ngModel"  color="dark"></ion-checkbox>
@@ -150,7 +142,19 @@
         <ion-checkbox [(ngModel)]="athlete.show.country" #country = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
 
-
+      <!--<ion-item>-->
+        <!--<ion-label>Show</ion-label>-->
+        <!--<ion-select multiple="true">-->
+          <!--<ion-option [(ngModel)]="athlete.show.name" checked="true" ngDefaultControl>Name</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.id" ngDefaultControl>Athlete ID</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.sex" ngDefaultControl>Gender</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.height" ngDefaultControl>Height</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.weight" ngDefaultControl>Weight</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.birthday" ngDefaultControl>Birthday</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.city" ngDefaultControl>City</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.country" ngDefaultControl>Country</ion-option>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
 
         <div padding>
           <button ion-button (click)="onAthleteSubmit()" type="submit" block>SUBMIT</button>
