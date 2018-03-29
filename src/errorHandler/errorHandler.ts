@@ -21,6 +21,7 @@ export class MyErrorHandler implements ErrorHandler {
 
 
   handleError(error) {
+    // error.preventDefault();
     console.log('Errrrrrrrror ' + error);
     let alert = this.alertCtrl.create({
       title: 'ERROR!',

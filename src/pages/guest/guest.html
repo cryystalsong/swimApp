@@ -49,7 +49,7 @@
         <ion-select [(ngModel)]="club.clubOptionSelected">
           <ion-option value="clubAwards">awards won by the club</ion-option>
           <ion-option value="clubAthletes">athletes at the club</ion-option>
-          <ion-option value="clubCoaches">coaches at the club</ion-option>
+          <ion-option value="clubCoaches">coaches at the club </ion-option>
           <ion-option value="clubLocation">location of the club</ion-option>
         </ion-select>
       </ion-item>
@@ -62,202 +62,174 @@
     </ion-list>
 
 
+
+
+
+
     <ion-list *ngSwitchCase="'athlete'">
 
       <!--<p>Find information about individual Athlete</p>-->
 
-      <ion-list no-lines>
-        <ion-item>
-          <ion-label floating> What is the Athlete's name?</ion-label>
-          <ion-input [(ngModel)]="athlete.athlName" name="athlName" (ionChange)="updateAthleteName()" type="text"
-                     #athlName="ngModel" required>
-          </ion-input>
-        </ion-item>
-      </ion-list>
+        <ion-list no-lines>
+          <ion-item>
+            <ion-label floating> What is the Athlete's name?</ion-label>
+            <ion-input [(ngModel)]="athlete.athlName" name="athlName" (ionChange)="updateAthleteName()" type="text" #athlName="ngModel" required>
+            </ion-input>
+          </ion-item>
+        </ion-list>
 
-      <div *ngIf="!athlete.allAthletes">
-        <p ion-text [hidden]="athlName.valid || submitted == false" color="danger" padding-left>
-          Athlete name is required
-        </p>
-      </div>
-      <!--<ng-template #elsetag>-->
-      <!--<div>-->
-      <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
-      <!--</div>-->
-      <!--</ng-template>-->
+        <div *ngIf = "!athlete.allAthletes">
+          <p ion-text [hidden]="athlName.valid || submitted == false" color="danger" padding-left>
+            Athlete name is required
+          </p>
+        </div>
+        <!--<ng-template #elsetag>-->
+        <!--<div>-->
+        <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
+        <!--</div>-->
+        <!--</ng-template>-->
 
       <!--<p>OR Find information about all Athletes</p>-->
 
 
       <ion-item>
-        <ion-label>All Athletes</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.allAthletes" #allAthletes="ngModel"
-                      color="dark"></ion-checkbox>
+        <ion-label >All Athletes</ion-label>
+        <ion-checkbox [(ngModel)]="athlete.allAthletes" (ionChange)="updateAllAthletes()" #allAthletes = "ngModel" color="dark"></ion-checkbox>
       </ion-item>
 
-      <ion-list [class.hide]="!athlete.allAthletes">
-        <ion-item>
-          <ion-label>Find height info for all athletes</ion-label>
-          <ion-select [(ngModel)]="athlete.height">
-            <div *ngIf="!athlete.athlName; else elsetag">
-              <ion-option value="max(a1.height)">Find the athlete with greatest height</ion-option>
-              <ion-option value="min(a1.height)">Find the athlete with shortest height</ion-option>
-              <ion-option value="a1.height">Find athlete with height equal to:</ion-option>
-              //TODO put in user text input box
-            </div>
-          </ion-select>
-        </ion-item>
 
-        <ion-item [class.hide]="!athlete.height || athlete.height != 'a1.height'">
-          <ion-label>Specify height:</ion-label>
-          <ion-input type="text" [(ngModel)]="athlete.sHeight" name="sHeight" #sHeight="ngModel" required></ion-input>
-        </ion-item>
-      </ion-list>
-
-
-      <!--<p>Select the information you would like to get:</p>-->
-
-      <!--<ion-item [class.hide]="!athlete.athlName" > //TODO this doesn't work!-->
-        <!--<ion-label>Awards won by selected athlete</ion-label>-->
-        <!--<ion-checkbox [(ngModel)]="athlete.athlAward" #athlAward = "ngModel"  color="dark">-->
-        <!--</ion-checkbox>-->
-      <!--</ion-item>-->
+      <ion-item [class.hide]="athlete.athlName">
+        <ion-label>Find height info for all athletes</ion-label>
+        <ion-select [(ngModel)]="athlete.height">
+          <div *ngIf = "!athlete.athlName; else elsetag">
+            <ion-option value="max(a1.height)">Find the athlete with greatest height</ion-option>
+            <ion-option value="min(a1.height)">Find the athlete with shortest height</ion-option>
+            <ion-option value="a1.height = !!!">Find athlete with height equal to: </ion-option> //TODO put in user text input box
+          </div>
+        </ion-select>
+      </ion-item>
 
       <ion-item>
         <ion-label>Name</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.name" checked="true" #name="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.name" checked="true" #name = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Athlete ID</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.id" #id="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.id" #id = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Gender</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.sex" #sex="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.sex" #sex = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Height</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.height" #height="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.height" #height = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Weight</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.weight" #weight="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.weight" #weight = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Birthday</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.birthday" #birthday="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.birthday" #birthday = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>City</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.city" #city="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.city" #city = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Country</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.country" #country="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.country" #country = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
 
       <!--<ion-item>-->
-      <!--<ion-label>Show</ion-label>-->
-      <!--<ion-select multiple="true">-->
-      <!--<ion-option [(ngModel)]="athlete.show.name" checked="true" ngDefaultControl>Name</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.id" ngDefaultControl>Athlete ID</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.sex" ngDefaultControl>Gender</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.height" ngDefaultControl>Height</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.weight" ngDefaultControl>Weight</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.birthday" ngDefaultControl>Birthday</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.city" ngDefaultControl>City</ion-option>-->
-      <!--<ion-option [(ngModel)]="athlete.show.country" ngDefaultControl>Country</ion-option>-->
-      <!--</ion-select>-->
+        <!--<ion-label>Show</ion-label>-->
+        <!--<ion-select multiple="true">-->
+          <!--<ion-option [(ngModel)]="athlete.show.name" checked="true" ngDefaultControl>Name</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.id" ngDefaultControl>Athlete ID</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.sex" ngDefaultControl>Gender</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.height" ngDefaultControl>Height</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.weight" ngDefaultControl>Weight</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.birthday" ngDefaultControl>Birthday</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.city" ngDefaultControl>City</ion-option>-->
+          <!--<ion-option [(ngModel)]="athlete.show.country" ngDefaultControl>Country</ion-option>-->
+        <!--</ion-select>-->
       <!--</ion-item>-->
 
+        <div padding>
+          <button ion-button (click)="onAthleteSubmit()" type="submit" block>SUBMIT</button>
+        </div>
 
-      <div padding>
-        <button ion-button (click)="onAthleteSubmit()" type="submit" block>SUBMIT</button>
-      </div>
-
-      <div id="athleteResult"></div>
-
-
-    </ion-list>
-    <ion-list *ngSwitchCase="'coach'">
-
-      <ion-item>
-        <ion-label floating>Type in Coach name</ion-label>
-        <ion-input [(ngModel)]="coach.coachName" name="coachName" (ionChange)="updateCoachName()" type="text"
-                   #coachName="ngModel" required>
-        </ion-input>
-      </ion-item>
-
-      <div *ngIf="!coach.allCoaches">
-        <p ion-text [hidden]="coachName.valid || submitted == false" color="danger" padding-left>
-          Coach name is required
-        </p>
-      </div>
+        <div id="athleteResult"></div>
 
 
-      <ion-item>
-        <ion-label>All Coaches</ion-label>
-        <ion-checkbox [(ngModel)]="coach.allCoaches" #allCoaches="ngModel"
-                      color="dark"></ion-checkbox>
-      </ion-item>
 
-      <ion-list [class.hide]="!coach.allCoaches">
+      </ion-list>
+      <ion-list *ngSwitchCase="'coach'">
+
         <ion-item>
+          <ion-label floating>Type in Coach name</ion-label>
+          <ion-input [(ngModel)]="coach.coachName" name="coachName" (ionChange)="updateCoachName()" type="text" #coachName="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <div *ngIf = "!coach.allCoaches">
+          <p ion-text [hidden]="coachName.valid || submitted == false" color="danger" padding-left>
+            Coach name is required
+          </p>
+        </div>
+        <ion-item>
+          <ion-label >All Coaches</ion-label>
+          <ion-checkbox [(ngModel)]="coach.allCoaches" (ionChange)="updateAllCoaches()" #allCoaches = "ngModel" color="dark"></ion-checkbox>
+        </ion-item>
+
+        <ion-item [class.hide]="!coach.allCoaches">
           <ion-label>Years of Experience</ion-label>
           <ion-select [(ngModel)]="coach.yrs">
             <ion-option value="max(c1.yearsOfExp)">Find coach with longest coaching experience</ion-option>
             <ion-option value="min(c1.yearsOfExp)">Find coach with shortest coaching experience</ion-option>
-            <ion-option value="specifyCoachExp">Find coaches with specific coaching experience</ion-option>
+            <ion-option value="!!!max(c1.yearsOfExp)">Find coach with given coaching experience (in years)</ion-option> //TODO add user input box
           </ion-select>
         </ion-item>
 
-        <ion-item [class.hide]="!coach.yrs || coach.yrs != 'specifyCoachExp'">
-          <ion-label>Coaching years ></ion-label>
-          <ion-input type="text" [(ngModel)]="coach.sYrs" name="specifyCoachExp" #specifyCoachExp="ngModel" required></ion-input>
+        <ion-item>
+          <ion-label>Name</ion-label>
+          <ion-checkbox [(ngModel)]="coach.show.name" checked="true" #name = "ngModel"  color="dark"></ion-checkbox>
         </ion-item>
-      </ion-list>
+        <ion-item>
+          <ion-label>Coach ID</ion-label>
+          <ion-checkbox [(ngModel)]="coach.show.id" #id = "ngModel"  color="dark"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Years of Experience</ion-label>
+          <ion-checkbox [(ngModel)]="coach.show.yrs" #yrs = "ngModel"  color="dark"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Birthday</ion-label>
+          <ion-checkbox [(ngModel)]="coach.show.birthday" #birthday = "ngModel"  color="dark"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>City</ion-label>
+          <ion-checkbox [(ngModel)]="coach.show.city" #city = "ngModel"  color="dark"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Country</ion-label>
+          <ion-checkbox [(ngModel)]="coach.show.country" #country = "ngModel"  color="dark"></ion-checkbox>
+        </ion-item>
+        <!--<ion-item [class.hide]="coach.allCoaches" >-->
+          <!--<ion-label>Athletes Coached</ion-label>-->
+          <!--<ion-checkbox [(ngModel)]="coach.show.athletes" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
+        <!--</ion-item>-->
+        <!--<ion-item [class.hide]="coach.allCoaches" >-->
+          <!--<ion-label>Awards Won</ion-label>-->
+          <!--<ion-checkbox [(ngModel)]="coach.show.awards" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
+        <!--</ion-item>-->
 
-      <!--<ion-item *ngIf="a1.height">-->
+        <div padding>
+          <button ion-button (click)="onCoachSubmit()" type="submit" block>SUBMIT</button>
+        </div>
+        <div id="coachResult"></div>
 
-      <!--</ion-item>-->
-
-      <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.name" checked="true" #name="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Coach ID</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.id" #id="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Years of Experience</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.yrs" #yrs="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Birthday</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.birthday" #birthday="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>City</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.city" #city="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Country</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.country" #country="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <!--<ion-item [class.hide]="coach.allCoaches" >-->
-      <!--<ion-label>Athletes Coached</ion-label>-->
-      <!--<ion-checkbox [(ngModel)]="coach.show.athletes" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
-      <!--</ion-item>-->
-      <!--<ion-item [class.hide]="coach.allCoaches" >-->
-      <!--<ion-label>Awards Won</ion-label>-->
-      <!--<ion-checkbox [(ngModel)]="coach.show.awards" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
-      <!--</ion-item>-->
-
-      <div padding>
-        <button ion-button (click)="onCoachSubmit()" type="submit" block>SUBMIT</button>
-      </div>
-      <div id="coachResult"></div>
 
 
     </ion-list>
@@ -294,42 +266,35 @@
 
     <ion-list *ngSwitchCase="'other'">
       <div padding>
-        <button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all
-          competitions
-        </button>
+        <button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all competitions</button>
       </div>
 
-      <h5>Nested Aggregation w/ Group By Query: Find the max/min average time of each unique event(event defined by
-        Stroke + Length)</h5>
+      <h5>Nested Aggregation w/ Group By Query: Find the max/min average time of each unique event(event defined by Stroke + Length)</h5>
 
       <div padding>
-        <button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time
-          to swim
-        </button>
+        <button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time to swim</button>
       </div>
 
       <div padding>
-        <button ion-button (click)="minNestedAggQuery()" type="submit" block>Show event that takes minimum average time
-          to swim
-        </button>
+        <button ion-button (click)="minNestedAggQuery()" type="submit" block>Show event that takes minimum average time to swim</button>
       </div>
 
 
-      <button ion-button (click)="coachAthletes()" type="submit" block>Show athletes coached by:</button>
+
+      <button ion-button (click)="coachAthletes()" type="submit" block>Show athletes coached by: </button>
       <div padding>
         <ion-item>
           <ion-label floating>Type in Coach name</ion-label>
-          <ion-input [(ngModel)]="coachName" name="ccoachName" type="text" #ccoachName="ngModel" required></ion-input>
+        <ion-input [(ngModel)]="coachName" name="ccoachName" type="text" #ccoachName="ngModel" required></ion-input>
         </ion-item>
       </div>
 
 
-      <button ion-button (click)="coachAwards()" type="submit" block>Show awards won by Coach:</button>
+      <button ion-button (click)="coachAwards()" type="submit" block>Show awards won by Coach: </button>
       <div padding>
         <ion-item>
           <ion-label floating>Type in Coach name</ion-label>
-          <ion-input [(ngModel)]="coachName2" name="ccoachName2" type="text" #ccoachName2="ngModel"
-                     required></ion-input>
+          <ion-input [(ngModel)]="coachName2" name="ccoachName2" type="text" #ccoachName2="ngModel" required></ion-input>
         </ion-item>
       </div>
 
