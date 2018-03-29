@@ -118,7 +118,7 @@ export class UpdatePage {
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
       this.http.get(phpURL, {},{}).then(data => {
-        console.log(data.data);
+        console.log(data.data); 
 
         var query = "select * from Participate";
         this.myApp.retrieveQueryData(query).then((result) => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ModalController, IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 // import {AthletePage} from "../athlete/athlete";
 // import {AdminPage} from "../admin/admin";
@@ -17,10 +17,9 @@ export class GuestPage {
               public modalCtrl: ModalController,
               public navParams: NavParams,
               public myApp: MyApp,
-              private alertCtrl: AlertController
-              ) {
+              private alertCtrl: AlertController) {
     var fromPage = navParams.get('id');
-    if(fromPage !== "login") {
+    if (fromPage !== "login") {
       this.hideUpdate = true;
     }
   }
@@ -31,14 +30,14 @@ export class GuestPage {
     console.log(this.hideUpdate);
   }
 
-  // presentAlert() {
-  //   let alert = this.alertCtrl.create({
-  //     title: 'ERROR!',
-  //     subTitle: 'Incorrect information',
-  //     buttons: ['Dismiss']
-  //   });
-  //   alert.present();
-  // }
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'ERROR!',
+      subTitle: 'Incorrect information',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 
 
   club = {clubName: '', clubOptionSelected: ''}; // clubCoaches should be an array !!!
@@ -56,24 +55,22 @@ export class GuestPage {
     } else if (this.club.clubOptionSelected === "clubCoaches") {
       q = "select * from person p, coach c where p.id=c.id and c.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')";
     } else {
-      q= "select c.name, c.address from club c where c.name = '" + this.club.clubName + "'";
+      q = "select c.name, c.address from club c where c.name = '" + this.club.clubName + "'";
     }
 
 
-    this.myApp.retrieveQueryData(q).then((data)=> {
+    this.myApp.retrieveQueryData(q).then((data) => {
       this.myApp.displayQueryData(data, "clubResult");
-        console.log(data);
-      });
+      console.log(data);
+    });
     //   .catch((err)=>{
     // this.presentAlert();
     // });
-
     // this.navCtrl.push(ResultsPage);
-
   }
 
   athlete = {
-    allAthletes: false, athlName: '', height: '', show: {
+    allAthletes: false, athlName: '', height: '', sHeight: '', show: {
       name: true,
       id: false,
       sex: false,
@@ -84,15 +81,20 @@ export class GuestPage {
       country: false
     }
   };
+
+
   onAthleteSubmit() {
     var query = '';
-    console.log("athlete.athlAward " + this.athlete.athlAward);
+    // console.log("athlete.athlAward " + this.athlete.athlAward);
     console.log("athlete.show " + JSON.stringify(this.athlete.show));
-    console.log("athlete.show.name " + this.athlete.show.name.value.checked);
+    // console.log("athlete.show.name " + this.athlete.show.name.value.checked);
     console.log("athlete.show.height " + this.athlete.show.height);
+    // console.log("athlete.show " + JSON.stringify(this.athlete.show));
+    // console.log("athlete.show.name " + this.athlete.show.name);
+    // console.log("athlete.show.height " + this.athlete.show.height);
     this.submitted = true;
     let select = "select ";
-    let from = "from athlete a, person p" ;
+    let from = "from athlete a, person p";
     let where = "where a.id = p.id ";
     let flag = 0;
 
@@ -100,6 +102,9 @@ export class GuestPage {
       flag = 1;
       select += "p.name";
     }
+
+    console.log("query1 " + query);
+
     if (this.athlete.show.id) {
       if (flag) {
         select += ", a.id";
@@ -159,8 +164,10 @@ export class GuestPage {
       }
     }
 
-   if (this.athlete.athlName) {
+    if (this.athlete.athlName) {
       where += " and p.name = \'" + this.athlete.athlName + "\'";
+    } else if (this.athlete.sHeight) {
+      where += " and " + "a.height =" + this.athlete.sHeight;
     } else if (this.athlete.height) {
       where += " and " + "a.height in (select " + this.athlete.height + "from athlete a1)";
     }
@@ -171,20 +178,15 @@ export class GuestPage {
 
     console.log("query " + query);
 
-    this.myApp.retrieveQueryData(query).then((data)=> {
+    this.myApp.retrieveQueryData(query).then((data) => {
       this.myApp.displayQueryData(data, "athleteResult");
       console.log(data);
+      this.resetAll();
+    }).catch((err) => {
+      console.log(err);
+      this.presentAlert();
     });
-    // .catch((err)=>{
-    //   console.log(err);
-    // this.presentAlert();
-    // });
 
-  }
-
-  updateAllAthletes() {
-    this.athlete.athlName = '';
-    this.athlete.allAthletes = true;
   }
 
   updateAthleteName() {
@@ -196,6 +198,7 @@ export class GuestPage {
     allCoaches: false,
     coachName: '',
     yrs: '',
+    sYrs: '',
     show: {
       name: true,
       id: false,
@@ -207,12 +210,14 @@ export class GuestPage {
       // awards: false
     }
   };
+
+
   onCoachSubmit() {
     var query = '';
     console.log(this.coach.show.name);
     this.submitted = true;
     let select = "select ";
-    let from = "from coach c, person p" ;
+    let from = "from coach c, person p";
     let where = "where c.id = p.id";
     let flag = 0;
     if (this.coach.show.name) {
@@ -260,124 +265,189 @@ export class GuestPage {
       }
     }
 
+      // if (this.coach.show.athletes) {
+      //    from += ", person ap, coaches co";
+      //    if (flag) {
+      //      select += ", ap.name";
+      //    } else {
+      //      select += "ap.name";
+      //      flag = 1;
+      //    }
+      //  }
+
+      // if (this.coach.coachName && this.coach.show.athletes) {
+      //   where = "where co.aid = ap.id and co.cid not in ((select co2.cid from coaches co2) " +
+      //     "minus (select coa.id from coach coa, person cp where cp.name = \'" + this.coach.coachName + "\' and cp.id = coa.id))";
+      // } else
       if (this.coach.coachName) {
-      where += " and p.name = \'" + this.coach.coachName + "\'";
-    } else if (this.coach.yrs){
-      where += " and c.yearsOfExp = (select " + this.coach.yrs + " from Coach c1)";
+        where += " and p.name = \'" + this.coach.coachName + "\'";
+      } else if (this.coach.sYrs) {
+        where += " and c.yearsOfExp > " + this.coach.sYrs;
+      } else if (this.coach.yrs) {
+        where += " and c.yearsOfExp = (select " + this.coach.yrs + " from Coach c1)";
+      }
+
+      query = select + " " + from + " " + where;
+
+
+      console.log("query " + query);
+      this.myApp.retrieveQueryData(query).then((data) => {
+        this.myApp.displayQueryData(data, "coachResult");
+        console.log(data);
+        this.resetAll();
+      }).catch((err) => {
+        this.presentAlert();
+      });
     }
 
-    query = select + " " + from + " " + where;
+      updateCoachName()
+      {
+        this.coach.allCoaches = false;
+      }
+
+      navUpdate()
+      {
+        this.navCtrl.push("UpdatePage")
+      }
+
+      comp = {compName: '', compOptionSelected: ''}; // clubCoaches should be an array !!!
+      onCompSubmit()
+      {
+        this.submitted = true;
+
+        var q = '';
+
+        if (this.comp.compOptionSelected === "compTitleHolders") {
+          q = "select e.titleholder, e.length, e.stroke from events e where e.cname = '" + this.comp.compName + "'"
+        } else {
+          q = "select p.name, pa.length, pa.stroke, pa.length from person p, participate pa where p.id = pa.id and pa.name = '" + this.comp.compName + "'"
+        }
+
+        this.myApp.retrieveQueryData(q).then((data) => {
+          this.myApp.displayQueryData(data, "compResult");
+          console.log(data);
+
+          this.resetAll();
+
+        }).catch((err) => {
+          this.presentAlert();
+
+        });
+
+        // this.navCtrl.push(ResultsPage);
+
+      }
+
+      divisionQuery()
+      {
+        var q = "select p.name from person p, athlete a where p.id=a.id and NOT EXISTS ((select c.name from competition c) MINUS (select p.name from participate p where p.id=a.id))"
+
+        this.myApp.retrieveQueryData(q).then((data) => {
+          this.myApp.displayQueryData(data, "otherResult");
+          console.log(data);
+
+          this.resetAll();
+
+        }).catch((err) => {
+          this.presentAlert();
+
+        });
+      }
+
+      minNestedAggQuery()
+      {
+        var q = "select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select min(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))";
+
+        this.myApp.retrieveQueryData(q).then((data) => {
+          this.myApp.displayQueryData(data, "otherResult");
+          console.log(data);
+          this.resetAll();
+        }).catch((err) => {
+          this.presentAlert();
+        });
+      }
+
+      maxNestedAggQuery()
+      {
+        var q = "select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select max(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))";
+
+        this.myApp.retrieveQueryData(q).then((data) => {
+          this.myApp.displayQueryData(data, "otherResult");
+          console.log(data);
+          this.resetAll();
+        }).catch((err) => {
+          this.presentAlert();
+
+        });
+      }
+
+      coachName = "";
+
+      coachAthletes()
+      {
+        var q = "select ap.name from person ap, coaches co where co.AID = ap.ID AND co.CID NOT IN ((SELECT co2.CID FROM " +
+          "Coaches co2) MINUS (SELECT c.ID FROM Coach c, Person cp WHERE cp.name = \'" + this.coachName + "\' and cp.ID = c.ID))";
+        this.myApp.retrieveQueryData(q).then((data) => {
+          this.myApp.displayQueryData(data, "otherResult");
+          console.log(data);
+          this.resetAll();
+        }).catch((err) => {
+          this.presentAlert();
+        });
+      }
+
+      resetAll()
+      {
+        // this.athlete = {
+        //   allAthletes: false,
+        //   athlName: '',
+        //   height: this.athlete.height,
+        //   sHeight: '',
+        //   show: {
+        //     name: true,
+        //     id: false,
+        //     sex: false,
+        //     height: false,
+        //     weight: false,
+        //     birthday: false,
+        //     city: false,
+        //     country: false
+        //   }
+        // };
+        //
+        // this.coach = {
+        //   allCoaches: false,
+        //   coachName: '',
+        //   yrs: this.coach.yrs,
+        //   sYrs: '',
+        //   show: {
+        //     name: true,
+        //     id: false,
+        //     yrs: false,
+        //     birthday: false,
+        //     city: false,
+        //     country: false
+        //     // athletes: false,
+        //     // awards: false
+        //   }
+        // };
+      }
 
 
-    console.log("query " + query);
-    this.myApp.retrieveQueryData(query).then((data)=> {
-      this.myApp.displayQueryData(data, "coachResult");
-      console.log(data);
-    });
-    // .catch((err)=>{
-    // this.presentAlert();
-    // });
-  }
+      // coachName2 = "";
+      // coachAwards() {
+      //   var q = "select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID";
+      //   console.log(q);
+      //   this.myApp.retrieveQueryData(q).then((data)=> {
+      //     this.myApp.displayQueryData(data, "otherResult");
+      //     console.log(data);
+      //   }).catch((err)=>{
+      //     this.presentAlert();
+      //   });
+      // }
+      // select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID
 
-  updateAllCoaches() {
-    this.coach.coachName = '';
-    this.coach.allCoaches = true;
-  }
-
-  updateCoachName() {
-    this.coach.allCoaches = false;
-  }
-
-  navUpdate() {
-    this.navCtrl.push("UpdatePage")
-  }
-
-  comp = {compName: '', compOptionSelected: ''}; // clubCoaches should be an array !!!
-  onCompSubmit() {
-    this.submitted = true;
-
-    var q = '';
-
-    if (this.comp.compOptionSelected === "compTitleHolders") {
-      q="select e.titleholder, e.length, e.stroke from events e where e.cname = '" + this.comp.compName + "'"
-    } else {
-      q="select p.name, pa.length, pa.stroke, pa.length from person p, participate pa where p.id = pa.id and pa.name = '" + this.comp.compName + "'"
     }
 
-    this.myApp.retrieveQueryData(q).then((data)=> {
-      this.myApp.displayQueryData(data, "compResult");
-      console.log(data);
-    });
-    // .catch((err)=>{
-    // this.presentAlert();
-    // });
-
-    // this.navCtrl.push(ResultsPage);
-
-  }
-
-  divisionQuery() {
-    var q = "select p.name from person p, athlete a where p.id=a.id and NOT EXISTS ((select c.name from competition c) MINUS (select p.name from participate p where p.id=a.id))"
-
-    this.myApp.retrieveQueryData(q).then((data)=> {
-      this.myApp.displayQueryData(data, "otherResult");
-      console.log(data);
-    });
-    // .catch((err)=>{
-    // this.presentAlert();
-    // });
-  }
-
-  minNestedAggQuery() {
-    var q ="select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select min(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))";
-
-    this.myApp.retrieveQueryData(q).then((data)=> {
-      this.myApp.displayQueryData(data, "otherResult");
-      console.log(data);
-    });
-    // .catch((err)=>{
-    // this.presentAlert();
-    // });
-  }
-
-  maxNestedAggQuery() {
-    var q = "select * from (select avg(seconds) as avgSeconds, stroke, length from participate group by stroke, length) where avgSeconds in (select max(avgSecondsTwo) from (select avg(seconds) as avgSecondsTwo from participate group by stroke, length))";
-
-    this.myApp.retrieveQueryData(q).then((data)=> {
-      this.myApp.displayQueryData(data, "otherResult");
-      console.log(data);
-    });
-    // .catch((err)=>{
-    // this.presentAlert();
-    // });
-  }
-  coachName = "";
-  coachAthletes() {
-    var q = "select ap.name from person ap, coaches co where co.AID = ap.ID AND co.CID NOT IN ((SELECT co2.CID FROM " +
-      "Coaches co2) MINUS (SELECT c.ID FROM Coach c, Person cp WHERE cp.name = \'" + this.coachName + "\' and cp.ID = c.ID))";
-    this.myApp.retrieveQueryData(q).then((data)=> {
-      this.myApp.displayQueryData(data, "otherResult");
-      console.log(data);
-    });
-    // .catch((err)=>{
-    //   this.presentAlert();
-    // });
-  }
-
-  // coachName2 = "";
-  // coachAwards() {
-  //   var q = "select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID";
-  //   console.log(q);
-  //   this.myApp.retrieveQueryData(q).then((data)=> {
-  //     this.myApp.displayQueryData(data, "otherResult");
-  //     console.log(data);
-  //   }).catch((err)=>{
-  //     this.presentAlert();
-  //   });
-  // }
-  // select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID
-
-
-}
 
 
