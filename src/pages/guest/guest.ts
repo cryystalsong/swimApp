@@ -91,7 +91,7 @@ export class GuestPage {
     }
   };
 
-  
+
 
   resetAthlete() {
     this.athlete = {
@@ -186,7 +186,7 @@ export class GuestPage {
     if (this.athlete.athlName) {
       where += " and p.name = \'" + this.athlete.athlName + "\'";
     } else if (this.athlete.sHeight) {
-      where += " and " + "a.height =" + this.athlete.sHeight;
+      where += " and " + "a.height >" + this.athlete.sHeight;
     } else if (this.athlete.height) {
       where += " and " + "a.height in (select " + this.athlete.height + "from athlete a1)";
     }

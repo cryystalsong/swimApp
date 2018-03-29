@@ -84,11 +84,6 @@
           </ion-item>
         </ion-list>
 
-        <div *ngIf = "!athlete.allAthletes">
-          <p ion-text [hidden]="athlName.valid || submitted == false" color="danger" padding-left>
-            Athlete name is required
-          </p>
-        </div>
         <!--<ng-template #elsetag>-->
         <!--<div>-->
         <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
@@ -124,26 +119,14 @@
       </ion-item>
 
 
-      <ion-item [class.hide]="athlete.athlName">
-        <ion-label>Find height info for all athletes</ion-label>
-        <ion-select [(ngModel)]="athlete.height">
-          <div *ngIf = "!athlete.athlName; else elsetag">
-            <ion-option value="max(a1.height)">Find the athlete with greatest height</ion-option>
-            <ion-option value="min(a1.height)">Find the athlete with shortest height</ion-option>
-            <ion-option value="a1.height = !!!">Find athlete with height equal to: </ion-option> //TODO put in user text input box
-          </div>
-        </ion-select>
-      </ion-item>
-
       <ion-list [class.hide]="!athlete.allAthletes">
         <ion-item>
-          <ion-label>Find height info for all athletes</ion-label>
+          <ion-label>Find athlete(s) with</ion-label>
           <ion-select [(ngModel)]="athlete.height">
             <div *ngIf="!athlete.athlName; else elsetag">
-              <ion-option value="max(a1.height)">Find the athlete with greatest height</ion-option>
-              <ion-option value="min(a1.height)">Find the athlete with shortest height</ion-option>
-              <ion-option value="a1.height">Find athlete with height equal to:</ion-option>
-              //TODO put in user text input box
+              <ion-option value="max(a1.height)">greatest height</ion-option>
+              <ion-option value="min(a1.height)">shortest height</ion-option>
+              <ion-option value="a1.height">height greater than:</ion-option>
             </div>
           </ion-select>
         </ion-item>
@@ -236,15 +219,15 @@
 
       <ion-list [class.hide]="!coach.allCoaches">
         <ion-item>
-          <ion-label>Years of Experience</ion-label>
+          <ion-label>Find coach(es) who have</ion-label>
           <ion-select [(ngModel)]="coach.yrs">
-            <ion-option value="max(c1.yearsOfExp)">Find coach with longest coaching experience</ion-option>
-            <ion-option value="min(c1.yearsOfExp)">Find coach with shortest coaching experience</ion-option>
-            <ion-option value="specifyCoachExp">Find coaches with specific coaching experience</ion-option>
+            <ion-option value="max(c1.yearsOfExp)">coached the most years</ion-option>
+            <ion-option value="min(c1.yearsOfExp)">coached the least years</ion-option>
+            <ion-option value="specifyCoachExp">coached for more than:</ion-option>
           </ion-select>
         </ion-item>
         <ion-item [class.hide]="!coach.yrs || coach.yrs != 'specifyCoachExp'">
-          <ion-label>Coaching years ></ion-label>
+          <ion-label>Specify number of years</ion-label>
           <ion-input type="text" [(ngModel)]="coach.sYrs" name="specifyCoachExp" #specifyCoachExp="ngModel" required></ion-input>
         </ion-item>
       </ion-list>
