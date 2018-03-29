@@ -25,38 +25,27 @@ export class UpdatePage {
     console.log('ionViewDidLoad UpdatePage');
   }
 
-  athlete = {athleteID: 0, athleteAward: '', athleteWeight: 0};
-  coach = {coachID: 0, coachAward: ''};
-  award = {recipientPersonID: 0, recipientClubName: ''};
-  participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
+  athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''}
+  coach = {coachID: '', coachAward: ''}
+  award = {recipientPersonID: '', recipientClubName: ''}
+  participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID: ''}
 
+  DAsubmitted = false;
+  DCsubmitted = false;
+  DRPsubmitted = false;
+  DRCsubmitted = false;
+  Isubmitted = false;
+  Usubmitted = false;
 
-  submitted = true;
-
-  resetInsert() {
-    this.participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
-    document.getElementById("insertedParticipate").innerHTML = "";
-  }
-
-  resetUpdate() {
-    this.athlete.athleteID = 0;
-    this.athlete.athleteWeight = 0;
-    document.getElementById("updateAthleteWeight").innerHTML = "";
-  }
-
-  resetDelete() {
-    this.athlete = {athleteID: 0, athleteAward: '', athleteWeight: 0};
-    this.coach = {coachID: 0, coachAward: ''};
-    this.award = {recipientPersonID: 0, recipientClubName: ''};
-    this.participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
-    document.getElementById("deleteAthleteResult").innerHTML = "";
-    document.getElementById("deleteCoachResult").innerHTML = "";
-    document.getElementById("deleteRecipientPerson").innerHTML = "";
-    document.getElementById("deleteRecipientClub").innerHTML = "";
-  }
   DeleteAthlete() {
 
-      var query = "delete from athlete where id = " + this.athlete.athleteID;
+    this.DAsubmitted = true;
+
+    var isnum = /^\d+$/.test(this.athlete.DathleteID);
+
+    if (isnum) {
+
+      var query = "delete from athlete where id = " + this.athlete.DathleteID;
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
       this.http.get(phpURL, {},{}).then(data => {
@@ -70,43 +59,59 @@ export class UpdatePage {
           this.myApp.displayQueryData(result, "deleteAthleteResult");
         });
       })
+    }
 
   }
 
 
   DeleteCoach(){
 
-    var query = "delete from coach where id = " + this.coach.coachID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+    this.DCsubmitted = true;
 
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-      var query = "select * from coach";
-      this.myApp.retrieveQueryData(query).then((result) => {
-        this.myApp.displayQueryData(result, "deleteCoachResult");
-      });
-    })
+    var isnum = /^\d+$/.test(this.coach.coachID);
+
+    if(isnum){
+      var query = "delete from coach where id = " + this.coach.coachID;
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+        var query = "select * from coach";
+        this.myApp.retrieveQueryData(query).then((result) => {
+          this.myApp.displayQueryData(result, "deleteCoachResult");
+        });
+      })
+    }
 
   }
 
   DeleteRecipientPerson(){
 
-    var query = "delete from AwardPerson where id = " + this.award.recipientPersonID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+    this.DRPsubmitted = true;
 
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-      var query = "select * from AwardPerson";
-      this.myApp.retrieveQueryData(query).then((result) => {
-        this.myApp.displayQueryData(result, "deleteRecipientPerson");
-      });
-    })
+    var isnum = /^\d+$/.test(this.award.recipientPersonID);
+
+    if(isnum){
+      var query = "delete from AwardPerson where id = " + this.award.recipientPersonID;
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+        var query = "select * from AwardPerson";
+        this.myApp.retrieveQueryData(query).then((result) => {
+          this.myApp.displayQueryData(result, "deleteRecipientPerson");
+        });
+      })
+    }
+
   }
 
   DeleteRecipientClub(){
 
+    this.DRCsubmitted = true;
+
     if(Number.isNaN(Number(this.award.recipientClubName))) {
-      this.submitted = true;
+
       var query = "delete from AwardClub where cName = " + "'" + this.award.recipientClubName + "'";
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
@@ -117,20 +122,25 @@ export class UpdatePage {
           this.myApp.displayQueryData(result, "deleteRecipientClub");
         });
       })
-    } else {
-      this.submitted = false;
     }
 
   }
 
 
   Insert() {
+    //TODO: stroke, name, and date cannot be strings that can be numbers!
+    // if(/^\d+$/.test(this.participate.stroke)){
+    //   this.Isubmitted = false;
+    // }
+
+    this.Isubmitted = true;
 
     if(Number.isNaN(Number(this.participate.stroke)) &&
       Number.isNaN(Number(this.participate.name)) &&
-      Number.isNaN(Number(this.participate.pdate))){
-
-      this.submitted = true;
+      Number.isNaN(Number(this.participate.pdate)) &&
+      this.participate.seconds != '' &&
+      this.participate.length != '' &&
+      this.participate.ID != ''){
 
       var query = "insert into Participate values (" + this.participate.seconds + ", "
         + this.participate.length + ", " + "'" + this.participate.stroke + "'" + ", "
@@ -147,27 +157,32 @@ export class UpdatePage {
         });
 
       })
-    } else{
-      this.submitted = false;
     }
 
   }
 
   Updated(){
 
-    //make the update to a specified athlete
-    var query = "update athlete set weight = " + this.athlete.athleteWeight + " where id = "
-      + this.athlete.athleteID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+    this.Usubmitted = true;
 
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-      var query = "select * from Athlete";
-      this.myApp.retrieveQueryData(query).then((result) => {
-        this.myApp.displayQueryData(result, "updateAthleteWeight");
-      });
+    var isnumUID = /^\d+$/.test(this.athlete.UathleteID);
+    var isnumUW = /^\d+$/.test(this.athlete.athleteWeight);
 
-    })
+    if(isnumUW && isnumUID){
+      //make the update to a specified athlete
+      var query = "update athlete set weight = " + this.athlete.athleteWeight + " where id = "
+        + this.athlete.UathleteID;
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+        var query = "select * from Athlete";
+        this.myApp.retrieveQueryData(query).then((result) => {
+          this.myApp.displayQueryData(result, "updateAthleteWeight");
+        });
+
+      })
+    }
 
   }
 

@@ -33,44 +33,47 @@
 
     <ion-list *ngSwitchCase="'Insert'">
       <ion-list no-lines>
+<<<<<<< HEAD
 
         <div align="right" padding>
           <button ion-button round (click)="resetInsert()">Reset Form</button>
         </div>
 
+=======
+>>>>>>> f0624ba9a98f9f23b668e786ec37641c9a0e43cf
         <ion-item>
-          <ion-label floating>Type in seconds</ion-label>
-          <ion-input [(ngModel)]="participate.seconds" name="seconds" type="number" #seconds="ngModel" required>
+          <ion-label stacked>Type in seconds</ion-label>
+          <ion-input placeholder="seconds" [(ngModel)]="participate.seconds" name="seconds" type="number" #seconds="ngModel" required>
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Type in length</ion-label>
-          <ion-input [(ngModel)]="participate.length" name="length" type="number" #length="ngModel" required>
+          <ion-label stacked>Type in length</ion-label>
+          <ion-input placeholder="length"[(ngModel)]="participate.length" name="length" type="number" #length="ngModel" required>
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Type in stroke</ion-label>
-          <ion-input [(ngModel)]="participate.stroke" name="stroke" type="text" #stroke="ngModel" required>
+          <ion-label stacked>Type in stroke</ion-label>
+          <ion-input placeholder="stroke"[(ngModel)]="participate.stroke" name="stroke" type="text" #stroke="ngModel" required>
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Type in name</ion-label>
-          <ion-input [(ngModel)]="participate.name" name="name" type="text" #name="ngModel" required>
+          <ion-label stacked>Type in name</ion-label>
+          <ion-input placeholder="name"[(ngModel)]="participate.name" name="name" type="text" #name="ngModel" required>
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Type in date</ion-label>
-          <ion-input [(ngModel)]="participate.pdate" name="date" type="text" #pdate="ngModel" required>
+          <ion-label stacked>Type in date</ion-label>
+          <ion-input placeholder="date"[(ngModel)]="participate.pdate" name="date" type="text" #pdate="ngModel" required>
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Type in ID</ion-label>
-          <ion-input [(ngModel)]="participate.ID" name="ID" type="number" #ID="ngModel" required>
+          <ion-label stacked>Type in ID</ion-label>
+          <ion-input placeholder="ID"[(ngModel)]="participate.ID" name="ID" type="number" #ID="ngModel" required>
           </ion-input>
         </ion-item>
 
@@ -78,8 +81,8 @@
           <button ion-button (click)="Insert()" type="submit" block>INSERT AND SHOW</button>
         </div>
 
-        <p ion-text [hidden]="submitted == true" color="danger" padding-left>
-           length, stroke, and name must be a string
+        <p ion-text [hidden]="seconds.valid && length.valid && stroke.valid && name.valid && pdate.valid && ID.valid || Isubmitted == false" color="danger" padding-left>
+          seconds, length, and ID must be numbers, stroke and name must be strings, and date must be in yyyy-mm-dd syntax
         </p>
 
         <div id="insertedParticipate"></div>
@@ -92,19 +95,22 @@
     <ion-list *ngSwitchCase="'Delete'">
       <!--CASCADING DELETES-->
       <ion-list no-lines>
+<<<<<<< HEAD
         <div align="right" padding>
           <button ion-button round (click)="resetDelete()">Reset Form</button>
         </div>
+=======
+>>>>>>> f0624ba9a98f9f23b668e786ec37641c9a0e43cf
         <ion-item>
-          <ion-label floating>Type Athlete ID that was caught doping (cascading)</ion-label>
-          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="number" #athleteID="ngModel" required>
+          <ion-label stacked>Type Athlete ID that was caught doping (cascading)</ion-label>
+          <ion-input placeholder="Athlete ID"[(ngModel)]="athlete.DathleteID" name="DathleteID" type="number" #DathleteID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
 
       <!--<div #ngIf = "!athlete.athleteName">-->
-      <p ion-text [hidden]="athleteID.valid ||submitted == false" color="danger" padding-left>
-        Athlete ID is required
+      <p ion-text [hidden]="DathleteID.valid ||DAsubmitted == false" color="danger" padding-left>
+        Athlete ID must be a number
       </p>
       <!--</div>-->
 
@@ -119,14 +125,14 @@
 
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Coach ID that was caught administering doping (cascading)</ion-label>
-          <ion-input [(ngModel)]="coach.coachID" name="coachID" type="number" #coachID="ngModel" required>
+          <ion-label stacked>Type Coach ID that was caught administering doping (cascading)</ion-label>
+          <ion-input placeholder="Coach ID"[(ngModel)]="coach.coachID" name="coachID" type="number" #coachID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
 
-      <p ion-text [hidden]="coachID.valid ||submitted == false" color="danger" padding-left>
-        Coach ID is required
+      <p ion-text [hidden]="coachID.valid ||DCsubmitted == false" color="danger" padding-left>
+        Coach ID must be a number
       </p>
 
       <div padding>
@@ -139,14 +145,14 @@
 
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Person ID to remove their awards</ion-label>
-          <ion-input [(ngModel)]="award.recipientPersonID" name="recipientPersonID" type="number" #recipientPersonID="ngModel" required>
+          <ion-label stacked>Type Person ID to remove their awards</ion-label>
+          <ion-input placeholder="Person ID"[(ngModel)]="award.recipientPersonID" name="recipientPersonID" type="number" #recipientPersonID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
 
-      <p ion-text [hidden]="recipientPersonID.valid ||submitted == false" color="danger" padding-left>
-        Person ID is required
+      <p ion-text [hidden]="recipientPersonID.valid ||DRPsubmitted == false" color="danger" padding-left>
+        Person ID must be a number
       </p>
 
       <div padding>
@@ -159,17 +165,13 @@
 
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Club Name to remove their awards</ion-label>
-          <ion-input [(ngModel)]="award.recipientClubName" name="recipientClubName" type="text" #recipientClubName="ngModel" required>
+          <ion-label stacked>Type Club Name to remove their awards</ion-label>
+          <ion-input placeholder="Club Name"[(ngModel)]="award.recipientClubName" name="recipientClubName" type="text" #recipientClubName="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
 
-      <p ion-text [hidden]="recipientClubName.valid ||submitted == false" color="danger" padding-left>
-        Club Name is required
-      </p>
-
-      <p ion-text [hidden]="submitted == true" color="danger" padding-left>
+      <p ion-text [hidden]="recipientClubName.valid ||DRCsubmitted == false" color="danger" padding-left>
         Club Name must be a string
       </p>
 
@@ -186,19 +188,26 @@
 
     <ion-list *ngSwitchCase="'Update'">
       <ion-list no-lines>
+<<<<<<< HEAD
         <div align="right" padding>
           <button ion-button round (click)="resetUpdate()">Reset Form</button>
         </div>
+=======
+>>>>>>> f0624ba9a98f9f23b668e786ec37641c9a0e43cf
         <ion-item>
-          <ion-label floating>Type Athlete ID to update</ion-label>
-          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="number" #athleteID="ngModel" required>
+          <ion-label stacked>Type Athlete ID to update</ion-label>
+          <ion-input placeholder="Athlete ID" [(ngModel)]="athlete.UathleteID" name="UathleteID" type="number" #UathleteID="ngModel" required>
           </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Type Athlete weight to update</ion-label>
-          <ion-input [(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="number" #athleteWeight="ngModel" required>
+          <ion-label stacked>Type Athlete weight to update</ion-label>
+          <ion-input placeholder="new weight"[(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="number" #athleteWeight="ngModel" required>
           </ion-input>
         </ion-item>
+
+        <p ion-text [hidden]="UathleteID.valid && athleteWeight.valid || Usubmitted == false" color="danger" padding-left>
+          Athlete ID and weight must be numbers
+        </p>
 
         <div padding>
           <button ion-button (click)="Updated()" type="submit">

@@ -444,18 +444,41 @@ export class GuestPage {
     // });
   }
 
-  // coachName2 = "";
-  // coachAwards() {
-  //   var q = "select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID";
-  //   console.log(q);
-  //   this.myApp.retrieveQueryData(q).then((data)=> {
-  //     this.myApp.displayQueryData(data, "otherResult");
-  //     console.log(data);
-  //   }).catch((err)=>{
-  //     this.presentAlert();
-  //   });
-  // }
+  coachName2 = "";
+  coachAwards() {
+    var q = "select p.name, ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = \'" + this.coachName2 + "\' and c.ID = p.ID and ap.ID = c.ID";
+    console.log(q);
+    this.myApp.retrieveQueryData(q).then((data)=> {
+      this.myApp.displayQueryData(data, "otherResult");
+      console.log(data);
+    })
+    //   .catch((err)=>{
+    //   this.presentAlert();
+    // });
+  }
   // select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID
+
+  others = {allComps: false, maxAvg: false, minAvg: false, coachedBy: false, coachAwards: false};
+
+  onOthersSubmit() {
+    if (this.others.allComps) {
+      this.divisionQuery();
+    } else if (this.others.maxAvg) {
+      this.maxNestedAggQuery();
+    }else if (this.others.minAvg) {
+      this.minNestedAggQuery();
+    } else if (this.others.coachedBy) {
+      this.coachAthletes();
+    } else if (this.others.coachAwards) {
+      this.coachAwards();
+    }
+    console.log('others submit' + JSON.stringify(this.others));
+  }
+
+  onOthersChange(input : any) {
+    this.others = {allComps: false, maxAvg: false, minAvg: false, coachedBy: false, coachAwards: false};
+
+  }
 
 
 }
