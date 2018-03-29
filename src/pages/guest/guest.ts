@@ -233,6 +233,7 @@ export class GuestPage {
     coachName: '',
     yrs: '',
     sYrs: '',
+    selected: [],
     show: {
       name: true,
       id: false,
@@ -251,6 +252,7 @@ export class GuestPage {
       coachName: '',
       yrs: '',
       sYrs: '',
+      selected: [],
       show: {
         name: true,
         id: false,
@@ -259,7 +261,7 @@ export class GuestPage {
         city: false,
         country: false
       }
-    }
+    };
     document.getElementById("coachResult").innerHTML = "";
   }
 
@@ -271,11 +273,11 @@ export class GuestPage {
     let from = "from coach c, person p";
     let where = "where c.id = p.id";
     let flag = 0;
-    if (this.coach.show.name) {
+    if (this.coach.selected.indexOf("Name")!== -1) {
       flag = 1;
       select += "p.name";
     }
-    if (this.coach.show.id) {
+    if (this.coach.selected.indexOf("ID")!== -1) {
       if (flag) {
         select += ", c.id";
       } else {
@@ -283,7 +285,7 @@ export class GuestPage {
         flag = 1;
       }
     }
-    if (this.coach.show.yrs) {
+    if (this.coach.selected.indexOf("Years of Experience")!== -1) {
       if (flag) {
         select += ", c.yearsofexp";
       } else {
@@ -291,7 +293,7 @@ export class GuestPage {
         flag = 1;
       }
     }
-    if (this.coach.show.birthday) {
+    if (this.coach.selected.indexOf("Birth Date")!== -1) {
       if (flag) {
         select += ", p.birthday";
       } else {
@@ -299,7 +301,7 @@ export class GuestPage {
         flag = 1;
       }
     }
-    if (this.coach.show.city) {
+    if (this.coach.selected.indexOf("City")!== -1) {
       if (flag) {
         select += ", p.citydetails";
       } else {
@@ -307,11 +309,19 @@ export class GuestPage {
         flag = 1;
       }
     }
-    if (this.coach.show.country) {
+    if (this.coach.selected.indexOf("Country")!== -1) {
       if (flag) {
         select += ", p.country";
       } else {
         select += "p.country";
+        flag = 1;
+      }
+    }
+    if (this.coach.selected.indexOf("Gender")!== -1) {
+      if (flag) {
+        select += ", p.sex";
+      } else {
+        select += "p.sex";
         flag = 1;
       }
     }

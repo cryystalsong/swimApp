@@ -200,39 +200,20 @@
         </ion-item>
       </ion-list>
 
-      <h6>Show Coach's: </h6>
       <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.name" checked="true" #name="ngModel" color="dark"></ion-checkbox>
+        <ion-label>Show</ion-label>
+        <ion-select [(ngModel)]="coach.selected" multiple="true">
+          <div>
+            <ion-option>Name</ion-option>
+            <ion-option>ID</ion-option>
+            <ion-option>Years of Experience</ion-option>
+            <ion-option>Birth Date</ion-option>
+            <ion-option>City</ion-option>
+            <ion-option>Country</ion-option>
+            <ion-option>Gender</ion-option>
+          </div>
+        </ion-select>
       </ion-item>
-      <ion-item>
-        <ion-label>Coach ID</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.id" #id="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Years of Experience</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.yrs" #yrs="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Birthday</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.birthday" #birthday="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>City</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.city" #city="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Country</ion-label>
-        <ion-checkbox [(ngModel)]="coach.show.country" #country="ngModel" color="dark"></ion-checkbox>
-      </ion-item>
-      <!--<ion-item [class.hide]="coach.allCoaches" >-->
-      <!--<ion-label>Athletes Coached</ion-label>-->
-      <!--<ion-checkbox [(ngModel)]="coach.show.athletes" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
-      <!--</ion-item>-->
-      <!--<ion-item [class.hide]="coach.allCoaches" >-->
-      <!--<ion-label>Awards Won</ion-label>-->
-      <!--<ion-checkbox [(ngModel)]="coach.show.awards" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
-      <!--</ion-item>-->
 
       <div padding>
         <button ion-button (click)="onCoachSubmit()" type="submit" block>SUBMIT</button>
