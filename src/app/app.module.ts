@@ -14,7 +14,7 @@ import { HTTP } from '@ionic-native/http';
 class MyErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     console.log("ERROR!");
-  }
+  } 
 }
 
 @NgModule({
