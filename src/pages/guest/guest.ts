@@ -71,8 +71,8 @@ export class GuestPage {
   }
 
   athlete = {
-    allAthletes: false, athlName: '', athlAward: false, height: '', show: {
-      name: false,
+    allAthletes: false, athlName: '', height: '', show: {
+      name: true,
       id: false,
       sex: false,
       height: false,
@@ -84,10 +84,10 @@ export class GuestPage {
   };
   onAthleteSubmit() {
     var query = '';
-    console.log("athlete.athlAward " + this.athlete.athlAward);
-    console.log("athlete.show " + JSON.stringify(this.athlete.show));
-    console.log("athlete.show.name " + this.athlete.show.name);
-    console.log("athlete.show.height " + this.athlete.show.height);
+    // console.log("athlete.athlAward " + this.athlete.athlAward);
+    // console.log("athlete.show " + JSON.stringify(this.athlete.show));
+    // console.log("athlete.show.name " + this.athlete.show.name);
+    // console.log("athlete.show.height " + this.athlete.show.height);
     this.submitted = true;
     let select = "select ";
     let from = "from athlete a, person p" ;
@@ -194,14 +194,14 @@ export class GuestPage {
     coachName: '',
     yrs: '',
     show: {
-      name: false,
+      name: true,
       id: false,
       yrs: false,
       birthday: false,
       city: false,
-      country: false,
-      athletes: false,
-      awards: false
+      country: false
+      // athletes: false,
+      // awards: false
     }
   };
   onCoachSubmit() {
@@ -266,11 +266,11 @@ export class GuestPage {
         flag = 1;
       }
     }
-
-    if (this.coach.coachName && this.coach.show.athletes) {
-      where = "where co.aid = ap.id and co.cid not in ((select co2.cid from coaches co2) " +
-        "minus (select c.id from coach c, person cp where cp.name = \'" + this.coach.coachName + "\' and cp.id = c.id))";
-    } else if (this.coach.coachName) {
+    // if (this.coach.coachName && this.coach.show.athletes) {
+    //   where = "where co.aid = ap.id and co.cid not in ((select co2.cid from coaches co2) " +
+    //     "minus (select coa.id from coach coa, person cp where cp.name = \'" + this.coach.coachName + "\' and cp.id = coa.id))";
+    // } else
+      if (this.coach.coachName) {
       where += " and p.name = \'" + this.coach.coachName + "\'";
     } else if (this.coach.yrs){
       where += " and c.yearsOfExp = (select " + this.coach.yrs + " from Coach c1)";
@@ -356,6 +356,31 @@ export class GuestPage {
     this.presentAlert();
     });
   }
+  coachName = "";
+  coachAthletes() {
+    var q = "select ap.name from person ap, coaches co where co.AID = ap.ID AND co.CID NOT IN ((SELECT co2.CID FROM " +
+      "Coaches co2) MINUS (SELECT c.ID FROM Coach c, Person cp WHERE cp.name = \'" + this.coachName + "\' and cp.ID = c.ID))";
+    this.myApp.retrieveQueryData(q).then((data)=> {
+      this.myApp.displayQueryData(data, "otherResult");
+      console.log(data);
+    }).catch((err)=>{
+      this.presentAlert();
+    });
+  }
+
+  // coachName2 = "";
+  // coachAwards() {
+  //   var q = "select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID";
+  //   console.log(q);
+  //   this.myApp.retrieveQueryData(q).then((data)=> {
+  //     this.myApp.displayQueryData(data, "otherResult");
+  //     console.log(data);
+  //   }).catch((err)=>{
+  //     this.presentAlert();
+  //   });
+  // }
+  // select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID
+
 
 }
 

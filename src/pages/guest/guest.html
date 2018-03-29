@@ -68,7 +68,7 @@
 
     <ion-list *ngSwitchCase="'athlete'">
 
-      <p>Find information about individual Athlete</p>
+      <!--<p>Find information about individual Athlete</p>-->
 
         <ion-list no-lines>
           <ion-item>
@@ -89,7 +89,7 @@
         <!--</div>-->
         <!--</ng-template>-->
 
-      <p>OR Find information about all Athletes</p>
+      <!--<p>OR Find information about all Athletes</p>-->
 
 
       <ion-item>
@@ -109,17 +109,17 @@
         </ion-select>
       </ion-item>
 
-      <p>Select the information you would like to get:</p>
+      <!--<p>Select the information you would like to get:</p>-->
 
-      <ion-item [class.hide]="!athlete.athlName" > //TODO this doesn't work!
-        <ion-label>Awards won by selected athlete</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.athlAward" #athlAward = "ngModel"  color="dark">
-        </ion-checkbox>
-      </ion-item>
+      <!--<ion-item [class.hide]="!athlete.athlName" > //TODO this doesn't work!-->
+        <!--<ion-label>Awards won by selected athlete</ion-label>-->
+        <!--<ion-checkbox [(ngModel)]="athlete.athlAward" #athlAward = "ngModel"  color="dark">-->
+        <!--</ion-checkbox>-->
+      <!--</ion-item>-->
 
       <ion-item>
         <ion-label>Name</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.show.name" #name = "ngModel"  color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.show.name" checked="true" #name = "ngModel"  color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Athlete ID</ion-label>
@@ -190,7 +190,7 @@
 
         <ion-item>
           <ion-label>Name</ion-label>
-          <ion-checkbox [(ngModel)]="coach.show.name" #name = "ngModel"  color="dark"></ion-checkbox>
+          <ion-checkbox [(ngModel)]="coach.show.name" checked="true" #name = "ngModel"  color="dark"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label>Coach ID</ion-label>
@@ -212,14 +212,14 @@
           <ion-label>Country</ion-label>
           <ion-checkbox [(ngModel)]="coach.show.country" #country = "ngModel"  color="dark"></ion-checkbox>
         </ion-item>
-        <ion-item [class.hide]="coach.allCoaches" >
-          <ion-label>Athletes Coached</ion-label>
-          <ion-checkbox [(ngModel)]="coach.show.athletes" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK
-        </ion-item>
-        <ion-item [class.hide]="coach.allCoaches" >
-          <ion-label>Awards Won</ion-label>
-          <ion-checkbox [(ngModel)]="coach.show.awards" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK
-        </ion-item>
+        <!--<ion-item [class.hide]="coach.allCoaches" >-->
+          <!--<ion-label>Athletes Coached</ion-label>-->
+          <!--<ion-checkbox [(ngModel)]="coach.show.athletes" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
+        <!--</ion-item>-->
+        <!--<ion-item [class.hide]="coach.allCoaches" >-->
+          <!--<ion-label>Awards Won</ion-label>-->
+          <!--<ion-checkbox [(ngModel)]="coach.show.awards" #country = "ngModel"  color="dark"></ion-checkbox> //TODO DOESN'T WORK-->
+        <!--</ion-item>-->
 
         <div padding>
           <button ion-button (click)="onCoachSubmit()" type="submit" block>SUBMIT</button>
@@ -274,6 +274,26 @@
       <div padding>
         <button ion-button (click)="minNestedAggQuery()" type="submit" block>Show event that takes minimum average time to swim</button>
       </div>
+
+
+
+      <button ion-button (click)="coachAthletes()" type="submit" block>Show athletes coached by: </button>
+      <div padding>
+        <ion-item>
+          <ion-label floating>Type in Coach name</ion-label>
+        <ion-input [(ngModel)]="coachName" name="ccoachName" type="text" #ccoachName="ngModel" required></ion-input>
+        </ion-item>
+      </div>
+
+
+      <button ion-button (click)="coachAwards()" type="submit" block>Show awards won by Coach: </button>
+      <div padding>
+        <ion-item>
+          <ion-label floating>Type in Coach name</ion-label>
+          <ion-input [(ngModel)]="coachName2" name="ccoachName2" type="text" #ccoachName2="ngModel" required></ion-input>
+        </ion-item>
+      </div>
+
 
       <div id="otherResult"></div>
 
