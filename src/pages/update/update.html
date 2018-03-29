@@ -70,7 +70,7 @@
         </ion-item>
 
         <div padding>
-          <button ion-button (click)="Insert()" type="submit" block>INSERT</button>
+          <button ion-button (click)="Insert()" type="submit" block>INSERT AND SHOW</button>
         </div>
 
         <div id="insertedParticipate"></div>
@@ -84,7 +84,7 @@
       <!--CASCADING DELETES-->
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Athlete ID that was caught doping</ion-label>
+          <ion-label floating>Type Athlete ID that was caught doping (cascading)</ion-label>
           <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="text" #athleteID="ngModel" required>
           </ion-input>
         </ion-item>
@@ -98,7 +98,7 @@
 
       <div padding>
         <button ion-button (click)="DeleteAthlete()" type="submit" icon-right>
-          DELETE ATHLETE
+          DELETE ATHLETE AND SHOW
         </button>
       </div>
 
@@ -107,7 +107,7 @@
 
       <ion-list no-lines>
         <ion-item>
-          <ion-label floating>Type Coach ID that was caught administering doping</ion-label>
+          <ion-label floating>Type Coach ID that was caught administering doping (cascading)</ion-label>
           <ion-input [(ngModel)]="coach.coachID" name="coachID" type="text" #coachID="ngModel" required>
           </ion-input>
         </ion-item>
@@ -119,7 +119,7 @@
 
       <div padding>
         <button ion-button (click)="DeleteCoach()" type="submit" icon-right>
-          DELETE
+          DELETE AND SHOW
         </button>
       </div>
 
@@ -139,7 +139,7 @@
 
       <div padding>
         <button ion-button (click)="DeleteRecipientPerson()" type="submit" icon-right>
-          DELETE PERSON AWARD
+          DELETE PERSON AWARD AND SHOW
         </button>
       </div>
 
@@ -159,7 +159,7 @@
 
       <div padding>
         <button ion-button (click)="DeleteRecipientClub()" type="submit" icon-right>
-          DELETE CLUB AWARD
+          DELETE CLUB AWARD AND SHOW
         </button>
       </div>
 
@@ -180,26 +180,19 @@
           <ion-input [(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="text" #athleteWeight="ngModel" required>
           </ion-input>
         </ion-item>
-<<<<<<< HEAD
-=======
 
         <div padding>
           <button ion-button (click)="Updated()" type="submit">
-            UPDATE
+            UPDATE AND SHOW
           </button>
         </div>
 
         <div id="updateAthleteWeight"></div>
 
->>>>>>> 9cc5e2e58dae0981addf9fddd3bb4362290f9801
+
       </ion-list>
     </ion-list>
 
-    <div padding>
-      <button ion-button="update" (click)="Update()" type="submit" icon-right>
-        UPDATE
-      </button>
-    </div>
 
 
   </div>
