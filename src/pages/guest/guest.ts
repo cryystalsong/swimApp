@@ -429,7 +429,7 @@ export class GuestPage {
   coachName = "";
 
   coachAthletes() {
-    var q = "select p.name, ap.name from person ap, coaches co where co.AID = ap.ID AND co.CID NOT IN ((SELECT co2.CID FROM " +
+    var q = "select ap.name from person ap, coaches co where co.AID = ap.ID AND co.CID NOT IN ((SELECT co2.CID FROM " +
       "Coaches co2) MINUS (SELECT c.ID FROM Coach c, Person cp WHERE cp.name = \'" + this.coachName + "\' and cp.ID = c.ID))";
     this.myApp.retrieveQueryData(q).then((data) => {
       this.myApp.displayQueryData(data, "otherResult");
@@ -442,7 +442,7 @@ export class GuestPage {
 
   coachName2 = "";
   coachAwards() {
-    var q = "select p.name, ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = \'" + this.coachName + "\' and c.ID = p.ID and ap.ID = c.ID";
+    var q = "select p.name, ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = \'" + this.coachName2 + "\' and c.ID = p.ID and ap.ID = c.ID";
     console.log(q);
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
