@@ -257,15 +257,16 @@ export class GuestPage {
       }
     }
 
-    if (this.coach.show.athletes) {
-      from += ", person ap, coaches co";
-      if (flag) {
-        select += ", ap.name";
-      } else {
-        select += "ap.name";
-        flag = 1;
-      }
-    }
+   // if (this.coach.show.athletes) {
+   //    from += ", person ap, coaches co";
+   //    if (flag) {
+   //      select += ", ap.name";
+   //    } else {
+   //      select += "ap.name";
+   //      flag = 1;
+   //    }
+   //  }
+
     // if (this.coach.coachName && this.coach.show.athletes) {
     //   where = "where co.aid = ap.id and co.cid not in ((select co2.cid from coaches co2) " +
     //     "minus (select coa.id from coach coa, person cp where cp.name = \'" + this.coach.coachName + "\' and cp.id = coa.id))";
