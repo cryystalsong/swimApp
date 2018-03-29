@@ -99,11 +99,6 @@
         <!--</ion-item>-->
       <!--</ion-list>-->
 
-      <div *ngIf="!athlete.allAthletes">
-        <p ion-text [hidden]="athlName.valid || submitted == false" color="danger" padding-left>
-          Athlete name is required
-        </p>
-      </div>
       <!--<ng-template #elsetag>-->
       <!--<div>-->
       <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
@@ -156,6 +151,10 @@
         <button ion-button (click)="onAthleteSubmit()" type="submit" block>SUBMIT</button>
       </div>
 
+      <p ion-text [hidden]="!athlete.badResults && submitted == false" color="danger" padding-left>
+        Must enter athlete name or select "all athletes"
+      </p>
+
       <div id="athleteResult"></div>
 
 
@@ -171,12 +170,6 @@
           <ion-input [(ngModel)]="coach.coachName" name="coachName" (ionChange)="updateCoachName()" type="text" #coachName="ngModel" required>
           </ion-input>
         </ion-item>
-
-      <div *ngIf="!coach.allCoaches">
-        <p ion-text [hidden]="coachName.valid || submitted == false" color="danger" padding-left>
-          Coach name is required
-        </p>
-      </div>
 
 
       <ion-item>
@@ -218,6 +211,9 @@
       <div padding>
         <button ion-button (click)="onCoachSubmit()" type="submit" block>SUBMIT</button>
       </div>
+      <p ion-text [hidden]="!coach.badResults && submitted == false" color="danger" padding-left>
+        Must enter coach name or select "all coaches"
+      </p>
       <div id="coachResult"></div>
 
 

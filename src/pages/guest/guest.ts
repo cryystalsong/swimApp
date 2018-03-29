@@ -81,6 +81,7 @@ export class GuestPage {
     height: '',
     sHeight: '',
     selected: [],
+    badResults: false,
     show: {
        name: true,
        id: false,
@@ -102,6 +103,7 @@ export class GuestPage {
       height: '',
       sHeight: '',
       selected: [],
+      badResults: false,
       show: {
         name: true,
         id: false,
@@ -209,6 +211,7 @@ export class GuestPage {
     console.log("query " + query);
 
     if(this.athlete.athlName !== '' || this.athlete.allAthletes) {
+      this.athlete.badResults = true;
       this.myApp.retrieveQueryData(query).then((data) => {
         this.myApp.displayQueryData(data, "athleteResult");
       });
@@ -236,6 +239,7 @@ export class GuestPage {
     yrs: '',
     sYrs: '',
     selected: [],
+    badResult: false,
     show: {
       name: true,
       id: false,
@@ -255,6 +259,7 @@ export class GuestPage {
       yrs: '',
       sYrs: '',
       selected: [],
+      badResult: false,
       show: {
         name: true,
         id: false,
@@ -341,6 +346,7 @@ export class GuestPage {
 
     console.log("query " + query);
     if(this.coach.coachName!=='' || this.coach.allCoaches) {
+      this.coach.badResult = true;
       this.myApp.retrieveQueryData(query).then((data) => {
         this.myApp.displayQueryData(data, "coachResult");
         console.log(data);
