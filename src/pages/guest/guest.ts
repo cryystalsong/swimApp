@@ -208,9 +208,11 @@ export class GuestPage {
 
     console.log("query " + query);
 
-    this.myApp.retrieveQueryData(query).then((data) => {
-      this.myApp.displayQueryData(data, "athleteResult");
-    });
+    if(this.athlete.athlName !== '' || this.athlete.allAthletes) {
+      this.myApp.retrieveQueryData(query).then((data) => {
+        this.myApp.displayQueryData(data, "athleteResult");
+      });
+    }
     // .catch((err)=>{
     //   console.log(err);
     // this.presentAlert();
@@ -338,10 +340,12 @@ export class GuestPage {
 
 
     console.log("query " + query);
-    this.myApp.retrieveQueryData(query).then((data) => {
-      this.myApp.displayQueryData(data, "coachResult");
-      console.log(data);
-    });
+    if(this.coach.coachName!=='' || this.coach.allCoaches) {
+      this.myApp.retrieveQueryData(query).then((data) => {
+        this.myApp.displayQueryData(data, "coachResult");
+        console.log(data);
+      });
+    }
     // .catch((err)=>{
     // this.presentAlert();
     // });
