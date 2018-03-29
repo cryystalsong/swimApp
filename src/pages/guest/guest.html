@@ -72,7 +72,7 @@
 
         <ion-list no-lines>
           <ion-item>
-            <ion-label floating> What is the Athlete's name?</ion-label>
+            <ion-label floating> Type in athlete's name</ion-label>
             <ion-input [(ngModel)]="athlete.athlName" name="athlName" (ionChange)="updateAthleteName()" type="text" #athlName="ngModel" required>
             </ion-input>
           </ion-item>
@@ -98,7 +98,7 @@
       </ion-item>
 
 
-      <ion-item [class.hide]="athlete.athlName">
+      <ion-item [class.hide]="!athlete.allAthletes">
         <ion-label>Find height info for all athletes</ion-label>
         <ion-select [(ngModel)]="athlete.height">
           <div *ngIf = "!athlete.athlName; else elsetag">
@@ -117,6 +117,7 @@
         <!--</ion-checkbox>-->
       <!--</ion-item>-->
 
+      <h1 style="font-size:125%;">Show athlete's: </h1>
       <ion-item>
         <ion-label>Name</ion-label>
         <ion-checkbox [(ngModel)]="athlete.show.name" checked="true" #name = "ngModel"  color="dark"></ion-checkbox>
@@ -180,7 +181,7 @@
         </ion-item>
 
         <ion-item [class.hide]="!coach.allCoaches">
-          <ion-label>Years of Experience</ion-label>
+          <ion-label>Find Years of Experience info for all coaches</ion-label>
           <ion-select [(ngModel)]="coach.yrs">
             <ion-option value="max(c1.yearsOfExp)">Find coach with longest coaching experience</ion-option>
             <ion-option value="min(c1.yearsOfExp)">Find coach with shortest coaching experience</ion-option>
@@ -188,6 +189,7 @@
           </ion-select>
         </ion-item>
 
+        <h1 style="font-size:125%;">Show coach's: </h1>
         <ion-item>
           <ion-label>Name</ion-label>
           <ion-checkbox [(ngModel)]="coach.show.name" checked="true" #name = "ngModel"  color="dark"></ion-checkbox>
@@ -264,8 +266,6 @@
       <div padding>
         <button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all competitions</button>
       </div>
-
-      <h5>Nested Aggregation w/ Group By Query: Find the max/min average time of each unique event(event defined by Stroke + Length)</h5>
 
       <div padding>
         <button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time to swim</button>
