@@ -33,14 +33,6 @@
 
     <ion-list *ngSwitchCase="'Insert'">
       <ion-list no-lines>
-<<<<<<< HEAD
-
-        <div align="right" padding>
-          <button ion-button round (click)="resetInsert()">Reset Form</button>
-        </div>
-
-=======
->>>>>>> f0624ba9a98f9f23b668e786ec37641c9a0e43cf
         <ion-item>
           <ion-label stacked>Type in seconds</ion-label>
           <ion-input placeholder="seconds" [(ngModel)]="participate.seconds" name="seconds" type="number" #seconds="ngModel" required>
@@ -60,15 +52,15 @@
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Type in name</ion-label>
+          <ion-label stacked>Type in competition name</ion-label>
           <ion-input placeholder="name"[(ngModel)]="participate.name" name="name" type="text" #name="ngModel" required>
           </ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label stacked>Type in date</ion-label>
-          <ion-input placeholder="date"[(ngModel)]="participate.pdate" name="date" type="text" #pdate="ngModel" required>
-          </ion-input>
+        <ion-item align="left">
+          <ion-label stacked>Type in competition date</ion-label>
+          <ion-datetime placeholder="YYYY-MM-DD" [(ngModel)]="participate.pdate" name="date" #pdate="ngModel" required displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD">
+          </ion-datetime>
         </ion-item>
 
         <ion-item>
@@ -95,12 +87,6 @@
     <ion-list *ngSwitchCase="'Delete'">
       <!--CASCADING DELETES-->
       <ion-list no-lines>
-<<<<<<< HEAD
-        <div align="right" padding>
-          <button ion-button round (click)="resetDelete()">Reset Form</button>
-        </div>
-=======
->>>>>>> f0624ba9a98f9f23b668e786ec37641c9a0e43cf
         <ion-item>
           <ion-label stacked>Type Athlete ID that was caught doping (cascading)</ion-label>
           <ion-input placeholder="Athlete ID"[(ngModel)]="athlete.DathleteID" name="DathleteID" type="number" #DathleteID="ngModel" required>
@@ -188,12 +174,6 @@
 
     <ion-list *ngSwitchCase="'Update'">
       <ion-list no-lines>
-<<<<<<< HEAD
-        <div align="right" padding>
-          <button ion-button round (click)="resetUpdate()">Reset Form</button>
-        </div>
-=======
->>>>>>> f0624ba9a98f9f23b668e786ec37641c9a0e43cf
         <ion-item>
           <ion-label stacked>Type Athlete ID to update</ion-label>
           <ion-input placeholder="Athlete ID" [(ngModel)]="athlete.UathleteID" name="UathleteID" type="number" #UathleteID="ngModel" required>
