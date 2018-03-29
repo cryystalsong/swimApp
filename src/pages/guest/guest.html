@@ -98,7 +98,7 @@
       </ion-item>
 
 
-      <ion-item>
+      <ion-item [class.hide]="athlete.athlName">
         <ion-label>Find height info for all athletes</ion-label>
         <ion-select [(ngModel)]="athlete.height">
           <div *ngIf = "!athlete.athlName; else elsetag">
@@ -106,11 +106,6 @@
             <ion-option value="min(a1.height)">Find the athlete with shortest height</ion-option>
             <ion-option value="a1.height = !!!">Find athlete with height equal to: </ion-option> //TODO put in user text input box
           </div>
-          <!--<ng-template #elsetag>-->
-            <!--<div>-->
-              <!--<ion-option value="heightMax">Find height of selected athlete</ion-option>-->
-            <!--</div>-->
-          <!--</ng-template>-->
         </ion-select>
       </ion-item>
 
