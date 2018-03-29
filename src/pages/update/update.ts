@@ -35,11 +35,13 @@ export class UpdatePage {
 
   resetInsert() {
     this.participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
+    document.getElementById("insertedParticipate").innerHTML = "";
   }
 
   resetUpdate() {
     this.athlete.athleteID = 0;
     this.athlete.athleteWeight = 0;
+    document.getElementById("updateAthleteWeight").innerHTML = "";
   }
 
   resetDelete() {
@@ -47,6 +49,10 @@ export class UpdatePage {
     this.coach = {coachID: 0, coachAward: ''};
     this.award = {recipientPersonID: 0, recipientClubName: ''};
     this.participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
+    document.getElementById("deleteAthleteResult").innerHTML = "";
+    document.getElementById("deleteCoachResult").innerHTML = "";
+    document.getElementById("deleteRecipientPerson").innerHTML = "";
+    document.getElementById("deleteRecipientClub").innerHTML = "";
   }
   DeleteAthlete() {
 

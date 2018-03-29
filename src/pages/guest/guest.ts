@@ -44,7 +44,8 @@ export class GuestPage {
   submitted = false;
 
   resetClub() {
-    this.club = {clubName: '', clubOptionSelected: ''}
+    this.club = {clubName: '', clubOptionSelected: ''};
+    document.getElementById("clubResult").innerHTML = "";
   }
 
   onClubSubmit() {
@@ -112,6 +113,7 @@ export class GuestPage {
         country: false
       }
     }
+    document.getElementById("athleteResult").innerHTML = "";
     }
 
 
@@ -121,7 +123,7 @@ export class GuestPage {
     console.log(this.athlete.selected);
     console.log(this.athlete.selected.indexOf("ID")!== -1);
     // console.log("athlete.show.name " + this.athlete.show.name.value.checked);
-    console.log("athlete.show.height " + this.athlete.show.height);
+
     this.submitted = true;
     let select = "select ";
     let from = "from athlete a, person p";
@@ -208,7 +210,6 @@ export class GuestPage {
 
     this.myApp.retrieveQueryData(query).then((data) => {
       this.myApp.displayQueryData(data, "athleteResult");
-      console.log(data);
     });
     // .catch((err)=>{
     //   console.log(err);
@@ -259,6 +260,7 @@ export class GuestPage {
         country: false
       }
     }
+    document.getElementById("coachResult").innerHTML = "";
   }
 
   onCoachSubmit() {
@@ -352,7 +354,9 @@ export class GuestPage {
 
   resetCompetition() {
     this.comp = {compName: '', compOptionSelected: ''};
+    document.getElementById("compResult").innerHTML = "";
   }
+
   onCompSubmit() {
     this.submitted = true;
 
