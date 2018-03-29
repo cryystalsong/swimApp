@@ -31,25 +31,24 @@ export class UpdatePage {
   participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''}
 
 
-  submitted = false;
+  submitted = true;
 
   DeleteAthlete() {
 
-    console.log(typeof this.athlete.athleteID);
-    var query = "delete from athlete where id = " + this.athlete.athleteID;
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+      var query = "delete from athlete where id = " + this.athlete.athleteID;
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
-    this.http.get(phpURL, {},{}).then(data => {
-      var result= JSON.parse(data.data);
-      console.log(Object.keys(result));
+      this.http.get(phpURL, {},{}).then(data => {
+        var result= JSON.parse(data.data);
+        console.log(Object.keys(result));
 
 
-      // console.log(data.data);
-      var query = "select * from athlete";
-      this.myApp.retrieveQueryData(query).then((result) => {
-        this.myApp.displayQueryData(result, "deleteAthleteResult");
-      });
-    })
+        // console.log(data.data);
+        var query = "select * from athlete";
+        this.myApp.retrieveQueryData(query).then((result) => {
+          this.myApp.displayQueryData(result, "deleteAthleteResult");
+        });
+      })
 
   }
 
@@ -85,37 +84,51 @@ export class UpdatePage {
 
   DeleteRecipientClub(){
 
-    var query = "delete from AwardClub where cName = " + "'" + this.award.recipientClubName + "'";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+    if(Number.isNaN(Number(this.award.recipientClubName))) {
+      this.submitted = true;
+      var query = "delete from AwardClub where cName = " + "'" + this.award.recipientClubName + "'";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
-      var query = "select * from AwardClub";
-      this.myApp.retrieveQueryData(query).then((result) => {
-        this.myApp.displayQueryData(result, "deleteRecipientClub");
-      });
-    })
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+        var query = "select * from AwardClub";
+        this.myApp.retrieveQueryData(query).then((result) => {
+          this.myApp.displayQueryData(result, "deleteRecipientClub");
+        });
+      })
+    } else {
+      this.submitted = false;
+    }
 
   }
 
 
   Insert() {
 
-    var query = "insert into Participate values (" + this.participate.seconds + ", "
-      + this.participate.length + ", " + "'" + this.participate.stroke + "'" + ", "
-      + "'" + this.participate.name + "'" + ", " + "'" + this.participate.pdate + "'" + ", "
-      + this.participate.ID + ")";
-    var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+    if(Number.isNaN(Number(this.participate.stroke)) &&
+      Number.isNaN(Number(this.participate.name)) &&
+      Number.isNaN(Number(this.participate.pdate))){
 
-    this.http.get(phpURL, {},{}).then(data => {
-      console.log(data.data);
+      this.submitted = true;
 
-      var query = "select * from Participate";
-      this.myApp.retrieveQueryData(query).then((result) => {
-        this.myApp.displayQueryData(result, "insertedParticipate");
-      });
+      var query = "insert into Participate values (" + this.participate.seconds + ", "
+        + this.participate.length + ", " + "'" + this.participate.stroke + "'" + ", "
+        + "'" + this.participate.name + "'" + ", " + "'" + this.participate.pdate + "'" + ", "
+        + this.participate.ID + ")";
+      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
-    })
+      this.http.get(phpURL, {},{}).then(data => {
+        console.log(data.data);
+
+        var query = "select * from Participate";
+        this.myApp.retrieveQueryData(query).then((result) => {
+          this.myApp.displayQueryData(result, "insertedParticipate");
+        });
+
+      })
+    } else{
+      this.submitted = false;
+    }
 
   }
 

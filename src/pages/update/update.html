@@ -35,13 +35,13 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type in seconds</ion-label>
-          <ion-input [(ngModel)]="participate.seconds" name="seconds" type="text" #seconds="ngModel" required>
+          <ion-input [(ngModel)]="participate.seconds" name="seconds" type="number" #seconds="ngModel" required>
           </ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating>Type in length</ion-label>
-          <ion-input [(ngModel)]="participate.length" name="length" type="text" #length="ngModel" required>
+          <ion-input [(ngModel)]="participate.length" name="length" type="number" #length="ngModel" required>
           </ion-input>
         </ion-item>
 
@@ -65,13 +65,17 @@
 
         <ion-item>
           <ion-label floating>Type in ID</ion-label>
-          <ion-input [(ngModel)]="participate.ID" name="ID" type="text" #ID="ngModel" required>
+          <ion-input [(ngModel)]="participate.ID" name="ID" type="number" #ID="ngModel" required>
           </ion-input>
         </ion-item>
 
         <div padding>
           <button ion-button (click)="Insert()" type="submit" block>INSERT AND SHOW</button>
         </div>
+
+        <p ion-text [hidden]="submitted == true" color="danger" padding-left>
+           length, stroke, and name must be a string
+        </p>
 
         <div id="insertedParticipate"></div>
 
@@ -85,7 +89,7 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type Athlete ID that was caught doping (cascading)</ion-label>
-          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="text" #athleteID="ngModel" required>
+          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="number" #athleteID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
@@ -108,7 +112,7 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type Coach ID that was caught administering doping (cascading)</ion-label>
-          <ion-input [(ngModel)]="coach.coachID" name="coachID" type="text" #coachID="ngModel" required>
+          <ion-input [(ngModel)]="coach.coachID" name="coachID" type="number" #coachID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
@@ -128,7 +132,7 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type Person ID to remove their awards</ion-label>
-          <ion-input [(ngModel)]="award.recipientPersonID" name="recipientPersonID" type="text" #recipientPersonID="ngModel" required>
+          <ion-input [(ngModel)]="award.recipientPersonID" name="recipientPersonID" type="number" #recipientPersonID="ngModel" required>
           </ion-input>
         </ion-item>
       </ion-list>
@@ -157,6 +161,10 @@
         Club Name is required
       </p>
 
+      <p ion-text [hidden]="submitted == true" color="danger" padding-left>
+        Club Name must be a string
+      </p>
+
       <div padding>
         <button ion-button (click)="DeleteRecipientClub()" type="submit" icon-right>
           DELETE CLUB AWARD AND SHOW
@@ -172,12 +180,12 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type Athlete ID to update</ion-label>
-          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="text" #athleteID="ngModel" required>
+          <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="number" #athleteID="ngModel" required>
           </ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Type Athlete weight to update</ion-label>
-          <ion-input [(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="text" #athleteWeight="ngModel" required>
+          <ion-input [(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="number" #athleteWeight="ngModel" required>
           </ion-input>
         </ion-item>
 
