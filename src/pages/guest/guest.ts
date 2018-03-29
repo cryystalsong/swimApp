@@ -31,14 +31,14 @@ export class GuestPage {
     console.log(this.hideUpdate);
   }
 
-  presentAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'ERROR!',
-      subTitle: 'Incorrect information',
-      buttons: ['Dismiss']
-    });
-    alert.present();
-  }
+  // presentAlert() {
+  //   let alert = this.alertCtrl.create({
+  //     title: 'ERROR!',
+  //     subTitle: 'Incorrect information',
+  //     buttons: ['Dismiss']
+  //   });
+  //   alert.present();
+  // }
 
 
   club = {clubName: '', clubOptionSelected: ''}; // clubCoaches should be an array !!!
@@ -63,9 +63,10 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "clubResult");
         console.log(data);
-      }).catch((err)=>{
-    this.presentAlert();
-    });
+      });
+    //   .catch((err)=>{
+    // this.presentAlert();
+    // });
 
     // this.navCtrl.push(ResultsPage);
 
@@ -173,10 +174,11 @@ export class GuestPage {
     this.myApp.retrieveQueryData(query).then((data)=> {
       this.myApp.displayQueryData(data, "athleteResult");
       console.log(data);
-    }).catch((err)=>{
-      console.log(err);
-    this.presentAlert();
     });
+    // .catch((err)=>{
+    //   console.log(err);
+    // this.presentAlert();
+    // });
 
   }
 
@@ -258,19 +260,6 @@ export class GuestPage {
       }
     }
 
-    // if (this.coach.show.athletes) {
-    //   from += ", person ap, coaches co";
-    //   if (flag) {
-    //     select += ", ap.name";
-    //   } else {
-    //     select += "ap.name";
-    //     flag = 1;
-    //   }
-    // }
-    // if (this.coach.coachName && this.coach.show.athletes) {
-    //   where = "where co.aid = ap.id and co.cid not in ((select co2.cid from coaches co2) " +
-    //     "minus (select coa.id from coach coa, person cp where cp.name = \'" + this.coach.coachName + "\' and cp.id = coa.id))";
-    // } else
       if (this.coach.coachName) {
       where += " and p.name = \'" + this.coach.coachName + "\'";
     } else if (this.coach.yrs){
@@ -284,9 +273,10 @@ export class GuestPage {
     this.myApp.retrieveQueryData(query).then((data)=> {
       this.myApp.displayQueryData(data, "coachResult");
       console.log(data);
-    }).catch((err)=>{
-    this.presentAlert();
     });
+    // .catch((err)=>{
+    // this.presentAlert();
+    // });
   }
 
   updateAllCoaches() {
@@ -317,9 +307,10 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "compResult");
       console.log(data);
-    }).catch((err)=>{
-    this.presentAlert();
     });
+    // .catch((err)=>{
+    // this.presentAlert();
+    // });
 
     // this.navCtrl.push(ResultsPage);
 
@@ -331,9 +322,10 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
       console.log(data);
-    }).catch((err)=>{
-    this.presentAlert();
     });
+    // .catch((err)=>{
+    // this.presentAlert();
+    // });
   }
 
   minNestedAggQuery() {
@@ -342,9 +334,10 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
       console.log(data);
-    }).catch((err)=>{
-    this.presentAlert();
     });
+    // .catch((err)=>{
+    // this.presentAlert();
+    // });
   }
 
   maxNestedAggQuery() {
@@ -353,9 +346,10 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
       console.log(data);
-    }).catch((err)=>{
-    this.presentAlert();
     });
+    // .catch((err)=>{
+    // this.presentAlert();
+    // });
   }
   coachName = "";
   coachAthletes() {
@@ -364,9 +358,10 @@ export class GuestPage {
     this.myApp.retrieveQueryData(q).then((data)=> {
       this.myApp.displayQueryData(data, "otherResult");
       console.log(data);
-    }).catch((err)=>{
-      this.presentAlert();
     });
+    // .catch((err)=>{
+    //   this.presentAlert();
+    // });
   }
 
   // coachName2 = "";
