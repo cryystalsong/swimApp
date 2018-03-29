@@ -91,6 +91,7 @@ export class GuestPage {
     }
   };
 
+  
 
   resetAthlete() {
     this.athlete = {
