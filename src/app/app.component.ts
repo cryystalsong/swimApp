@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AlertController, Platform} from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { MyErrorHandler} from "../errorHandler/errorHandler";
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {MyErrorHandler} from "../errorHandler/errorHandler";
 import {HTTP} from '@ionic-native/http';
 
-import { HomePage } from '../pages/home/home';
+import {HomePage} from '../pages/home/home';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage: any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private http: HTTP, private alertCtrl: AlertController) {
     platform.ready().then(() => {
@@ -32,7 +33,7 @@ export class MyApp {
   // }
 
   //returns JSON object from input query
-  public retrieveQueryData(query : string) : any {
+  public retrieveQueryData(query: string): any {
 
     return new Promise((resolve, reject) => {
 
@@ -61,47 +62,54 @@ export class MyApp {
   //PARAM:
   // result is the resulting JSON Object
   // tagID is the tagID of the div you want the info to be displayed in
-  public displayQueryData(result, tagID) : void {
-    // Parse the JSON so we can access what we need.
+  public displayQueryData(result, tagID): void {
 
-// Get the amount of objects inside 'watson_tone' so we can loop through each one.
-    var count = Object.keys(result).length;
+    if (result.length == 0) {
+      document.getElementById(tagID).innerHTML = "<p> No such data exists </p>"
+    } else {
+      // Parse the JSON so we can access what we need.
 
-// Make some strings to include in our output.
-    var tableHeader = "<table>";
+      // Get the amount of objects inside 'watson_tone' so we can loop through each one.
+      var count = Object.keys(result).length;
 
-    var keyArray = Object.keys(result[0]);
+      // Make some strings to include in our output.
+      var tableHeader = "<table>";
 
-    for (var a=0; a< keyArray.length ;a++) {
-      tableHeader += "<col width='150'>" ;
-    }
+      var keyArray = Object.keys(result[0]);
 
-    tableHeader += "<tr>";
-
-    for (var b=0; b < keyArray.length ;b++) {
-      tableHeader += "<th>" + keyArray[b] + "</th>";
-    }
-
-    tableHeader += "</tr>";
-
-    var tableContent = "";
-
-// Loop through the JSON and output each row in to a string.
-    for (var i = 0; i < count; i++) {
-      tableContent = tableContent + "<tr align='center'>";
-
-      for (var j=0; j<keyArray.length;j++) {
-        tableContent += "<td>" + result[i][keyArray[j]] + "</td>";
+      for (var a = 0; a < keyArray.length; a++) {
+        tableHeader += "<col width='150'>";
       }
 
-      tableContent += "<tr>";
+      tableHeader += "<tr>";
+
+      for (var b = 0; b < keyArray.length; b++) {
+        tableHeader += "<th>" + keyArray[b] + "</th>";
+      }
+
+      tableHeader += "</tr>";
+
+      var tableContent = "";
+
+      // Loop through the JSON and output each row in to a string.
+      for (var i = 0; i < count; i++) {
+        tableContent = tableContent + "<tr align='center'>";
+
+        for (var j = 0; j < keyArray.length; j++) {
+          tableContent += "<td>" + result[i][keyArray[j]] + "</td>";
+        }
+
+        tableContent += "<tr>";
+      }
+
+
+      var tableFooter = "</table>";
+
+      // Get div and output the HTML. You can include these HTML strings straight in to your emailText variable.
+      document.getElementById(tagID).innerHTML = tableHeader + tableContent + tableFooter;
+
     }
-
-
-    var tableFooter = "</table>";
-
-// Get div and output the HTML. You can include these HTML strings straight in to your emailText variable.
-    document.getElementById(tagID).innerHTML = tableHeader + tableContent + tableFooter;
   }
+
 }
 
