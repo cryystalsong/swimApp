@@ -32,6 +32,10 @@
   <div [ngSwitch]="from">
     <ion-list *ngSwitchCase="'club'">
 
+      <div padding>
+        <button ion-button round (click)="resetClub()">Reset Form</button>
+      </div>
+
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type in Club name</ion-label>
@@ -62,15 +66,16 @@
     </ion-list>
 
 
-
-
-
-
     <ion-list *ngSwitchCase="'athlete'">
 
       <!--<p>Find information about individual Athlete</p>-->
 
         <ion-list no-lines>
+
+          <div padding>
+            <button ion-button round (click)="resetAthlete()">Reset Form</button>
+          </div>
+
           <ion-item>
             <ion-label floating> What is the Athlete's name?</ion-label>
             <ion-input [(ngModel)]="athlete.athlName" name="athlName" (ionChange)="updateAthleteName()" type="text" #athlName="ngModel" required>
@@ -96,7 +101,6 @@
         <ion-label >All Athletes</ion-label>
         <ion-checkbox [(ngModel)]="athlete.allAthletes" (ionChange)="updateAllAthletes()" #allAthletes = "ngModel" color="dark"></ion-checkbox>
       </ion-item>
-
 
       <ion-item [class.hide]="athlete.athlName">
         <ion-label>Find height info for all athletes</ion-label>
@@ -167,6 +171,10 @@
       </ion-list>
       <ion-list *ngSwitchCase="'coach'">
 
+        <div padding>
+          <button ion-button round (click)="resetCoach()">Reset Form</button>
+        </div>
+
         <ion-item>
           <ion-label floating>Type in Coach name</ion-label>
           <ion-input [(ngModel)]="coach.coachName" name="coachName" (ionChange)="updateCoachName()" type="text" #coachName="ngModel" required>
@@ -236,6 +244,10 @@
 
     <ion-list *ngSwitchCase="'competition'">
 
+      <div padding>
+        <button ion-button round (click)="resetCompetition()">Reset Form</button>
+      </div>
+
       <ion-list no-lines>
         <ion-item>
           <ion-label floating>Type in Competition name</ion-label>
@@ -268,8 +280,6 @@
       <div padding>
         <button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all competitions</button>
       </div>
-
-      <h5>Nested Aggregation w/ Group By Query: Find the max/min average time of each unique event(event defined by Stroke + Length)</h5>
 
       <div padding>
         <button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time to swim</button>

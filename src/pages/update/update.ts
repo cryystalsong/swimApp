@@ -25,14 +25,29 @@ export class UpdatePage {
     console.log('ionViewDidLoad UpdatePage');
   }
 
-  athlete = {athleteID: 0, athleteAward: '', athleteWeight: 0}
-  coach = {coachID: 0, coachAward: ''}
-  award = {recipientPersonID: 0, recipientClubName: ''}
-  participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''}
+  athlete = {athleteID: 0, athleteAward: '', athleteWeight: 0};
+  coach = {coachID: 0, coachAward: ''};
+  award = {recipientPersonID: 0, recipientClubName: ''};
+  participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
 
 
   submitted = true;
 
+  resetInsert() {
+    this.participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
+  }
+
+  resetUpdate() {
+    this.athlete.athleteID = 0;
+    this.athlete.athleteWeight = 0;
+  }
+
+  resetDelete() {
+    this.athlete = {athleteID: 0, athleteAward: '', athleteWeight: 0};
+    this.coach = {coachID: 0, coachAward: ''};
+    this.award = {recipientPersonID: 0, recipientClubName: ''};
+    this.participate = {seconds: 0, length: 0, stroke: '', name: '', pdate: '', ID:''};
+  }
   DeleteAthlete() {
 
       var query = "delete from athlete where id = " + this.athlete.athleteID;

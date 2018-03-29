@@ -44,6 +44,9 @@ export class GuestPage {
   club = {clubName: '', clubOptionSelected: ''}; // clubCoaches should be an array !!!
   submitted = false;
 
+  resetClub() {
+    this.club = {clubName: '', clubOptionSelected: ''}
+  }
 
   onClubSubmit() {
     this.submitted = true;
@@ -84,11 +87,26 @@ export class GuestPage {
       country: false
     }
   };
+
+  resetAthlete() {
+    this.athlete = {
+      allAthletes: false, athlName: '', height: '', show: {
+        name: true,
+        id: false,
+        sex: false,
+        height: false,
+        weight: false,
+        birthday: false,
+        city: false,
+        country: false
+      }
+    }
+  }
   onAthleteSubmit() {
     var query = '';
-    console.log("athlete.athlAward " + this.athlete.athlAward);
+    //console.log("athlete.athlAward " + this.athlete.athlAward);
     console.log("athlete.show " + JSON.stringify(this.athlete.show));
-    console.log("athlete.show.name " + this.athlete.show.name.value.checked);
+    //console.log("athlete.show.name " + this.athlete.show.name.value.checked);
     console.log("athlete.show.height " + this.athlete.show.height);
     this.submitted = true;
     let select = "select ";
@@ -207,6 +225,22 @@ export class GuestPage {
       // awards: false
     }
   };
+
+  resetCoach() {
+    this.coach = {
+      allCoaches: false,
+      coachName: '',
+      yrs: '',
+      show: {
+        name: true,
+        id: false,
+        yrs: false,
+        birthday: false,
+        city: false,
+        country: false
+      }
+    }
+  }
   onCoachSubmit() {
     var query = '';
     console.log(this.coach.show.name);
@@ -293,6 +327,10 @@ export class GuestPage {
   }
 
   comp = {compName: '', compOptionSelected: ''}; // clubCoaches should be an array !!!
+
+  resetCompetition() {
+    this.comp = {compName: '', compOptionSelected: ''};
+  }
   onCompSubmit() {
     this.submitted = true;
 

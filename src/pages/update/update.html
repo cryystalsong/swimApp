@@ -33,6 +33,11 @@
 
     <ion-list *ngSwitchCase="'Insert'">
       <ion-list no-lines>
+
+        <div padding>
+          <button ion-button round (click)="resetInsert()">Reset Form</button>
+        </div>
+
         <ion-item>
           <ion-label floating>Type in seconds</ion-label>
           <ion-input [(ngModel)]="participate.seconds" name="seconds" type="number" #seconds="ngModel" required>
@@ -87,6 +92,9 @@
     <ion-list *ngSwitchCase="'Delete'">
       <!--CASCADING DELETES-->
       <ion-list no-lines>
+        <div padding>
+          <button ion-button round (click)="resetDelete()">Reset Form</button>
+        </div>
         <ion-item>
           <ion-label floating>Type Athlete ID that was caught doping (cascading)</ion-label>
           <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="number" #athleteID="ngModel" required>
@@ -178,6 +186,9 @@
 
     <ion-list *ngSwitchCase="'Update'">
       <ion-list no-lines>
+        <div padding>
+          <button ion-button round (click)="resetUpdate()">Reset Form</button>
+        </div>
         <ion-item>
           <ion-label floating>Type Athlete ID to update</ion-label>
           <ion-input [(ngModel)]="athlete.athleteID" name="athleteID" type="number" #athleteID="ngModel" required>
