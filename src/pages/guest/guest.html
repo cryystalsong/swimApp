@@ -258,43 +258,94 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'other'">
-      <div padding>
-        <button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all
-          competitions
-        </button>
-      </div>
+
+      <ion-item>
+        <ion-label>Show athletes that competed at all competitions</ion-label>
+        <ion-checkbox [(ngModel)]="others.allComps" #allComps="ngModel" color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Show event that takes maximum average time to swim</ion-label>
+        <ion-checkbox [(ngModel)]="others.maxAvg" #maxAvg="ngModel" color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Show event that takes minimum average time to swim</ion-label>
+        <ion-checkbox [(ngModel)]="others.minAvg" #minAvg="ngModel" color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Show athletes coached by:</ion-label>
+        <ion-checkbox [(ngModel)]="others.coachedBy" #coachedBy="ngModel" color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item [class.hide]="!others.coachedBy">
+        <ion-label>Type in Coach name</ion-label>
+        <ion-input type="text" [(ngModel)]="coachName" name="coachedBy" #coachedBy="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Show awards that a coach has won</ion-label>
+        <ion-checkbox [(ngModel)]="others.coachAwards" #coachAwards="ngModel" color="dark"></ion-checkbox>
+      </ion-item>
+
+
+
+      <ion-item [class.hide]="!others.coachAwards">
+        <ion-label>Type in Coach name</ion-label>
+        <ion-input type="text" [(ngModel)]="coachName2" name="coachAwards" #coachAwards="ngModel" required></ion-input>
+      </ion-item>
+
+
+
+
+      <!--<div padding>-->
+      <!--<button ion-button (click)="divisionQuery()" type="submit" block>Show athletes that competed at all-->
+      <!--competitions-->
+      <!--</button>-->
+      <!--</div>-->
+
+      <!--<div padding>-->
+      <!--<button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time-->
+      <!--to swim-->
+      <!--</button>-->
+      <!--</div>-->
+
+      <!--<div padding>-->
+      <!--<button ion-button (click)="minNestedAggQuery()" type="submit" block>Show event that takes minimum average time-->
+      <!--to swim-->
+      <!--</button>-->
+      <!--</div>-->
+
+
+      <!--<button ion-button (click)="coachAthletes()" type="submit" block>Show athletes coached by:</button>-->
+      <!--<div padding>-->
+      <!--<ion-item>-->
+      <!--<ion-label floating>Type in Coach name</ion-label>-->
+      <!--<ion-input [(ngModel)]="coachName" name="ccoachName" type="text" #ccoachName="ngModel" required></ion-input>-->
+      <!--</ion-item>-->
+      <!--</div>-->
+
+
+      <!--<button ion-button (click)="coachAwards()" type="submit" block>Show awards won by Coach:</button>-->
+      <!--<div padding>-->
+      <!--<ion-item>-->
+      <!--<ion-label floating>Type in Coach name</ion-label>-->
+      <!--<ion-input [(ngModel)]="coachName2" name="ccoachName2" type="text" #ccoachName2="ngModel"-->
+      <!--required></ion-input>-->
+      <!--</ion-item>-->
+      <!--</div>-->
+
+      <!--<ion-list [(ngModel)]="others">-->
+      <!--<ion-label>Select whatever!!!!!!!</ion-label>-->
+      <!--<ion-select [(ngModel)]="others">-->
+      <!--<ion-option value="coachAwards">Find coaches with specific coaching experience</ion-option>-->
+      <!--</ion-select>-->
+      <!--</ion-list>-->
+      <!--<ion-item [class.hide]="!others || others != 'coachAwards'">-->
+      <!--<ion-label>Type in Coach name</ion-label>-->
+      <!--<ion-input type="text" [(ngModel)]="coachName2" name="coachAwards" #coachAwards="ngModel" required></ion-input>-->
+      <!--</ion-item>-->
+      <!--<ion-item>-->
 
       <div padding>
-        <button ion-button (click)="maxNestedAggQuery()" type="submit" block>Show event that takes maximum average time
-          to swim
-        </button>
+        <button ion-button (click)="onOthersSubmit()" type="submit" block>SUBMIT</button>
       </div>
-
-      <div padding>
-        <button ion-button (click)="minNestedAggQuery()" type="submit" block>Show event that takes minimum average time
-          to swim
-        </button>
-      </div>
-
-
-      <button ion-button (click)="coachAthletes()" type="submit" block>Show athletes coached by:</button>
-      <div padding>
-        <ion-item>
-          <ion-label floating>Type in Coach name</ion-label>
-          <ion-input [(ngModel)]="coachName" name="ccoachName" type="text" #ccoachName="ngModel" required></ion-input>
-        </ion-item>
-      </div>
-
-
-      <button ion-button (click)="coachAwards()" type="submit" block>Show awards won by Coach:</button>
-      <div padding>
-        <ion-item>
-          <ion-label floating>Type in Coach name</ion-label>
-          <ion-input [(ngModel)]="coachName2" name="ccoachName2" type="text" #ccoachName2="ngModel"
-                     required></ion-input>
-        </ion-item>
-      </div>
-
 
       <div id="otherResult"></div>
 
