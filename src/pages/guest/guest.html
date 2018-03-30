@@ -109,7 +109,7 @@
         </ion-item>
         <ion-item [class.hide]="!athlete.height || athlete.height != 'a1.height'">
           <ion-label>Specify height:</ion-label>
-          <ion-input type="text" [(ngModel)]="athlete.sHeight" name="sHeight" #sHeight="ngModel" required></ion-input>
+          <ion-input type="number" [(ngModel)]="athlete.sHeight" name="sHeight" #sHeight="ngModel" required></ion-input>
         </ion-item>
       </ion-list>
 
@@ -173,7 +173,7 @@
         </ion-item>
         <ion-item [class.hide]="!coach.yrs || coach.yrs != 'specifyCoachExp'">
           <ion-label>Specify number of years</ion-label>
-          <ion-input type="text" [(ngModel)]="coach.sYrs" name="specifyCoachExp" #specifyCoachExp="ngModel" required></ion-input>
+          <ion-input type="number" [(ngModel)]="coach.sYrs" name="specifyCoachExp" #specifyCoachExp="ngModel" required></ion-input>
         </ion-item>
       </ion-list>
 

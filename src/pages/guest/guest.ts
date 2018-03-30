@@ -33,7 +33,7 @@ export class GuestPage {
   submitted = false;
 
   resetClub() {
-    this.club = {clubName: '', clubOptionSelected: ''};
+    this.club = {clubName: '', clubOptionSelected: '', clubError: false};
     document.getElementById("clubResult").innerHTML = "";
   }
 
@@ -175,7 +175,10 @@ export class GuestPage {
     if (this.athlete.athlName) {
       where += " and p.name = \'" + this.athlete.athlName + "\'";
     } else if (this.athlete.sHeight) {
-      where += " and " + "a.height >" + this.athlete.sHeight;
+      var isnum = /^\d+$/.test(this.athlete.sHeight);
+      if(isnum){
+        where += " and " + "a.height >" + this.athlete.sHeight;
+      }
     } else if (this.athlete.height) {
       where += " and " + "a.height in (select " + this.athlete.height + "from athlete a1)";
     }
@@ -300,7 +303,11 @@ export class GuestPage {
     if (this.coach.coachName) {
       where += " and p.name = \'" + this.coach.coachName + "\'";
     } else if (this.coach.sYrs) {
-      where += " and c.yearsOfExp > " + this.coach.sYrs;
+      var isnum = /^\d+$/.test(this.coach.sYrs);
+
+      if(isnum){
+        where += " and c.yearsOfExp > " + this.coach.sYrs;
+      }
     } else if (this.coach.yrs) {
       where += " and c.yearsOfExp = (select " + this.coach.yrs + " from Coach c1)";
     }
