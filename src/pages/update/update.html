@@ -73,7 +73,8 @@
           <button ion-button (click)="Insert()" type="submit" block>INSERT AND SHOW</button>
         </div>
 
-        <div id="errtext5"></div>
+        <div id="errtext">
+        </div>
 
         <p ion-text [hidden]="seconds.valid && length.valid && stroke.valid && name.valid && pdate.valid && ID.valid || Isubmitted == false" color="danger" padding-left>
           seconds, length, and ID must be numbers, stroke and name must be strings, and date must be in yyyy-mm-dd syntax
@@ -95,8 +96,6 @@
           </ion-input>
         </ion-item>
       </ion-list>
-
-      <div id="errtext1"></div>
 
       <!--<div #ngIf = "!athlete.athleteName">-->
       <p ion-text [hidden]="DathleteID.valid ||DAsubmitted == false" color="danger" padding-left>
@@ -121,8 +120,6 @@
         </ion-item>
       </ion-list>
 
-      <div id="errtext2"></div>
-
       <p ion-text [hidden]="coachID.valid ||DCsubmitted == false" color="danger" padding-left>
         Coach ID must be a number
       </p>
@@ -143,8 +140,6 @@
         </ion-item>
       </ion-list>
 
-      <div id="errtext3"></div>
-
       <p ion-text [hidden]="recipientPersonID.valid ||DRPsubmitted == false" color="danger" padding-left>
         Person ID must be a number
       </p>
@@ -164,8 +159,6 @@
           </ion-input>
         </ion-item>
       </ion-list>
-
-      <div id="errtext4"></div>
 
       <p ion-text [hidden]="recipientClubName.valid ||DRCsubmitted == false" color="danger" padding-left>
         Club Name must be a string
@@ -194,8 +187,6 @@
           <ion-input placeholder="new weight"[(ngModel)]="athlete.athleteWeight" name="athleteWeight" type="number" #athleteWeight="ngModel" required>
           </ion-input>
         </ion-item>
-
-        <div id="errtext6"></div>
 
         <p ion-text [hidden]="UathleteID.valid && athleteWeight.valid || Usubmitted == false" color="danger" padding-left>
           Athlete ID and weight must be numbers
