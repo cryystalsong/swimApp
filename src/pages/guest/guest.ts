@@ -10,7 +10,7 @@ import {MyApp} from "../../app/app.component";
   templateUrl: 'guest.html',
 })
 export class GuestPage {
-
+  from = '';
   hideUpdate = false;
 
   constructor(public navCtrl: NavController,
@@ -190,7 +190,7 @@ export class GuestPage {
     console.log("query " + query);
     console.log("athlete error " + this.athlete.athlError);
 
-    if (!this.athlete.athlError && this.athlete.selected.length > 0) {
+    if (!this.athlete.athlError && this.athlete.selected.length > 0 && !this.athlete.sHeight.indexOf('e')) {
       console.log("this shouldnt be running");
       this.myApp.retrieveQueryData(query).then((data) => {
         this.myApp.displayQueryData(data, "athleteResult");
@@ -317,7 +317,7 @@ export class GuestPage {
 
     console.log("query " + query);
 
-    if(!this.coach.coachError && this.coach.selected.length > 0) {
+    if(!this.coach.coachError && this.coach.selected.length > 0 && !this.coach.sYrs.indexOf('e')) {
       console.log("this shouldnt be running");
       this.myApp.retrieveQueryData(query).then((data) => {
         this.myApp.displayQueryData(data, "coachResult");
