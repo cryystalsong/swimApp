@@ -33,6 +33,11 @@
 
     <ion-list *ngSwitchCase="'Insert'">
       <ion-list no-lines>
+
+        <div align="right" padding>
+          <button ion-button round (click)="resetInsert()">Reset Form</button>
+        </div>
+
         <ion-item>
           <ion-label stacked>Type in seconds</ion-label>
           <ion-input placeholder="seconds" [(ngModel)]="participate.seconds" name="seconds" type="number" #seconds="ngModel" required>
@@ -88,6 +93,9 @@
 
 
     <ion-list *ngSwitchCase="'Delete'">
+      <div align="right" padding>
+        <button ion-button round (click)="resetDelete()">Reset Form</button>
+      </div>
       <!--CASCADING DELETES-->
       <ion-list no-lines>
         <ion-item>
@@ -177,6 +185,9 @@
 
     <ion-list *ngSwitchCase="'Update'">
       <ion-list no-lines>
+        <div align="right" padding>
+          <button ion-button round (click)="resetUpdate()">Reset Form</button>
+        </div>
         <ion-item>
           <ion-label stacked>Type Athlete ID to update</ion-label>
           <ion-input placeholder="Athlete ID" [(ngModel)]="athlete.UathleteID" name="UathleteID" type="number" #UathleteID="ngModel" required>

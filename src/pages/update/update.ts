@@ -25,10 +25,25 @@ export class UpdatePage {
     console.log('ionViewDidLoad UpdatePage');
   }
 
-  athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''}
-  coach = {coachID: '', coachAward: ''}
-  award = {recipientPersonID: '', recipientClubName: ''}
-  participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID: ''}
+  athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''};
+  coach = {coachID: '', coachAward: ''};
+  award = {recipientPersonID: '', recipientClubName: ''};
+  participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID: ''};
+
+  resetInsert() {
+    this.participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID:''};
+  }
+
+  resetUpdate() {
+    this.athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''};
+  }
+
+  resetDelete() {
+    this.athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''};
+    this.coach = {coachID: '', coachAward: ''};
+    this.award = {recipientPersonID: '', recipientClubName: ''};
+    this.participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID: ''};
+  }
 
   DAsubmitted = false;
   DCsubmitted = false;
