@@ -207,9 +207,9 @@ export class GuestPage {
     this.athlete.athlName = '';
   }
 
-  updateAthleteName() {
-    this.athlete.allAthletes = false;
-  }
+  // updateAthleteName() {
+  //   this.athlete.allAthletes = false;
+  // }
 
 
   coach = {
@@ -331,9 +331,10 @@ export class GuestPage {
     this.coach.coachName = '';
   }
 
-  updateCoachName() {
-    this.coach.allCoaches = false;
-  }
+  //
+  // updateCoachName() {
+  //   this.coach.allCoaches = false;
+  // }
 
   navUpdate() {
     this.navCtrl.push("UpdatePage")

@@ -78,9 +78,9 @@
             <button ion-button round (click)="resetAthlete()">Reset Form</button>
           </div>
 
-          <ion-item>
+          <ion-item [class.hide]="athlete.allAthletes">
             <ion-label floating> What is the Athlete's name?</ion-label>
-            <ion-input [(ngModel)]="athlete.athlName" name="athlName" (ionChange)="updateAthleteName()" type="text" #athlName="ngModel" required>
+            <ion-input [(ngModel)]="athlete.athlName" name="athlName" type="text" #athlName="ngModel" required>
             </ion-input>
           </ion-item>
         </ion-list>
@@ -88,7 +88,7 @@
 
       <ion-item>
         <ion-label>All Athletes</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.allAthletes" #allAthletes="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.allAthletes" (ionChange)="updateAllAthletes()"  #allAthletes="ngModel" color="dark"></ion-checkbox>
       </ion-item>
       <p ion-text [hidden]="!athlete.athlError || submitted == false && from == 'athlete'" color="danger" padding-left>
         Must enter athlete name or select "all athletes"
@@ -146,16 +146,16 @@
         <button ion-button round (click)="resetCoach()">Reset Form</button>
       </div>
 
-        <ion-item>
+        <ion-item [class.hide]="coach.allCoaches">
           <ion-label floating>Type in Coach name</ion-label>
-          <ion-input [(ngModel)]="coach.coachName" name="coachName" (ionChange)="updateCoachName()" type="text" #coachName="ngModel" required>
+          <ion-input [(ngModel)]="coach.coachName" name="coachName" type="text" #coachName="ngModel" required>
           </ion-input>
         </ion-item>
 
 
       <ion-item>
         <ion-label>All Coaches</ion-label>
-        <ion-checkbox [(ngModel)]="coach.allCoaches" #allCoaches="ngModel" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="coach.allCoaches" (ionChange)="updateAllCoaches()" #allCoaches="ngModel" color="dark"></ion-checkbox>
       </ion-item>
       <p ion-text [hidden]="!coach.coachError || submitted == false && from == 'coach'" color="danger" padding-left>
         Must enter coach name or select "all coaches"
