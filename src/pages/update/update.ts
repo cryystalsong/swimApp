@@ -53,6 +53,7 @@ export class UpdatePage {
   DRCsubmitted = false;
   Isubmitted = false;
   Usubmitted = false;
+  negativeError = false;
 
 
 
@@ -189,19 +190,27 @@ export class UpdatePage {
     var isnumUW = /^\d+$/.test(this.athlete.athleteWeight);
 
     if(isnumUW && isnumUID){
-      //make the update to a specified athlete
-      var query = "update athlete set weight = " + this.athlete.athleteWeight + " where id = "
-        + this.athlete.UathleteID;
-      var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
+      var weight = parseInt(this.athlete.athleteWeight);
+      var AID = parseInt(this.athlete.UathleteID);
+      if(weight > 0 || AID > 0){
+        this.negativeError = false;
+        //make the update to a specified athlete
+        var query = "update athlete set weight = " + this.athlete.athleteWeight + " where id = "
+          + this.athlete.UathleteID;
+        var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
-      this.http.get(phpURL, {},{}).then(data => {
-        console.log(data.data);
-        var query = "select * from Athlete";
-        this.myApp.retrieveQueryData(query).then((result) => {
-          this.myApp.displayQueryData(result, "updateAthleteWeight");
-        });
+        this.http.get(phpURL, {},{}).then(data => {
+          console.log(data.data);
+          var query = "select * from Athlete";
+          this.myApp.retrieveQueryData(query).then((result) => {
+            this.myApp.displayQueryData(result, "updateAthleteWeight");
+          });
 
-      })
+        })
+      } else{
+        this.negativeError = true;
+      }
+
     }
 
   }
