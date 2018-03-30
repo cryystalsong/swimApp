@@ -461,6 +461,9 @@ export class GuestPage {
     document.getElementById("otherResult").innerHTML = "";
   }
 
+  pageChanged() {
+    this.submitted = false;
+  }
 }
 
 
