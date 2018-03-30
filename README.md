@@ -1,4 +1,4 @@
-### How to run our project:
+# How to run our project:
 
 Run `npm install`
 
@@ -6,7 +6,7 @@ Run `ionic cordova run browser` to run our app on a browser, alternatively you c
 
 Run ionic app by  `npm run browser` 
 
-## To access privileges for updating queries as Admin, use the following login:
+### To access privileges for updating queries as Admin, use the following login:
 ```
 Username: "username"
 Password: "password"
