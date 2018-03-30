@@ -205,7 +205,6 @@ export class GuestPage {
 
   updateAllAthletes(){
     this.athlete.athlName = '';
-    this.athlete.allAthletes = true;
   }
 
   updateAthleteName() {
@@ -330,7 +329,6 @@ export class GuestPage {
 
   updateAllCoaches() {
     this.coach.coachName = '';
-    this.coach.allCoaches = true;
   }
 
   updateCoachName() {
