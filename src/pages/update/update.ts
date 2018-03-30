@@ -29,15 +29,15 @@ export class UpdatePage {
     DathleteID: '',
     athleteAward: '',
     UathleteID: '',
-    athleteWeight: ''}
+    athleteWeight: ''};
 
   coach = {
     coachID: '',
-    coachAward: ''}
+    coachAward: ''};
 
   award = {
     recipientPersonID: '',
-    recipientClubName: ''}
+    recipientClubName: ''};
 
   participate = {
     seconds: '',
@@ -45,7 +45,7 @@ export class UpdatePage {
     stroke: '',
     name: '',
     pdate: '',
-    ID: ''}
+    ID: ''};
 
   DAsubmitted = false;
   DCsubmitted = false;
@@ -55,9 +55,55 @@ export class UpdatePage {
   Usubmitted = false;
   negativeError = false;
 
+  resetUpdate() {
+    this.athlete = {
+      DathleteID: '',
+      athleteAward: '',
+      UathleteID: '',
+      athleteWeight: ''};
 
+    document.getElementById("updateAthleteWeight").innerHTML = "";
+  }
 
+  resetInsert() {
+    this.participate = {
+      seconds: '',
+      length: '',
+      stroke: '',
+      name: '',
+      pdate: '',
+      ID: ''}
+  }
 
+  resetDelete() {
+    this.athlete = {
+      DathleteID: '',
+      athleteAward: '',
+      UathleteID: '',
+      athleteWeight: ''};
+
+    this.coach = {
+      coachID: '',
+      coachAward: ''};
+
+    this.award = {
+      recipientPersonID: '',
+      recipientClubName: ''};
+
+    this.participate = {
+      seconds: '',
+      length: '',
+      stroke: '',
+      name: '',
+      pdate: '',
+      ID: ''};
+
+    document.getElementById("deleteAthleteResult").innerHTML = "";
+    document.getElementById("deleteCoachResult").innerHTML = "";
+    document.getElementById("deleteRecipientPerson").innerHTML = "";
+    document.getElementById("deleteRecipientClub").innerHTML = "";
+
+  }
   DeleteAthlete() {
 
     this.DAsubmitted = true;
