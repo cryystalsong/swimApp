@@ -199,6 +199,12 @@
           </ion-input>
         </ion-item>
 
+        <div id="errUpdate">
+          <p ion-text [hidden]= "negativeError == true" padding-left="">
+            ID and weight must be larger than 0
+          </p>
+        </div>
+
         <p ion-text [hidden]="UathleteID.valid && athleteWeight.valid || Usubmitted == false" color="danger" padding-left>
           Athlete ID and weight must be numbers
         </p>
@@ -210,6 +216,7 @@
         </div>
 
         <div id="updateAthleteWeight"></div>
+
 
 
       </ion-list>
