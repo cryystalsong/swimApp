@@ -57,14 +57,14 @@
           <ion-option value="clubLocation">location of the club</ion-option>
         </ion-select>
       </ion-item>
-
+      <p ion-text [hidden]="!club.clubError || submitted == false" color="danger" padding-left>
+        Please select on of the options above
+      </p>
       <div padding>
         <button ion-button (click)="onClubSubmit()" type="submit" block>SUBMIT</button>
       </div>
 
-      <p ion-text [hidden]="!club.clubError || submitted == false" color="danger" padding-left>
-        Please select on of the options above
-      </p>
+
       <div id="clubResult"></div>
     </ion-list>
 
@@ -229,14 +229,14 @@
           <ion-option value="compAllRaces">all race results</ion-option>
         </ion-select>
       </ion-item>
-
+      <p ion-text [hidden]="!comp.compError || submitted == false" color="danger" padding-left>
+        Please select on of the options above
+      </p>
       <div padding>
         <button ion-button (click)="onCompSubmit()" type="submit" block>SUBMIT</button>
       </div>
 
-      <p ion-text [hidden]="!comp.compError || submitted == false" color="danger" padding-left>
-        Please select on of the options above
-      </p>
+
 
       <div id="compResult"></div>
 
