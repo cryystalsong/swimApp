@@ -37,6 +37,8 @@ export class UpdatePage {
   Isubmitted = false;
   Usubmitted = false;
 
+  // errtext = "";
+
   DeleteAthlete() {
 
     this.DAsubmitted = true;
@@ -50,14 +52,15 @@ export class UpdatePage {
 
       this.http.get(phpURL, {},{}).then(data => {
         var result= JSON.parse(data.data);
-        console.log(Object.keys(result));
-
-
-        // console.log(data.data);
-        var query = "select * from athlete";
-        this.myApp.retrieveQueryData(query).then((result) => {
-          this.myApp.displayQueryData(result, "deleteAthleteResult");
-        });
+        if(data.data === "[]"){
+          console.log("shit dude");
+          document.getElementById("errtext1").innerHTML = "<p> No such data exists </p>";
+        } else{
+          var query = "select * from athlete";
+          this.myApp.retrieveQueryData(query).then((result) => {
+            this.myApp.displayQueryData(result, "deleteAthleteResult");
+          });
+        }
       })
     }
 
@@ -75,11 +78,15 @@ export class UpdatePage {
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
       this.http.get(phpURL, {},{}).then(data => {
-        console.log(data.data);
-        var query = "select * from coach";
-        this.myApp.retrieveQueryData(query).then((result) => {
-          this.myApp.displayQueryData(result, "deleteCoachResult");
-        });
+        if(data.data === "[]"){
+          console.log("shit dude");
+          document.getElementById("errtext2").innerHTML = "<p> No such data exists </p>";
+        } else{
+          var query = "select * from coach";
+          this.myApp.retrieveQueryData(query).then((result) => {
+            this.myApp.displayQueryData(result, "deleteCoachResult");
+          });
+        }
       })
     }
 
@@ -96,11 +103,15 @@ export class UpdatePage {
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
       this.http.get(phpURL, {},{}).then(data => {
-        console.log(data.data);
-        var query = "select * from AwardPerson";
-        this.myApp.retrieveQueryData(query).then((result) => {
-          this.myApp.displayQueryData(result, "deleteRecipientPerson");
-        });
+        if(data.data === "[]"){
+          console.log("shit dude");
+          document.getElementById("errtext3").innerHTML = "<p> No such data exists </p>";
+        } else{
+          var query = "select * from AwardPerson";
+          this.myApp.retrieveQueryData(query).then((result) => {
+            this.myApp.displayQueryData(result, "deleteRecipientPerson");
+          });
+        }
       })
     }
 
@@ -116,11 +127,16 @@ export class UpdatePage {
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
       this.http.get(phpURL, {},{}).then(data => {
-        console.log(data.data);
-        var query = "select * from AwardClub";
-        this.myApp.retrieveQueryData(query).then((result) => {
-          this.myApp.displayQueryData(result, "deleteRecipientClub");
-        });
+        if(data.data === "[]"){
+          console.log("shit dude");
+          document.getElementById("errtext4").innerHTML = "<p> No such data exists </p>";
+        } else{
+          var query = "select * from AwardClub";
+          this.myApp.retrieveQueryData(query).then((result) => {
+            this.myApp.displayQueryData(result, "deleteRecipientClub");
+          });
+        }
+
       })
     }
 
@@ -149,12 +165,19 @@ export class UpdatePage {
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
       this.http.get(phpURL, {},{}).then(data => {
-        console.log(data.data);
-
-        var query = "select * from Participate";
-        this.myApp.retrieveQueryData(query).then((result) => {
-          this.myApp.displayQueryData(result, "insertedParticipate");
-        });
+        // console.log(data.data);
+        var obg = data.data;
+        if(typeof obg === "string"){
+          if(obg.indexOf("ERROR") >= 0){
+            console.log("shit");
+            document.getElementById("errtext5").innerHTML = "<p> No such data exists </p>";
+          } else{
+            var query = "select * from Participate";
+            this.myApp.retrieveQueryData(query).then((result) => {
+              this.myApp.displayQueryData(result, "insertedParticipate");
+            });
+          }
+        }
 
       })
     }
@@ -175,11 +198,16 @@ export class UpdatePage {
       var phpURL = "http://www.ugrad.cs.ubc.ca/~x1p0b/clubsAwardsWon.php?q=" + query;
 
       this.http.get(phpURL, {},{}).then(data => {
-        console.log(data.data);
-        var query = "select * from Athlete";
-        this.myApp.retrieveQueryData(query).then((result) => {
-          this.myApp.displayQueryData(result, "updateAthleteWeight");
-        });
+        console.log(typeof data.data);
+        if(data.data === "[]"){
+          console.log("shit dude");
+          document.getElementById("errtext6").innerHTML = "<p> No such data exists </p>";
+        } else {
+          var query = "select * from Athlete";
+          this.myApp.retrieveQueryData(query).then((result) => {
+            this.myApp.displayQueryData(result, "updateAthleteWeight");
+          });
+        }
 
       })
     }
@@ -188,4 +216,3 @@ export class UpdatePage {
 
 
 }
-
