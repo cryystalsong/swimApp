@@ -24,23 +24,12 @@ export class GuestPage {
     }
   }
 
-  // var query = "";
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuestPage');
     console.log(this.hideUpdate);
   }
 
-  // presentAlert() {
-  //   let alert = this.alertCtrl.create({
-  //     title: 'ERROR!',
-  //     subTitle: 'Incorrect information',
-  //     buttons: ['Dismiss']
-  //   });
-  //   alert.present();
-  // }
-
-
-  club = {clubName: '', clubOptionSelected: ''}; // clubCoaches should be an array !!!
+  club = {clubName: '', clubOptionSelected: '', clubError: false}; // clubCoaches should be an array !!!
   submitted = false;
 
   resetClub() {
@@ -50,9 +39,11 @@ export class GuestPage {
 
   onClubSubmit() {
     this.submitted = true;
-
+    this.club.clubError = false;
     var q = '';
-    if (this.club.clubOptionSelected === "clubAwards") {
+    if (this.club.clubOptionSelected === '') {
+      this.club.clubError = true;
+    } else if (this.club.clubOptionSelected === "clubAwards") {
       q = "select ac.cname, ac.awardname from awardclub ac where ac.cname = '" + this.club.clubName + "'";
     } else if (this.club.clubOptionSelected === "clubAthletes") {
       q = "select * from person p, athlete a where p.id=a.id and a.id in (select b.id from belongs b where b.clubname = '" + this.club.clubName + "')";
@@ -62,11 +53,12 @@ export class GuestPage {
       q = "select c.name, c.address from club c where c.name = '" + this.club.clubName + "'";
     }
 
-
-    this.myApp.retrieveQueryData(q).then((data) => {
-      this.myApp.displayQueryData(data, "clubResult");
-      console.log(data);
-    });
+    if(!this.club.clubError && this.club.clubName !== '') {
+      this.myApp.retrieveQueryData(q).then((data) => {
+        this.myApp.displayQueryData(data, "clubResult");
+        console.log(data);
+      });
+    }
     //   .catch((err)=>{
     // this.presentAlert();
     // });
@@ -81,17 +73,7 @@ export class GuestPage {
     height: '',
     sHeight: '',
     selected: [],
-    badResults: false,
-    show: {
-       name: true,
-       id: false,
-       sex: false,
-       height: false,
-       weight: false,
-       birthday: false,
-       city: false,
-       country: false
-    }
+    athlError: false
   };
 
 
@@ -103,17 +85,7 @@ export class GuestPage {
       height: '',
       sHeight: '',
       selected: [],
-      badResults: false,
-      show: {
-        name: true,
-        id: false,
-        sex: false,
-        height: false,
-        weight: false,
-        birthday: false,
-        city: false,
-        country: false
-      }
+      athlError: false
     }
     document.getElementById("athleteResult").innerHTML = "";
     }
@@ -131,8 +103,13 @@ export class GuestPage {
     let from = "from athlete a, person p";
     let where = "where a.id = p.id ";
     let flag = 0;
+    this.athlete.athlError = false;
+    if(this.athlete.athlName === '' && !this.athlete.allAthletes) {
+      this.athlete.athlError = true;
+    }
 
-     if (this.athlete.selected.indexOf("Name")!== -1) {
+
+    if (this.athlete.selected.indexOf("Name")!== -1) {
        flag = 1;
        select += "p.name";
      }
@@ -194,7 +171,6 @@ export class GuestPage {
        }
      }
 
-    console.log("athlete.show " + JSON.stringify(this.athlete.show));
 
     if (this.athlete.athlName) {
       where += " and p.name = \'" + this.athlete.athlName + "\'";
@@ -209,9 +185,10 @@ export class GuestPage {
 
 
     console.log("query " + query);
+    console.log("athlete error " + this.athlete.athlError);
 
-    if(this.athlete.athlName !== '' || this.athlete.allAthletes) {
-      this.athlete.badResults = true;
+    if (!this.athlete.athlError && this.athlete.selected.length > 0) {
+      console.log("this shouldnt be running");
       this.myApp.retrieveQueryData(query).then((data) => {
         this.myApp.displayQueryData(data, "athleteResult");
       });
@@ -239,17 +216,7 @@ export class GuestPage {
     yrs: '',
     sYrs: '',
     selected: [],
-    badResult: false,
-    show: {
-      name: true,
-      id: false,
-      yrs: false,
-      birthday: false,
-      city: false,
-      country: false
-      // athletes: false,
-      // awards: false
-    }
+    coachError: false
   };
 
   resetCoach() {
@@ -259,27 +226,24 @@ export class GuestPage {
       yrs: '',
       sYrs: '',
       selected: [],
-      badResult: false,
-      show: {
-        name: true,
-        id: false,
-        yrs: false,
-        birthday: false,
-        city: false,
-        country: false
-      }
+      coachError: false
     };
     document.getElementById("coachResult").innerHTML = "";
   }
 
   onCoachSubmit() {
     var query = '';
-    console.log(this.coach.show.name);
+    // console.log(this.coach.show.name);
     this.submitted = true;
     let select = "select ";
     let from = "from coach c, person p";
     let where = "where c.id = p.id";
     let flag = 0;
+    this.coach.coachError = false;
+    if(this.coach.coachName === '' && !this.coach.allCoaches) {
+      this.coach.coachError = true;
+    }
+
     if (this.coach.selected.indexOf("Name")!== -1) {
       flag = 1;
       select += "p.name";
@@ -345,11 +309,11 @@ export class GuestPage {
 
 
     console.log("query " + query);
-    if(this.coach.coachName!=='' || this.coach.allCoaches) {
-      this.coach.badResult = true;
+
+    if(!this.coach.coachError && this.coach.selected.length > 0) {
+      console.log("this shouldnt be running");
       this.myApp.retrieveQueryData(query).then((data) => {
         this.myApp.displayQueryData(data, "coachResult");
-        console.log(data);
       });
     }
     // .catch((err)=>{
@@ -370,34 +334,36 @@ export class GuestPage {
     this.navCtrl.push("UpdatePage")
   }
 
-  comp = {compName: '', compOptionSelected: ''}; // clubCoaches should be an array !!!
+  comp = {compName: '', compOptionSelected: '', compError: false}; // clubCoaches should be an array !!!
 
   resetCompetition() {
-    this.comp = {compName: '', compOptionSelected: ''};
+    this.comp = {compName: '', compOptionSelected: '', compError: false};
     document.getElementById("compResult").innerHTML = "";
   }
 
   onCompSubmit() {
     this.submitted = true;
-
+    this.comp.compError = false;
     var q = '';
-
-    if (this.comp.compOptionSelected === "compTitleHolders") {
+    if (this.comp.compOptionSelected === '') {
+      this.comp.compError = true;
+    } else if (this.comp.compOptionSelected === "compTitleHolders") {
       q = "select e.titleholder, e.length, e.stroke from events e where e.cname = '" + this.comp.compName + "'"
     } else {
       q = "select p.name, pa.length, pa.stroke, pa.length from person p, participate pa where p.id = pa.id and pa.name = '" + this.comp.compName + "'"
     }
 
-    this.myApp.retrieveQueryData(q).then((data) => {
-      this.myApp.displayQueryData(data, "compResult");
-      console.log(data);
-    });
-    // .catch((err)=>{
-    // this.presentAlert();
-    // });
+    if (!this.comp.compError && this.comp.compName !== '') {
+      this.myApp.retrieveQueryData(q).then((data) => {
+        this.myApp.displayQueryData(data, "compResult");
+        console.log(data);
+      });
+      // .catch((err)=>{
+      // this.presentAlert();
+      // });
 
-    // this.navCtrl.push(ResultsPage);
-
+      // this.navCtrl.push(ResultsPage);
+    }
   }
 
   divisionQuery() {

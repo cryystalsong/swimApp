@@ -62,13 +62,14 @@
         <button ion-button (click)="onClubSubmit()" type="submit" block>SUBMIT</button>
       </div>
 
+      <p ion-text [hidden]="!club.clubError || submitted == false" color="danger" padding-left>
+        Please select on of the options above
+      </p>
       <div id="clubResult"></div>
     </ion-list>
 
 
     <ion-list *ngSwitchCase="'athlete'">
-
-      <!--<p>Find information about individual Athlete</p>-->
 
 
         <ion-list no-lines>
@@ -84,34 +85,15 @@
           </ion-item>
         </ion-list>
 
-        <!--<ng-template #elsetag>-->
-        <!--<div>-->
-        <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
-        <!--</div>-->
-        <!--</ng-template>-->
-
-      <!--<ion-list no-lines>-->
-        <!--<ion-item>-->
-          <!--<ion-label floating> What is the Athlete's name?</ion-label>-->
-          <!--<ion-input [(ngModel)]="athlete.athlName" name="athlName" (ionChange)="updateAthleteName()" type="text"-->
-                     <!--#athlName="ngModel" required>-->
-          <!--</ion-input>-->
-        <!--</ion-item>-->
-      <!--</ion-list>-->
-
-      <!--<ng-template #elsetag>-->
-      <!--<div>-->
-      <!--<ion-input [(ngModel)]="athlete.athlName" disabled= "true" name="athlName" type="text" #athlName="ngModel" required>-->
-      <!--</div>-->
-      <!--</ng-template>-->
-
-      <!--<p>OR Find information about all Athletes</p>-->
 
       <ion-item>
         <ion-label>All Athletes</ion-label>
         <ion-checkbox [(ngModel)]="athlete.allAthletes" #allAthletes="ngModel"
                       color="dark"></ion-checkbox>
       </ion-item>
+      <p ion-text [hidden]="!athlete.athlError || submitted == false" color="danger" padding-left>
+        Must enter athlete name or select "all athletes"
+      </p>
 
 
       <ion-list [class.hide]="!athlete.allAthletes">
@@ -146,14 +128,14 @@
           </div>
         </ion-select>
       </ion-item>
+      <p ion-text [hidden]="athlete.selected.length != 0 || submitted == false" color="danger" padding-left>
+        Please select on of the options above
+      </p>
 
       <div padding>
         <button ion-button (click)="onAthleteSubmit()" type="submit" block>SUBMIT</button>
       </div>
 
-      <p ion-text [hidden]="!athlete.badResults && submitted == false" color="danger" padding-left>
-        Must enter athlete name or select "all athletes"
-      </p>
 
       <div id="athleteResult"></div>
 
@@ -177,7 +159,9 @@
         <ion-checkbox [(ngModel)]="coach.allCoaches" #allCoaches="ngModel"
                       color="dark"></ion-checkbox>
       </ion-item>
-
+      <p ion-text [hidden]="!coach.coachError || submitted == false" color="danger" padding-left>
+        Must enter coach name or select "all coaches"
+      </p>
       <ion-list [class.hide]="!coach.allCoaches">
         <ion-item>
           <ion-label>Find coach(es) who have</ion-label>
@@ -207,13 +191,14 @@
           </div>
         </ion-select>
       </ion-item>
+      <p ion-text [hidden]="coach.selected.length != 0|| submitted == false" color="danger" padding-left>
+        Please select on of the options above
+      </p>
 
       <div padding>
         <button ion-button (click)="onCoachSubmit()" type="submit" block>SUBMIT</button>
       </div>
-      <p ion-text [hidden]="!coach.badResults && submitted == false" color="danger" padding-left>
-        Must enter coach name or select "all coaches"
-      </p>
+
       <div id="coachResult"></div>
 
 
@@ -248,6 +233,10 @@
       <div padding>
         <button ion-button (click)="onCompSubmit()" type="submit" block>SUBMIT</button>
       </div>
+
+      <p ion-text [hidden]="!comp.compError || submitted == false" color="danger" padding-left>
+        Please select on of the options above
+      </p>
 
       <div id="compResult"></div>
 
@@ -292,6 +281,8 @@
       <div padding>
         <button ion-button (click)="onOthersSubmit()" type="submit" block>SUBMIT</button>
       </div>
+
+
 
       <div id="otherResult"></div>
 
