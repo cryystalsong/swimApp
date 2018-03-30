@@ -465,7 +465,7 @@ export class GuestPage {
   // select ap.AwardName, ap.year from AwardPerson ap, Coach c, Person p where p.name = 'Keith Turner' and c.ID = p.ID and ap.ID = c.ID
 
   others = "";
-  
+
   onOthersSubmit() {
     if (this.others == "allComps") {
       this.divisionQuery();
@@ -481,6 +481,12 @@ export class GuestPage {
     console.log('others submit' + JSON.stringify(this.others));
   }
 
+  resetOther() {
+    this.others = "";
+    this.coachName2 = "";
+    this.coachName = "";
+    document.getElementById("otherResult").innerHTML = "";
+  }
 
 }
 

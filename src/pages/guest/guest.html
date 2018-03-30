@@ -255,6 +255,9 @@
 
     <ion-list *ngSwitchCase="'other'">
       <ion-list radio-group [(ngModel)]="others">
+        <div align="right" padding>
+          <button ion-button round (click)="resetOther()">Reset Form</button>
+        </div>
         <ion-item>
           <ion-radio item-left value ="allComps" color="dark"></ion-radio>
           <ion-label>Show athletes that competed at all competitions</ion-label>
