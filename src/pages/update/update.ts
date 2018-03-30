@@ -25,25 +25,27 @@ export class UpdatePage {
     console.log('ionViewDidLoad UpdatePage');
   }
 
-  athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''};
-  coach = {coachID: '', coachAward: ''};
-  award = {recipientPersonID: '', recipientClubName: ''};
-  participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID: ''};
+  athlete = {
+    DathleteID: '',
+    athleteAward: '',
+    UathleteID: '',
+    athleteWeight: ''}
 
-  resetInsert() {
-    this.participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID:''};
-  }
+  coach = {
+    coachID: '',
+    coachAward: ''}
 
-  resetUpdate() {
-    this.athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''};
-  }
+  award = {
+    recipientPersonID: '',
+    recipientClubName: ''}
 
-  resetDelete() {
-    this.athlete = {DathleteID: '', athleteAward: '', UathleteID: '', athleteWeight: ''};
-    this.coach = {coachID: '', coachAward: ''};
-    this.award = {recipientPersonID: '', recipientClubName: ''};
-    this.participate = {seconds: '', length: '', stroke: '', name: '', pdate: '', ID: ''};
-  }
+  participate = {
+    seconds: '',
+    length: '',
+    stroke: '',
+    name: '',
+    pdate: '',
+    ID: ''}
 
   DAsubmitted = false;
   DCsubmitted = false;
@@ -143,13 +145,8 @@ export class UpdatePage {
 
 
   Insert() {
-    //TODO: stroke, name, and date cannot be strings that can be numbers!
-    // if(/^\d+$/.test(this.participate.stroke)){
-    //   this.Isubmitted = false;
-    // }
 
     this.Isubmitted = true;
-
 
     if(Number.isNaN(Number(this.participate.stroke)) &&
       Number.isNaN(Number(this.participate.name)) &&
