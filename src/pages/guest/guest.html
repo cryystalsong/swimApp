@@ -88,7 +88,7 @@
 
       <ion-item>
         <ion-label>All Athletes</ion-label>
-        <ion-checkbox [(ngModel)]="athlete.allAthletes" #allAthletes="ngModel" (ionChange)="updateAllAthletes()" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="athlete.allAthletes" #allAthletes="ngModel" color="dark"></ion-checkbox>
       </ion-item>
       <p ion-text [hidden]="!athlete.athlError || submitted == false && from == 'athlete'" color="danger" padding-left>
         Must enter athlete name or select "all athletes"
@@ -155,7 +155,7 @@
 
       <ion-item>
         <ion-label>All Coaches</ion-label>
-        <ion-checkbox [(ngModel)]="coach.allCoaches" #allCoaches="ngModel" (ionChange)="updateAllCoaches()" color="dark"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="coach.allCoaches" #allCoaches="ngModel" color="dark"></ion-checkbox>
       </ion-item>
       <p ion-text [hidden]="!coach.coachError || submitted == false && from == 'coach'" color="danger" padding-left>
         Must enter coach name or select "all coaches"
